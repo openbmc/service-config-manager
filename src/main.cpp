@@ -116,7 +116,7 @@ std::tuple<std::string, UnitType, std::string>
 static inline void
     handleListUnitsResponse(sdbusplus::asio::object_server& server,
                             std::shared_ptr<sdbusplus::asio::connection>& conn,
-                            boost::system::error_code ec,
+                            boost::system::error_code /*ec*/,
                             const std::vector<ListUnitsType>& listUnits)
 {
     // Loop through all units, and mark all units, which has to be
@@ -314,7 +314,7 @@ int main()
         "type='signal',"
         "member='StartupFinished',path='/org/freedesktop/systemd1',"
         "interface='org.freedesktop.systemd1.Manager'",
-        [&server, &conn](sdbusplus::message::message& msg) {
+        [&server, &conn](sdbusplus::message::message& /*msg*/) {
             if (!unitQueryStarted)
             {
                 unitQueryStarted = true;
