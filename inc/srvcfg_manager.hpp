@@ -70,11 +70,11 @@ class ServiceConfig
     std::shared_ptr<sdbusplus::asio::dbus_interface> iface;
     bool internalSet = false;
     std::string objPath;
-    std::string instanceName;
     std::string baseUnitName;
+    std::string instanceName;
     std::string instantiatedUnitName;
-    std::string socketObjectPath;
     std::string serviceObjectPath;
+    std::string socketObjectPath;
     std::string overrideConfDir;
 
     // Properties
