@@ -3,7 +3,7 @@ Description=Daemon to control service configuration
 
 [Service]
 Restart=always
-ExecStart=/usr/bin/env phosphor-srvcfg-manager
+ExecStart=/usr/bin/phosphor-srvcfg-manager
 RestartSec=5
 StartLimitInterval=0
 SyslogIdentifier=srvcfg-manager
