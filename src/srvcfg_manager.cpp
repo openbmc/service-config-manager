@@ -13,10 +13,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 */
+#include "srvcfg_manager.hpp"
+
+#include <boost/asio/spawn.hpp>
+
 #include <fstream>
 #include <regex>
-#include <boost/asio/spawn.hpp>
-#include "srvcfg_manager.hpp"
 
 extern std::unique_ptr<boost::asio::steady_timer> timer;
 extern std::map<std::string, std::shared_ptr<phosphor::service::ServiceConfig>>
@@ -28,16 +30,16 @@ namespace phosphor
 namespace service
 {
 
-static constexpr const char *overrideConfFileName = "override.conf";
+static constexpr const char* overrideConfFileName = "override.conf";
 static constexpr const size_t restartTimeout = 15; // seconds
 
-static constexpr const char *systemd1UnitBasePath =
+static constexpr const char* systemd1UnitBasePath =
     "/org/freedesktop/systemd1/unit/";
-static constexpr const char *systemdOverrideUnitBasePath =
+static constexpr const char* systemdOverrideUnitBasePath =
     "/etc/systemd/system/";
 
 void ServiceConfig::updateSocketProperties(
-    const boost::container::flat_map<std::string, VariantType> &propertyMap)
+    const boost::container::flat_map<std::string, VariantType>& propertyMap)
 {
     auto listenIt = propertyMap.find("Listen");
     if (listenIt != propertyMap.end())
@@ -67,7 +69,7 @@ void ServiceConfig::updateSocketProperties(
 }
 
 void ServiceConfig::updateServiceProperties(
-    const boost::container::flat_map<std::string, VariantType> &propertyMap)
+    const boost::container::flat_map<std::string, VariantType>& propertyMap)
 {
     auto stateIt = propertyMap.find("UnitFileState");
     if (stateIt != propertyMap.end())
@@ -111,8 +113,8 @@ void ServiceConfig::queryAndUpdateProperties()
 {
     conn->async_method_call(
         [this](boost::system::error_code ec,
-               const boost::container::flat_map<std::string, VariantType>
-                   &propertyMap) {
+               const boost::container::flat_map<std::string, VariantType>&
+                   propertyMap) {
             if (ec)
             {
                 phosphor::logging::log<phosphor::logging::level::ERR>(
@@ -128,7 +130,7 @@ void ServiceConfig::queryAndUpdateProperties()
                     conn->async_method_call(
                         [this](boost::system::error_code ec,
                                const boost::container::flat_map<
-                                   std::string, VariantType> &propertyMap) {
+                                   std::string, VariantType>& propertyMap) {
                             if (ec)
                             {
                                 phosphor::logging::log<
@@ -145,7 +147,7 @@ void ServiceConfig::queryAndUpdateProperties()
                                     registerProperties();
                                 }
                             }
-                            catch (const std::exception &e)
+                            catch (const std::exception& e)
                             {
                                 phosphor::logging::log<
                                     phosphor::logging::level::ERR>(
@@ -163,7 +165,7 @@ void ServiceConfig::queryAndUpdateProperties()
                     registerProperties();
                 }
             }
-            catch (const std::exception &e)
+            catch (const std::exception& e)
             {
                 phosphor::logging::log<phosphor::logging::level::ERR>(
                     "Exception in getting socket properties",
@@ -203,11 +205,11 @@ void ServiceConfig::createSocketOverrideConf()
 }
 
 ServiceConfig::ServiceConfig(
-    sdbusplus::asio::object_server &srv_,
-    std::shared_ptr<sdbusplus::asio::connection> &conn_,
-    const std::string &objPath_, const std::string &baseUnitName_,
-    const std::string &instanceName_, const std::string &serviceObjPath_,
-    const std::string &socketObjPath_) :
+    sdbusplus::asio::object_server& srv_,
+    std::shared_ptr<sdbusplus::asio::connection>& conn_,
+    const std::string& objPath_, const std::string& baseUnitName_,
+    const std::string& instanceName_, const std::string& serviceObjPath_,
+    const std::string& socketObjPath_) :
     server(srv_),
     conn(conn_), objPath(objPath_), baseUnitName(baseUnitName_),
     instanceName(instanceName_), serviceObjectPath(serviceObjPath_),
@@ -338,7 +340,7 @@ void ServiceConfig::restartUnitConfig(boost::asio::yield_context yield)
 void ServiceConfig::startServiceRestartTimer()
 {
     timer->expires_after(std::chrono::seconds(restartTimeout));
-    timer->async_wait([this](const boost::system::error_code &ec) {
+    timer->async_wait([this](const boost::system::error_code& ec) {
         if (ec == boost::asio::error::operation_aborted)
         {
             // Timer reset.
@@ -354,9 +356,9 @@ void ServiceConfig::startServiceRestartTimer()
         boost::asio::spawn(conn->get_io_context(),
                            [this](boost::asio::yield_context yield) {
                                // Stop and apply configuration for all objects
-                               for (auto &srvMgrObj : srvMgrObjects)
+                               for (auto& srvMgrObj : srvMgrObjects)
                                {
-                                   auto &srvObj = srvMgrObj.second;
+                                   auto& srvObj = srvMgrObj.second;
                                    if (srvObj->updatedFlag)
                                    {
                                        srvObj->stopAndApplyUnitConfig(yield);
@@ -365,9 +367,9 @@ void ServiceConfig::startServiceRestartTimer()
                                // Do system reload
                                systemdDaemonReload(conn, yield);
                                // restart unit config.
-                               for (auto &srvMgrObj : srvMgrObjects)
+                               for (auto& srvMgrObj : srvMgrObjects)
                                {
-                                   auto &srvObj = srvMgrObj.second;
+                                   auto& srvObj = srvMgrObj.second;
                                    if (srvObj->updatedFlag)
                                    {
                                        srvObj->restartUnitConfig(yield);
@@ -386,7 +388,7 @@ void ServiceConfig::registerProperties()
     {
         iface->register_property(
             srvCfgPropPort, portNum,
-            [this](const uint16_t &req, uint16_t &res) {
+            [this](const uint16_t& req, uint16_t& res) {
                 if (!internalSet)
                 {
                     if (req == res)
@@ -408,7 +410,7 @@ void ServiceConfig::registerProperties()
     }
 
     iface->register_property(
-        srvCfgPropMasked, unitMaskedState, [this](const bool &req, bool &res) {
+        srvCfgPropMasked, unitMaskedState, [this](const bool& req, bool& res) {
             if (!internalSet)
             {
                 if (req == res)
@@ -438,7 +440,7 @@ void ServiceConfig::registerProperties()
 
     iface->register_property(
         srvCfgPropEnabled, unitEnabledState,
-        [this](const bool &req, bool &res) {
+        [this](const bool& req, bool& res) {
             if (!internalSet)
             {
                 if (req == res)
@@ -466,7 +468,7 @@ void ServiceConfig::registerProperties()
 
     iface->register_property(
         srvCfgPropRunning, unitRunningState,
-        [this](const bool &req, bool &res) {
+        [this](const bool& req, bool& res) {
             if (!internalSet)
             {
                 if (req == res)

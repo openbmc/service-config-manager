@@ -14,24 +14,25 @@
 // limitations under the License.
 */
 #pragma once
-#include <sdbusplus/timer.hpp>
 #include "utils.hpp"
+
+#include <sdbusplus/timer.hpp>
 
 namespace phosphor
 {
 namespace service
 {
 
-static constexpr const char *serviceConfigSrvName =
+static constexpr const char* serviceConfigSrvName =
     "xyz.openbmc_project.Control.Service.Manager";
-static constexpr const char *serviceConfigIntfName =
+static constexpr const char* serviceConfigIntfName =
     "xyz.openbmc_project.Control.Service.Attributes";
-static constexpr const char *srcCfgMgrBasePath =
+static constexpr const char* srcCfgMgrBasePath =
     "/xyz/openbmc_project/control/service";
-static constexpr const char *srvCfgPropPort = "Port";
-static constexpr const char *srvCfgPropMasked = "Masked";
-static constexpr const char *srvCfgPropEnabled = "Enabled";
-static constexpr const char *srvCfgPropRunning = "Running";
+static constexpr const char* srvCfgPropPort = "Port";
+static constexpr const char* srvCfgPropMasked = "Masked";
+static constexpr const char* srvCfgPropEnabled = "Enabled";
+static constexpr const char* srvCfgPropRunning = "Running";
 
 enum class UpdatedProp
 {
@@ -49,12 +50,12 @@ using VariantType =
 class ServiceConfig
 {
   public:
-    ServiceConfig(sdbusplus::asio::object_server &srv_,
-                  std::shared_ptr<sdbusplus::asio::connection> &conn_,
-                  const std::string &objPath_, const std::string &baseUnitName,
-                  const std::string &instanceName,
-                  const std::string &serviceObjPath,
-                  const std::string &socketObjPath);
+    ServiceConfig(sdbusplus::asio::object_server& srv_,
+                  std::shared_ptr<sdbusplus::asio::connection>& conn_,
+                  const std::string& objPath_, const std::string& baseUnitName,
+                  const std::string& instanceName,
+                  const std::string& serviceObjPath,
+                  const std::string& socketObjPath);
     ~ServiceConfig() = default;
 
     std::shared_ptr<sdbusplus::asio::connection> conn;
@@ -65,7 +66,7 @@ class ServiceConfig
     void startServiceRestartTimer();
 
   private:
-    sdbusplus::asio::object_server &server;
+    sdbusplus::asio::object_server& server;
     std::shared_ptr<sdbusplus::asio::dbus_interface> iface;
     bool internalSet = false;
     std::string objPath;
@@ -93,11 +94,11 @@ class ServiceConfig
     void queryAndUpdateProperties();
     void createSocketOverrideConf();
     void updateServiceProperties(
-        const boost::container::flat_map<std::string, VariantType>
-            &propertyMap);
+        const boost::container::flat_map<std::string, VariantType>&
+            propertyMap);
     void updateSocketProperties(
-        const boost::container::flat_map<std::string, VariantType>
-            &propertyMap);
+        const boost::container::flat_map<std::string, VariantType>&
+            propertyMap);
     std::string getSocketUnitName();
     std::string getServiceUnitName();
 };

@@ -14,50 +14,51 @@
 // limitations under the License.
 */
 #pragma once
-#include <ctime>
-#include <chrono>
-#include <string>
-#include <sdbusplus/asio/object_server.hpp>
-#include <phosphor-logging/elog-errors.hpp>
-#include <xyz/openbmc_project/Common/error.hpp>
-#include <experimental/filesystem>
 #include <boost/asio.hpp>
+#include <phosphor-logging/elog-errors.hpp>
+#include <sdbusplus/asio/object_server.hpp>
+#include <xyz/openbmc_project/Common/error.hpp>
 
-static constexpr const char *sysdStartUnit = "StartUnit";
-static constexpr const char *sysdStopUnit = "StopUnit";
-static constexpr const char *sysdRestartUnit = "RestartUnit";
-static constexpr const char *sysdReloadMethod = "Reload";
-static constexpr const char *sysdGetJobMethod = "GetJob";
-static constexpr const char *sysdReplaceMode = "replace";
-static constexpr const char *dBusGetAllMethod = "GetAll";
-static constexpr const char *dBusGetMethod = "Get";
-static constexpr const char *sysdService = "org.freedesktop.systemd1";
-static constexpr const char *sysdObjPath = "/org/freedesktop/systemd1";
-static constexpr const char *sysdMgrIntf = "org.freedesktop.systemd1.Manager";
-static constexpr const char *sysdUnitIntf = "org.freedesktop.systemd1.Unit";
-static constexpr const char *sysdSocketIntf = "org.freedesktop.systemd1.Socket";
-static constexpr const char *dBusPropIntf = "org.freedesktop.DBus.Properties";
-static constexpr const char *stateMasked = "masked";
-static constexpr const char *stateEnabled = "enabled";
-static constexpr const char *stateDisabled = "disabled";
-static constexpr const char *subStateRunning = "running";
+#include <chrono>
+#include <ctime>
+#include <experimental/filesystem>
+#include <string>
 
-static inline std::string addInstanceName(const std::string &instanceName,
-                                          const std::string &suffix)
+static constexpr const char* sysdStartUnit = "StartUnit";
+static constexpr const char* sysdStopUnit = "StopUnit";
+static constexpr const char* sysdRestartUnit = "RestartUnit";
+static constexpr const char* sysdReloadMethod = "Reload";
+static constexpr const char* sysdGetJobMethod = "GetJob";
+static constexpr const char* sysdReplaceMode = "replace";
+static constexpr const char* dBusGetAllMethod = "GetAll";
+static constexpr const char* dBusGetMethod = "Get";
+static constexpr const char* sysdService = "org.freedesktop.systemd1";
+static constexpr const char* sysdObjPath = "/org/freedesktop/systemd1";
+static constexpr const char* sysdMgrIntf = "org.freedesktop.systemd1.Manager";
+static constexpr const char* sysdUnitIntf = "org.freedesktop.systemd1.Unit";
+static constexpr const char* sysdSocketIntf = "org.freedesktop.systemd1.Socket";
+static constexpr const char* dBusPropIntf = "org.freedesktop.DBus.Properties";
+static constexpr const char* stateMasked = "masked";
+static constexpr const char* stateEnabled = "enabled";
+static constexpr const char* stateDisabled = "disabled";
+static constexpr const char* subStateRunning = "running";
+
+static inline std::string addInstanceName(const std::string& instanceName,
+                                          const std::string& suffix)
 {
     return (instanceName.empty() ? "" : suffix + instanceName);
 }
 
 void systemdDaemonReload(
-    const std::shared_ptr<sdbusplus::asio::connection> &conn,
+    const std::shared_ptr<sdbusplus::asio::connection>& conn,
     boost::asio::yield_context yield);
 
-void systemdUnitAction(const std::shared_ptr<sdbusplus::asio::connection> &conn,
+void systemdUnitAction(const std::shared_ptr<sdbusplus::asio::connection>& conn,
                        boost::asio::yield_context yield,
-                       const std::string &unitName,
-                       const std::string &actionMethod);
+                       const std::string& unitName,
+                       const std::string& actionMethod);
 
 void systemdUnitFilesStateChange(
-    const std::shared_ptr<sdbusplus::asio::connection> &conn,
-    boost::asio::yield_context yield, const std::vector<std::string> &unitFiles,
-    const std::string &unitState, bool maskedState, bool enabledState);
+    const std::shared_ptr<sdbusplus::asio::connection>& conn,
+    boost::asio::yield_context yield, const std::vector<std::string>& unitFiles,
+    const std::string& unitState, bool maskedState, bool enabledState);

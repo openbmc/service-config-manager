@@ -15,8 +15,8 @@
 */
 #include "utils.hpp"
 
-static inline void checkAndThrowInternalFailure(boost::system::error_code &ec,
-                                                const std::string &msg)
+static inline void checkAndThrowInternalFailure(boost::system::error_code& ec,
+                                                const std::string& msg)
 {
     if (ec)
     {
@@ -29,7 +29,7 @@ static inline void checkAndThrowInternalFailure(boost::system::error_code &ec,
 }
 
 void systemdDaemonReload(
-    const std::shared_ptr<sdbusplus::asio::connection> &conn,
+    const std::shared_ptr<sdbusplus::asio::connection>& conn,
     boost::asio::yield_context yield)
 {
     boost::system::error_code ec;
@@ -39,7 +39,7 @@ void systemdDaemonReload(
     return;
 }
 
-static inline uint32_t getJobId(const std::string &path)
+static inline uint32_t getJobId(const std::string& path)
 {
     auto pos = path.rfind("/");
     if (pos == std::string::npos)
@@ -52,10 +52,10 @@ static inline uint32_t getJobId(const std::string &path)
     return static_cast<uint32_t>(std::stoul(path.substr(pos + 1)));
 }
 
-void systemdUnitAction(const std::shared_ptr<sdbusplus::asio::connection> &conn,
+void systemdUnitAction(const std::shared_ptr<sdbusplus::asio::connection>& conn,
                        boost::asio::yield_context yield,
-                       const std::string &unitName,
-                       const std::string &actionMethod)
+                       const std::string& unitName,
+                       const std::string& actionMethod)
 {
     boost::system::error_code ec;
     auto jobPath = conn->yield_method_call<sdbusplus::message::object_path>(
@@ -95,9 +95,9 @@ void systemdUnitAction(const std::shared_ptr<sdbusplus::asio::connection> &conn,
 }
 
 void systemdUnitFilesStateChange(
-    const std::shared_ptr<sdbusplus::asio::connection> &conn,
-    boost::asio::yield_context yield, const std::vector<std::string> &unitFiles,
-    const std::string &unitState, bool maskedState, bool enabledState)
+    const std::shared_ptr<sdbusplus::asio::connection>& conn,
+    boost::asio::yield_context yield, const std::vector<std::string>& unitFiles,
+    const std::string& unitState, bool maskedState, bool enabledState)
 {
     boost::system::error_code ec;
 
