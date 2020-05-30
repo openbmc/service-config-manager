@@ -58,10 +58,10 @@ void ServiceConfig::updateSocketProperties(
                 throw std::out_of_range("Out of range");
             }
             portNum = tmp;
-            if (iface && iface->is_initialized())
+            if (sockAttrIface && sockAttrIface->is_initialized())
             {
                 internalSet = true;
-                iface->set_property(srvCfgPropPort, portNum);
+                sockAttrIface->set_property(sockAttrPropPort, portNum);
                 internalSet = false;
             }
         }
@@ -84,11 +84,11 @@ void ServiceConfig::updateServiceProperties(
         {
             unitEnabledState = true;
         }
-        if (iface && iface->is_initialized())
+        if (srvCfgIface && srvCfgIface->is_initialized())
         {
             internalSet = true;
-            iface->set_property(srvCfgPropMasked, unitMaskedState);
-            iface->set_property(srvCfgPropEnabled, unitEnabledState);
+            srvCfgIface->set_property(srvCfgPropMasked, unitMaskedState);
+            srvCfgIface->set_property(srvCfgPropEnabled, unitEnabledState);
             internalSet = false;
         }
     }
@@ -100,10 +100,10 @@ void ServiceConfig::updateServiceProperties(
         {
             unitRunningState = true;
         }
-        if (iface && iface->is_initialized())
+        if (srvCfgIface && srvCfgIface->is_initialized())
         {
             internalSet = true;
-            iface->set_property(srvCfgPropRunning, unitRunningState);
+            srvCfgIface->set_property(srvCfgPropRunning, unitRunningState);
             internalSet = false;
         }
     }
@@ -142,7 +142,7 @@ void ServiceConfig::queryAndUpdateProperties()
                             try
                             {
                                 updateSocketProperties(propertyMap);
-                                if (!iface)
+                                if (!srvCfgIface)
                                 {
                                     registerProperties();
                                 }
@@ -160,7 +160,7 @@ void ServiceConfig::queryAndUpdateProperties()
                         sysdService, socketObjectPath, dBusPropIntf,
                         dBusGetAllMethod, sysdSocketIntf);
                 }
-                else if (!iface)
+                else if (!srvCfgIface)
                 {
                     registerProperties();
                 }
@@ -380,12 +380,13 @@ void ServiceConfig::startServiceRestartTimer()
 
 void ServiceConfig::registerProperties()
 {
-    iface = server.add_interface(objPath, serviceConfigIntfName);
+    srvCfgIface = server.add_interface(objPath, serviceConfigIntfName);
 
     if (!socketObjectPath.empty())
     {
-        iface->register_property(
-            srvCfgPropPort, portNum,
+        sockAttrIface = server.add_interface(objPath, sockAttrIntfName);
+        sockAttrIface->register_property(
+            sockAttrPropPort, portNum,
             [this](const uint16_t& req, uint16_t& res) {
                 if (!internalSet)
                 {
@@ -407,7 +408,7 @@ void ServiceConfig::registerProperties()
             });
     }
 
-    iface->register_property(
+    srvCfgIface->register_property(
         srvCfgPropMasked, unitMaskedState, [this](const bool& req, bool& res) {
             if (!internalSet)
             {
@@ -427,8 +428,8 @@ void ServiceConfig::registerProperties()
                     (1 << static_cast<uint8_t>(UpdatedProp::enabledState)) |
                     (1 << static_cast<uint8_t>(UpdatedProp::runningState));
                 internalSet = true;
-                iface->set_property(srvCfgPropEnabled, unitEnabledState);
-                iface->set_property(srvCfgPropRunning, unitRunningState);
+                srvCfgIface->set_property(srvCfgPropEnabled, unitEnabledState);
+                srvCfgIface->set_property(srvCfgPropRunning, unitRunningState);
                 internalSet = false;
                 startServiceRestartTimer();
             }
@@ -436,7 +437,7 @@ void ServiceConfig::registerProperties()
             return 1;
         });
 
-    iface->register_property(
+    srvCfgIface->register_property(
         srvCfgPropEnabled, unitEnabledState,
         [this](const bool& req, bool& res) {
             if (!internalSet)
@@ -464,7 +465,7 @@ void ServiceConfig::registerProperties()
             return 1;
         });
 
-    iface->register_property(
+    srvCfgIface->register_property(
         srvCfgPropRunning, unitRunningState,
         [this](const bool& req, bool& res) {
             if (!internalSet)
@@ -492,7 +493,11 @@ void ServiceConfig::registerProperties()
             return 1;
         });
 
-    iface->initialize();
+    srvCfgIface->initialize();
+    if (!socketObjectPath.empty())
+    {
+        sockAttrIface->initialize();
+    }
     return;
 }
 
