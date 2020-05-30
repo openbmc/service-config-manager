@@ -27,9 +27,11 @@ static constexpr const char* serviceConfigSrvName =
     "xyz.openbmc_project.Control.Service.Manager";
 static constexpr const char* serviceConfigIntfName =
     "xyz.openbmc_project.Control.Service.Attributes";
+static constexpr const char* sockAttrIntfName =
+    "xyz.openbmc_project.Control.Service.SocketAttributes";
 static constexpr const char* srcCfgMgrBasePath =
     "/xyz/openbmc_project/control/service";
-static constexpr const char* srvCfgPropPort = "Port";
+static constexpr const char* sockAttrPropPort = "Port";
 static constexpr const char* srvCfgPropMasked = "Masked";
 static constexpr const char* srvCfgPropEnabled = "Enabled";
 static constexpr const char* srvCfgPropRunning = "Running";
@@ -67,7 +69,9 @@ class ServiceConfig
 
   private:
     sdbusplus::asio::object_server& server;
-    std::shared_ptr<sdbusplus::asio::dbus_interface> iface;
+    std::shared_ptr<sdbusplus::asio::dbus_interface> srvCfgIface;
+    std::shared_ptr<sdbusplus::asio::dbus_interface> sockAttrIface;
+
     bool internalSet = false;
     std::string objPath;
     std::string instanceName;
