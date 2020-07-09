@@ -4,8 +4,6 @@ Description=Daemon to control service configuration
 [Service]
 Restart=always
 ExecStart=/usr/bin/phosphor-srvcfg-manager
-RestartSec=5
-StartLimitInterval=0
 SyslogIdentifier=srvcfg-manager
 Type=dbus
 BusName=xyz.openbmc_project.Control.Service.Manager
