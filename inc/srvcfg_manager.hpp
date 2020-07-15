@@ -31,6 +31,8 @@ static constexpr const char* sockAttrIntfName =
     "xyz.openbmc_project.Control.Service.SocketAttributes";
 static constexpr const char* srcCfgMgrBasePath =
     "/xyz/openbmc_project/control/service";
+static constexpr const char* srcCfgMgrIntf =
+    "/xyz/openbmc_project.Control.Service.Manager";
 static constexpr const char* sockAttrPropPort = "Port";
 static constexpr const char* srvCfgPropMasked = "Masked";
 static constexpr const char* srvCfgPropEnabled = "Enabled";

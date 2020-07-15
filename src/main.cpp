@@ -306,6 +306,9 @@ int main()
     initTimer = std::make_unique<boost::asio::steady_timer>(io);
     conn->request_name(phosphor::service::serviceConfigSrvName);
     auto server = sdbusplus::asio::object_server(conn, true);
+    auto mgrIntf = server.add_interface(phosphor::service::srcCfgMgrBasePath,
+                                        phosphor::service::srcCfgMgrIntf);
+    mgrIntf->initialize();
     server.add_manager(phosphor::service::srcCfgMgrBasePath);
     // Initialize the objects after systemd indicated startup finished.
     auto userUpdatedSignal = std::make_unique<sdbusplus::bus::match::match>(
