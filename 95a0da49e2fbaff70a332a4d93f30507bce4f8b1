@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "31917347_5faf7826",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2021-04-27T16:38:02Z",
+      "side": 1,
+      "message": "Note: When Service config manager daemon starts, there won\u0027t be any dropbear service executing, i.e. object will be created based on dropbear.socket only. \n\nWhen a user connects to the SSH port, then dropbear service will be  instantiated say under dropbear@xyz.service. This will not create a new object under Service config manager daemon (as \"ListUnits\" will be performed, only during daemon start and won\u0027t monitor any signal after that). \ni.e. Service-config-manager creates objects at the daemon start and not continuously.\n\nThis means that as long as dropbear socket attributes can be updated / general service attributes can be updated. But can\u0027t do a service start (which happens through .socket).",
+      "range": {
+        "startLine": 27,
+        "startChar": 11,
+        "endLine": 27,
+        "endChar": 55
+      },
+      "revId": "95a0da49e2fbaff70a332a4d93f30507bce4f8b1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a9a491f_a92f2ab5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2021-04-27T16:38:02Z",
+      "side": 1,
+      "message": "This is actually not a problem, but instead limitation with current  service config manager \u0026 dropbear service \nNote: In case of dropbear the socket file name is dropbear.socket and service file name is dropbear@.service (indicating, instance name is needed). \nUnfortunately, we can\u0027t start dropbear service using any instance name, and it needs to be started by dropbear.socket\n\nHence Running property can\u0027t be changed to Running to True, when it is false, because we can\u0027t start the service on our own. \n\nSay systemctl start dropbear@\u003cxyz\u003e.service won\u0027t start.",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 40
+      },
+      "revId": "95a0da49e2fbaff70a332a4d93f30507bce4f8b1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
