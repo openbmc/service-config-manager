@@ -45,6 +45,30 @@
       "revId": "95a0da49e2fbaff70a332a4d93f30507bce4f8b1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa3a1a2f_7b141ede",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000235
+      },
+      "writtenOn": "2021-04-27T21:46:26Z",
+      "side": 1,
+      "message": "Thanks for the explanation.  I am struggling to find a way to control when the dropbear service is available.  Can we enhance service-config-manager to handle socket activated services, for example, indicate Running\u003dtrue when \"dropbear.socket\" is listening?\n\nWhat changes are needed to make this work?",
+      "parentUuid": "3a9a491f_a92f2ab5",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 40
+      },
+      "revId": "95a0da49e2fbaff70a332a4d93f30507bce4f8b1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
