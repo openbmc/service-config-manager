@@ -69,6 +69,30 @@
       "revId": "95a0da49e2fbaff70a332a4d93f30507bce4f8b1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c41dc2d3_6ad0a1f1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2021-04-28T03:11:22Z",
+      "side": 1,
+      "message": "Have you tried restarting the Service-config-manager daemon, after a valid SSH service is started? Can you restart \u0026 dump the object information? esp. the Running attribute.\n\nIn the mean time, i will just check whether any signal exists to figure out the service start. In that way service-config-manager can rely on it dynamically.",
+      "parentUuid": "aa3a1a2f_7b141ede",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 40
+      },
+      "revId": "95a0da49e2fbaff70a332a4d93f30507bce4f8b1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
