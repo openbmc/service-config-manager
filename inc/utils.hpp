@@ -42,6 +42,7 @@ static constexpr const char* stateMasked = "masked";
 static constexpr const char* stateEnabled = "enabled";
 static constexpr const char* stateDisabled = "disabled";
 static constexpr const char* subStateRunning = "running";
+static constexpr const char* subStateListening = "listening";
 
 static inline std::string addInstanceName(const std::string& instanceName,
                                           const std::string& suffix)
