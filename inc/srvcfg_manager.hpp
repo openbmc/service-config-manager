@@ -91,6 +91,7 @@ class ServiceConfig
     bool unitMaskedState = false;
     bool unitEnabledState = false;
     bool unitRunningState = false;
+    bool isDropBearService = false;
     std::string subStateValue;
 
     bool isMaskedOut();

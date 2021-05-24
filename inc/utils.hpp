@@ -42,12 +42,35 @@ static constexpr const char* stateMasked = "masked";
 static constexpr const char* stateEnabled = "enabled";
 static constexpr const char* stateDisabled = "disabled";
 static constexpr const char* subStateRunning = "running";
+static constexpr const char* subStateListening = "listening";
+
+using ListUnitsType =
+    std::tuple<std::string, std::string, std::string, std::string, std::string,
+               std::string, sdbusplus::message::object_path, uint32_t,
+               std::string, sdbusplus::message::object_path>;
+
+enum class ListUnitElements
+{
+    name,
+    descriptionString,
+    loadState,
+    activeState,
+    subState,
+    followedUnit,
+    objectPath,
+    queuedJobType,
+    jobType,
+    jobObject
+};
 
 static inline std::string addInstanceName(const std::string& instanceName,
                                           const std::string& suffix)
 {
     return (instanceName.empty() ? "" : suffix + instanceName);
 }
+
+void checkAndThrowInternalFailure(boost::system::error_code& ec,
+                                  const std::string& msg);
 
 void systemdDaemonReload(
     const std::shared_ptr<sdbusplus::asio::connection>& conn,
