@@ -96,7 +96,8 @@ void ServiceConfig::updateServiceProperties(
     if (subStateIt != propertyMap.end())
     {
         subStateValue = std::get<std::string>(subStateIt->second);
-        if (subStateValue == subStateRunning)
+        if (subStateValue == subStateRunning ||
+            subStateValue == subStateListening)
         {
             unitRunningState = true;
         }
@@ -111,6 +112,8 @@ void ServiceConfig::updateServiceProperties(
 
 void ServiceConfig::queryAndUpdateProperties()
 {
+    std::string objectPath =
+        isDropBearService ? socketObjectPath : serviceObjectPath;
     conn->async_method_call(
         [this](boost::system::error_code ec,
                const boost::container::flat_map<std::string, VariantType>&
@@ -173,8 +176,7 @@ void ServiceConfig::queryAndUpdateProperties()
                 return;
             }
         },
-        sysdService, serviceObjectPath, dBusPropIntf, dBusGetAllMethod,
-        sysdUnitIntf);
+        sysdService, objectPath, dBusPropIntf, dBusGetAllMethod, sysdUnitIntf);
     return;
 }
 
@@ -213,6 +215,10 @@ ServiceConfig::ServiceConfig(
     instanceName(instanceName_), serviceObjectPath(serviceObjPath_),
     socketObjectPath(socketObjPath_)
 {
+    if (baseUnitName == "dropbear")
+    {
+        isDropBearService = true;
+    }
     instantiatedUnitName = baseUnitName + addInstanceName(instanceName, "@");
     updatedFlag = 0;
     queryAndUpdateProperties();
@@ -247,13 +253,16 @@ void ServiceConfig::stopAndApplyUnitConfig(boost::asio::yield_context yield)
     phosphor::logging::log<phosphor::logging::level::INFO>(
         "Applying new settings.",
         phosphor::logging::entry("OBJPATH=%s", objPath.c_str()));
-    if (subStateValue == "running")
+    if (subStateValue == "running" || subStateValue == subStateListening)
     {
         if (!socketObjectPath.empty())
         {
             systemdUnitAction(conn, yield, getSocketUnitName(), sysdStopUnit);
         }
-        systemdUnitAction(conn, yield, getServiceUnitName(), sysdStopUnit);
+        if (!isDropBearService)
+        {
+            systemdUnitAction(conn, yield, getServiceUnitName(), sysdStopUnit);
+        }
     }
 
     if (updatedFlag & (1 << static_cast<uint8_t>(UpdatedProp::port)))
@@ -297,6 +306,10 @@ void ServiceConfig::stopAndApplyUnitConfig(boost::asio::yield_context yield)
         {
             unitFiles = {getServiceUnitName()};
         }
+        else if (!socketObjectPath.empty() && isDropBearService)
+        {
+            unitFiles = {getSocketUnitName()};
+        }
         else
         {
             unitFiles = {getSocketUnitName(), getServiceUnitName()};
@@ -321,7 +334,11 @@ void ServiceConfig::restartUnitConfig(boost::asio::yield_context yield)
             systemdUnitAction(conn, yield, getSocketUnitName(),
                               sysdRestartUnit);
         }
-        systemdUnitAction(conn, yield, getServiceUnitName(), sysdRestartUnit);
+        if (!isDropBearService)
+        {
+            systemdUnitAction(conn, yield, getServiceUnitName(),
+                              sysdRestartUnit);
+        }
     }
 
     // Reset the flag
