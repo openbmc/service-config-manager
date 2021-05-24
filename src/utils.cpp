@@ -15,8 +15,8 @@
 */
 #include "utils.hpp"
 
-static inline void checkAndThrowInternalFailure(boost::system::error_code& ec,
-                                                const std::string& msg)
+void checkAndThrowInternalFailure(boost::system::error_code& ec,
+                                  const std::string& msg)
 {
     if (ec)
     {
