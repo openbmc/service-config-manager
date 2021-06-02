@@ -44,9 +44,9 @@ executable('phosphor-srvcfg-manager',
         install_dir: get_option('bindir'))
 
 systemd = dependency('systemd')
-systemd_system_unit_dir = systemd.get_pkgconfig_variable(
-    'systemdsystemunitdir',
-    define_variable: ['prefix', get_option('prefix')])
+systemd_system_unit_dir = systemd.get_variable(
+    pkgconfig: 'systemdsystemunitdir',
+    pkgconfig_define: ['prefix', get_option('prefix')])
 
 configure_file(
     copy: true,
