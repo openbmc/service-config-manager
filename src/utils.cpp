@@ -67,7 +67,7 @@ void systemdUnitAction(const std::shared_ptr<sdbusplus::asio::connection>& conn,
     // this way we guarantee that queued job id is done.
     // this is needed to make sure dependency list on units are
     // properly handled.
-    while (1)
+    while (true)
     {
         ec.clear();
         conn->yield_method_call<>(yield, ec, sysdService, sysdObjPath,
