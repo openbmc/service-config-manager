@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1629a45d_cbeb713d",
+        "filename": "src/utils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2021-10-19T00:42:31Z",
+      "side": 1,
+      "message": "Could you explain that What is the difference between while(1) and while(true)?",
+      "range": {
+        "startLine": 70,
+        "startChar": 11,
+        "endLine": 70,
+        "endChar": 15
+      },
+      "revId": "5bf7ee1c69385ee1ad9f1f8293e5fa7b652e3b1f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
