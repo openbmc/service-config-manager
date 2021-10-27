@@ -94,6 +94,30 @@
       "revId": "5bf7ee1c69385ee1ad9f1f8293e5fa7b652e3b1f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0598003f_731b210d",
+        "filename": "src/utils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000224
+      },
+      "writtenOn": "2021-10-27T02:58:06Z",
+      "side": 1,
+      "message": "I thought using integers in conditions was a pretty common practice - at least in C. I\u0027m less familiar with common practice in C++, however in the openbmc repos I have cloned there are roughly the same number of `while(1)`s and `while(true)`s. Also, that second link (\"Use nullptr rather than 0 or NULL\") seems to be referring to pointers not conditions?\n\nCan you explain what the reason for this patch is? If you are adding further patches with other while loops and you want consistency across a file, I\u0027d +1 that. Or if we were converting all instances of `while(1)` to `while(true)` across openbmc. This change on it\u0027s own without additional context seems a little redundant to me.",
+      "parentUuid": "32812a88_a99961c8",
+      "range": {
+        "startLine": 70,
+        "startChar": 11,
+        "endLine": 70,
+        "endChar": 15
+      },
+      "revId": "5bf7ee1c69385ee1ad9f1f8293e5fa7b652e3b1f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
