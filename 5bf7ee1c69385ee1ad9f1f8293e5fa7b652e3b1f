@@ -142,6 +142,30 @@
       "revId": "5bf7ee1c69385ee1ad9f1f8293e5fa7b652e3b1f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d6c7cb0_d9f45691",
+        "filename": "src/utils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000524
+      },
+      "writtenOn": "2021-10-27T14:24:06Z",
+      "side": 1,
+      "message": "Using true seems more in the same spirt as using ES.47: Use nullptr rather than 0 or NULL\nhttps://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Res-nullptr",
+      "parentUuid": "7c88789d_b60710d6",
+      "range": {
+        "startLine": 70,
+        "startChar": 11,
+        "endLine": 70,
+        "endChar": 15
+      },
+      "revId": "5bf7ee1c69385ee1ad9f1f8293e5fa7b652e3b1f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
