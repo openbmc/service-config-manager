@@ -108,6 +108,15 @@ void ServiceConfig::updateServiceProperties(
             internalSet = false;
         }
     }
+
+#ifdef USB_CODE_UPDATE_DEFAULT_ENABLE
+    if (objPath == "/xyz/openbmc_project/control/service/"
+                   "phosphor_2dusb_2dcode_2dupdate")
+    {
+        unitEnabledState = true;
+        unitRunningState = true;
+    }
+#endif
 }
 
 void ServiceConfig::queryAndUpdateProperties()
@@ -463,6 +472,24 @@ void ServiceConfig::registerProperties()
         srvCfgPropMasked, unitMaskedState, [this](const bool& req, bool& res) {
             if (!internalSet)
             {
+#ifdef USB_CODE_UPDATE
+                if (objPath == "/xyz/openbmc_project/control/service/"
+                               "phosphor_2dusb_2dcode_2dupdate")
+                {
+                    unitMaskedState = req;
+                    unitEnabledState = !unitMaskedState;
+                    unitRunningState = !unitMaskedState;
+                    internalSet = true;
+                    srvCfgIface->set_property(srvCfgPropEnabled,
+                                              unitEnabledState);
+                    srvCfgIface->set_property(srvCfgPropRunning,
+                                              unitRunningState);
+                    srvCfgIface->set_property(srvCfgPropMasked,
+                                              unitMaskedState);
+                    internalSet = false;
+                    return 1;
+                }
+#endif
                 if (req == res)
                 {
                     return 1;
@@ -493,6 +520,28 @@ void ServiceConfig::registerProperties()
         [this](const bool& req, bool& res) {
             if (!internalSet)
             {
+#ifdef USB_CODE_UPDATE
+                if (objPath == "/xyz/openbmc_project/control/service/"
+                               "phosphor_2dusb_2dcode_2dupdate")
+                {
+                    if (unitMaskedState)
+                    { // block updating if masked
+                        phosphor::logging::log<phosphor::logging::level::ERR>(
+                            "Invalid value specified");
+                        return -EINVAL;
+                    }
+                    unitEnabledState = req;
+                    unitRunningState = req;
+                    internalSet = true;
+                    srvCfgIface->set_property(srvCfgPropEnabled,
+                                              unitEnabledState);
+                    srvCfgIface->set_property(srvCfgPropRunning,
+                                              unitRunningState);
+                    internalSet = false;
+                    res = req;
+                    return 1;
+                }
+#endif
                 if (req == res)
                 {
                     return 1;
@@ -521,6 +570,28 @@ void ServiceConfig::registerProperties()
         [this](const bool& req, bool& res) {
             if (!internalSet)
             {
+#ifdef USB_CODE_UPDATE
+                if (objPath == "/xyz/openbmc_project/control/service/"
+                               "phosphor_2dusb_2dcode_2dupdate")
+                {
+                    if (unitMaskedState)
+                    { // block updating if masked
+                        phosphor::logging::log<phosphor::logging::level::ERR>(
+                            "Invalid value specified");
+                        return -EINVAL;
+                    }
+                    unitEnabledState = req;
+                    unitRunningState = req;
+                    internalSet = true;
+                    srvCfgIface->set_property(srvCfgPropEnabled,
+                                              unitEnabledState);
+                    srvCfgIface->set_property(srvCfgPropRunning,
+                                              unitRunningState);
+                    internalSet = false;
+                    res = req;
+                    return 1;
+                }
+#endif
                 if (req == res)
                 {
                     return 1;

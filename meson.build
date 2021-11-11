@@ -33,6 +33,13 @@ deps = [dependency('boost'),
         dependency('systemd'),
 ]
 
+if(get_option('usb-code-update').enabled())
+    add_project_arguments('-DUSB_CODE_UPDATE', language : 'cpp')
+endif
+if(get_option('usb-code-update-default-value').enabled())
+    add_project_arguments('-DUSB_CODE_UPDATE_DEFAULT_ENABLE', language : 'cpp')
+endif
+
 executable('phosphor-srvcfg-manager',
            'src/main.cpp',
            'src/srvcfg_manager.cpp',

@@ -186,6 +186,14 @@ static inline void
         archive(CEREAL_NVP(unitsToMonitor));
     }
 
+#ifdef USB_CODE_UPDATE
+    unitsToMonitor.emplace(
+        "phosphor_2dusb_2dcode_2dupdate",
+        std::make_tuple(
+            "phosphor_usb_code_update", "",
+            "/org/freedesktop/systemd1/unit/USBCodeUpdate_2eservice", ""));
+#endif
+
     // create objects for needed services
     for (auto& it : unitsToMonitor)
     {

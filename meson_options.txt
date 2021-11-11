@@ -1,0 +1,11 @@
+option(
+    'usb-code-update', type: 'feature',
+    value: 'disabled',
+    description: 'Enable USB code update enable/disable feature.',
+)
+option(
+    'usb-code-update-default-value',
+    type: 'feature',
+    value: 'disabled',
+    description: 'Default value for USB code update.'
+)
