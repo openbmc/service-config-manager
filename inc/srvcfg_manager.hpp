@@ -67,6 +67,13 @@ class ServiceConfig
     void restartUnitConfig(boost::asio::yield_context yield);
     void startServiceRestartTimer();
 
+#ifdef USB_CODE_UPDATE
+    void saveUSBCodeUpdateStateToFile(const bool& maskedState,
+                                      const bool& enabledState);
+    void getUSBCodeUpdateStateFromFile();
+    void setUSBCodeUpdateState(const bool& state);
+#endif
+
   private:
     sdbusplus::asio::object_server& server;
     std::shared_ptr<sdbusplus::asio::dbus_interface> srvCfgIface;
