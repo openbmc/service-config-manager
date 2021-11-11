@@ -1,0 +1,5 @@
+option(
+    'USBCodeUpdate', type: 'feature',
+    value: 'enabled',
+    description: 'Enable USB Code Update.',
+)
