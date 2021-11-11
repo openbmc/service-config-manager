@@ -17,6 +17,14 @@
 
 #include <boost/asio/spawn.hpp>
 
+#ifdef USB_CODE_UPDATE
+#include <cereal/archives/json.hpp>
+#include <cereal/types/tuple.hpp>
+#include <cereal/types/unordered_map.hpp>
+
+#include <cstdio>
+#endif
+
 #include <fstream>
 #include <regex>
 
@@ -37,6 +45,109 @@ static constexpr const char* systemd1UnitBasePath =
     "/org/freedesktop/systemd1/unit/";
 static constexpr const char* systemdOverrideUnitBasePath =
     "/etc/systemd/system/";
+
+#ifdef USB_CODE_UPDATE
+static constexpr const char* usbCodeUpdateStateFilePath =
+    "/var/lib/srvcfg_manager";
+static constexpr const char* usbCodeUpdateStateFile =
+    "/var/lib/srvcfg_manager/usb-code-update-state";
+static constexpr const char* emptyUsbCodeUpdateRulesFile =
+    "/etc/udev/rules.d/70-bmc-usb.rules";
+static constexpr const char* usbCodeUpdateObjectPath =
+    "/xyz/openbmc_project/control/service/phosphor_2dusb_2dcode_2dupdate";
+
+using UsbCodeUpdateStateMap = std::unordered_map<std::string, bool>;
+
+void ServiceConfig::setUSBCodeUpdateState(const bool& state)
+{
+    // Enable usb code update
+    if (state)
+    {
+        if (std::filesystem::exists(emptyUsbCodeUpdateRulesFile))
+        {
+            phosphor::logging::log<phosphor::logging::level::INFO>(
+                "Enable usb code update");
+            std::filesystem::remove(emptyUsbCodeUpdateRulesFile);
+        }
+        return;
+    }
+
+    // Disable usb code update
+    if (std::filesystem::exists(emptyUsbCodeUpdateRulesFile))
+    {
+        std::filesystem::remove(emptyUsbCodeUpdateRulesFile);
+    }
+    std::error_code ec;
+    std::filesystem::create_symlink("/dev/null", emptyUsbCodeUpdateRulesFile,
+                                    ec);
+    if (ec)
+    {
+        phosphor::logging::log<phosphor::logging::level::ERR>(
+            "Disable usb code update failed");
+        return;
+    }
+    phosphor::logging::log<phosphor::logging::level::INFO>(
+        "Disable usb code update");
+}
+
+void ServiceConfig::saveUSBCodeUpdateStateToFile(const bool& maskedState,
+                                                 const bool& enabledState)
+{
+    if (!std::filesystem::exists(usbCodeUpdateStateFilePath))
+    {
+        std::filesystem::create_directories(usbCodeUpdateStateFilePath);
+    }
+
+    UsbCodeUpdateStateMap usbCodeUpdateState;
+    usbCodeUpdateState[srvCfgPropMasked] = maskedState;
+    usbCodeUpdateState[srvCfgPropEnabled] = enabledState;
+
+    std::ofstream file(usbCodeUpdateStateFile, std::ios::out);
+    cereal::JSONOutputArchive archive(file);
+    archive(CEREAL_NVP(usbCodeUpdateState));
+}
+
+void ServiceConfig::getUSBCodeUpdateStateFromFile()
+{
+    if (!std::filesystem::exists(usbCodeUpdateStateFile))
+    {
+        phosphor::logging::log<phosphor::logging::level::INFO>(
+            "usb-code-update-state file does not exist");
+
+        unitMaskedState = false;
+        unitEnabledState = true;
+        unitRunningState = true;
+        setUSBCodeUpdateState(unitEnabledState);
+        return;
+    }
+
+    std::ifstream file(usbCodeUpdateStateFile);
+    cereal::JSONInputArchive archive(file);
+    UsbCodeUpdateStateMap usbCodeUpdateState;
+    archive(usbCodeUpdateState);
+
+    auto iterMask = usbCodeUpdateState.find(srvCfgPropMasked);
+    if (iterMask != usbCodeUpdateState.end())
+    {
+        unitMaskedState = iterMask->second;
+        if (unitMaskedState)
+        {
+            unitEnabledState = !unitMaskedState;
+            unitRunningState = !unitMaskedState;
+            setUSBCodeUpdateState(unitEnabledState);
+            return;
+        }
+
+        auto iterEnable = usbCodeUpdateState.find(srvCfgPropEnabled);
+        if (iterEnable != usbCodeUpdateState.end())
+        {
+            unitEnabledState = iterEnable->second;
+            unitRunningState = iterEnable->second;
+            setUSBCodeUpdateState(unitEnabledState);
+        }
+    }
+}
+#endif
 
 void ServiceConfig::updateSocketProperties(
     const boost::container::flat_map<std::string, VariantType>& propertyMap)
@@ -108,6 +219,13 @@ void ServiceConfig::updateServiceProperties(
             internalSet = false;
         }
     }
+
+#ifdef USB_CODE_UPDATE
+    if (objPath == usbCodeUpdateObjectPath)
+    {
+        getUSBCodeUpdateStateFromFile();
+    }
+#endif
 }
 
 void ServiceConfig::queryAndUpdateProperties()
@@ -463,6 +581,26 @@ void ServiceConfig::registerProperties()
         srvCfgPropMasked, unitMaskedState, [this](const bool& req, bool& res) {
             if (!internalSet)
             {
+#ifdef USB_CODE_UPDATE
+                if (objPath == usbCodeUpdateObjectPath)
+                {
+                    unitMaskedState = req;
+                    unitEnabledState = !unitMaskedState;
+                    unitRunningState = !unitMaskedState;
+                    internalSet = true;
+                    srvCfgIface->set_property(srvCfgPropEnabled,
+                                              unitEnabledState);
+                    srvCfgIface->set_property(srvCfgPropRunning,
+                                              unitRunningState);
+                    srvCfgIface->set_property(srvCfgPropMasked,
+                                              unitMaskedState);
+                    internalSet = false;
+                    setUSBCodeUpdateState(unitEnabledState);
+                    saveUSBCodeUpdateStateToFile(unitMaskedState,
+                                                 unitEnabledState);
+                    return 1;
+                }
+#endif
                 if (req == res)
                 {
                     return 1;
@@ -493,6 +631,30 @@ void ServiceConfig::registerProperties()
         [this](const bool& req, bool& res) {
             if (!internalSet)
             {
+#ifdef USB_CODE_UPDATE
+                if (objPath == usbCodeUpdateObjectPath)
+                {
+                    if (unitMaskedState)
+                    { // block updating if masked
+                        phosphor::logging::log<phosphor::logging::level::ERR>(
+                            "Invalid value specified");
+                        return -EINVAL;
+                    }
+                    unitEnabledState = req;
+                    unitRunningState = req;
+                    internalSet = true;
+                    srvCfgIface->set_property(srvCfgPropEnabled,
+                                              unitEnabledState);
+                    srvCfgIface->set_property(srvCfgPropRunning,
+                                              unitRunningState);
+                    internalSet = false;
+                    setUSBCodeUpdateState(unitEnabledState);
+                    saveUSBCodeUpdateStateToFile(unitMaskedState,
+                                                 unitEnabledState);
+                    res = req;
+                    return 1;
+                }
+#endif
                 if (req == res)
                 {
                     return 1;
@@ -521,6 +683,30 @@ void ServiceConfig::registerProperties()
         [this](const bool& req, bool& res) {
             if (!internalSet)
             {
+#ifdef USB_CODE_UPDATE
+                if (objPath == usbCodeUpdateObjectPath)
+                {
+                    if (unitMaskedState)
+                    { // block updating if masked
+                        phosphor::logging::log<phosphor::logging::level::ERR>(
+                            "Invalid value specified");
+                        return -EINVAL;
+                    }
+                    unitEnabledState = req;
+                    unitRunningState = req;
+                    internalSet = true;
+                    srvCfgIface->set_property(srvCfgPropEnabled,
+                                              unitEnabledState);
+                    srvCfgIface->set_property(srvCfgPropRunning,
+                                              unitRunningState);
+                    internalSet = false;
+                    setUSBCodeUpdateState(unitEnabledState);
+                    saveUSBCodeUpdateStateToFile(unitMaskedState,
+                                                 unitEnabledState);
+                    res = req;
+                    return 1;
+                }
+#endif
                 if (req == res)
                 {
                     return 1;
