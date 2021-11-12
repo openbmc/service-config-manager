@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "621c923a_f8ece80a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000400
+      },
+      "writtenOn": "2021-11-12T10:28:05Z",
+      "side": 1,
+      "message": "\u003e When USBCodeUpdate is enabled, how can the system integrator set \u003e the default value for the phosphor_usb_code_update property. \n\u003e Should there be a meson build option for the default value?\n\nThis hasn\u0027t come true yet. I\u0027m working on it",
+      "parentUuid": "a1ab1c26_cc314be1",
+      "revId": "1124861bc2c63321eb0619dea56ada41afb1ad59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0e7bdd26_0600c1c1",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2021-11-11T18:25:57Z",
       "side": 1,
       "message": "Please add test cases to show the code update property survives BMC reboot.  For example, set the property to true, then reboot the BMC, then validate the property is true.  Repeat for the \"false\" value.",
+      "revId": "1124861bc2c63321eb0619dea56ada41afb1ad59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ed2f9ab_24dce9a8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000400
+      },
+      "writtenOn": "2021-11-12T10:28:05Z",
+      "side": 1,
+      "message": "There is no persistence here. Restarting BMC will restore the default value. All other services, such as bmcweb/phosphor-ipmi-net and so on, will also restore their default values too.",
+      "parentUuid": "0e7bdd26_0600c1c1",
       "revId": "1124861bc2c63321eb0619dea56ada41afb1ad59",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
