@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a948fcaa_74ea958d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000400
+      },
+      "writtenOn": "2021-11-15T08:39:43Z",
+      "side": 1,
+      "message": "No, what this commit does is create a object for \"phosphor-usb-code-update\" application. \nUpdating FW with USB is a feature that we can disable it by set the \"Enabled\" property to false.",
+      "parentUuid": "89b8076b_f4f2939d",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 40
+      },
+      "revId": "ec8a0fdcd0f454ffec207ce221c7becf181e76a0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e8cf8a97_74a9f169",
         "filename": "meson_options.txt",
         "patchSetId": 3
