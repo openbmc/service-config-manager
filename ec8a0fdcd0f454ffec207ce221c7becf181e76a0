@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "89b8076b_f4f2939d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2021-11-15T05:56:25Z",
+      "side": 1,
+      "message": "Do you envision logic for an end-user / company to block this update, by masking the service either temporarily (for that boot) / permanently (Across AC cycle) ?\nAny specific reason why it shouldn\u0027t be allowed. Please educate me, why it shouldn\u0027t be allowed.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 40
+      },
+      "revId": "ec8a0fdcd0f454ffec207ce221c7becf181e76a0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}

@@ -87,6 +87,52 @@
       "revId": "1124861bc2c63321eb0619dea56ada41afb1ad59",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "856f99c4_6aa1c366",
+        "filename": "src/main.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2021-11-15T05:56:25Z",
+      "side": 1,
+      "message": "Trying to understand why it is not added as part of ServiceName in line @37. If you can use #if flag and accordingly update the service name then it should be fine. \n\nReason: If we start adding multiple services like this, then code will not be maintainable. Let me know if there is any specific reason, which will not make it to work",
+      "range": {
+        "startLine": 191,
+        "startChar": 8,
+        "endLine": 191,
+        "endChar": 41
+      },
+      "revId": "1124861bc2c63321eb0619dea56ada41afb1ad59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5c15d44_8529beee",
+        "filename": "src/srvcfg_manager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2021-11-15T05:56:25Z",
+      "side": 1,
+      "message": "trying to understand the special handling needed for this scenario.",
+      "range": {
+        "startLine": 467,
+        "startChar": 16,
+        "endLine": 469,
+        "endChar": 17
+      },
+      "revId": "1124861bc2c63321eb0619dea56ada41afb1ad59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
