@@ -144,6 +144,24 @@
     },
     {
       "key": {
+        "uuid": "35517adb_50f3c61a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000400
+      },
+      "writtenOn": "2021-11-16T08:35:07Z",
+      "side": 1,
+      "message": "\u003e 2. Write the setting to a file (for example, /etc/usb-code-update-enablement) \n\u003e whenever it is changed, and read it from that file when the service-config- manager app starts up.\n\nDone. Now this setting is persistent across BMC reboots.",
+      "parentUuid": "37867427_4bc02aa0",
+      "revId": "1124861bc2c63321eb0619dea56ada41afb1ad59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "856f99c4_6aa1c366",
         "filename": "src/main.cpp",
         "patchSetId": 2
@@ -167,6 +185,30 @@
     },
     {
       "key": {
+        "uuid": "ed708eaf_a39257ae",
+        "filename": "src/main.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000400
+      },
+      "writtenOn": "2021-11-16T08:35:07Z",
+      "side": 1,
+      "message": "\u003e why it is not added as part of ServiceName in line @37\n\nphosphor_usb_code_update is not a daemon, but an application. We can\u0027t find it by calling the \"ListUnits\" method(line @237). Therefore, if it is added to the array at line 37, the object will not be created.",
+      "parentUuid": "856f99c4_6aa1c366",
+      "range": {
+        "startLine": 191,
+        "startChar": 8,
+        "endLine": 191,
+        "endChar": 41
+      },
+      "revId": "1124861bc2c63321eb0619dea56ada41afb1ad59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e5c15d44_8529beee",
         "filename": "src/srvcfg_manager.cpp",
         "patchSetId": 2
@@ -178,6 +220,30 @@
       "writtenOn": "2021-11-15T05:56:25Z",
       "side": 1,
       "message": "trying to understand the special handling needed for this scenario.",
+      "range": {
+        "startLine": 467,
+        "startChar": 16,
+        "endLine": 469,
+        "endChar": 17
+      },
+      "revId": "1124861bc2c63321eb0619dea56ada41afb1ad59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a093586e_a3a2b0c8",
+        "filename": "src/srvcfg_manager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1000400
+      },
+      "writtenOn": "2021-11-16T08:35:07Z",
+      "side": 1,
+      "message": "srvcfg_manager don\u0027t need to do anything to systemd when we enable/disable phosphor_usb_code_update, which is different from other services. srvcfg_manager only need to show the properties on the object. And another process will look for these properties: https://gerrit.openbmc-project.xyz/c/openbmc/service-config-manager/+/48780/5//COMMIT_MSG#25",
+      "parentUuid": "e5c15d44_8529beee",
       "range": {
         "startLine": 467,
         "startChar": 16,
