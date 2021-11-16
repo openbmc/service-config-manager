@@ -126,6 +126,24 @@
     },
     {
       "key": {
+        "uuid": "37867427_4bc02aa0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000400
+      },
+      "writtenOn": "2021-11-16T02:15:57Z",
+      "side": 1,
+      "message": "\u003e I believe the other services enablement setting (network IPMI, SSH, bmcweb, \n\u003e obmc-console service, etc.) persists across BMC reboots.  They are all systemd\n\u003e services, and the persistence of the setting is provided by systemd.  Can the \n\u003e testers confirm this?\n\nYes, you\u0027re right. I\u0027ve tested it.\n\n\u003e Here are two independent ideas for how to persist the setting:\n\u003e 1. Create a trivial do-nothing service which this can enable or disable.  In \n\u003e this way, systemd manages the setting.\n\u003e 2. Write the setting to a file (for example, /etc/usb-code-update-enablement) \n\u003e whenever it is changed, and read it from that file when the service-config-manager app starts up.\n\nI think #2 it\u0027s better. I\u0027ll do it. Thanks.",
+      "parentUuid": "d8b3cfa9_d83544c1",
+      "revId": "1124861bc2c63321eb0619dea56ada41afb1ad59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "856f99c4_6aa1c366",
         "filename": "src/main.cpp",
         "patchSetId": 2
