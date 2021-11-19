@@ -16,6 +16,24 @@
       "revId": "7e58e54fd8f0e1cf2ff8d148c36e257fe9c61aa9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7445264c_daab2949",
+        "filename": "src/srvcfg_manager.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1000400
+      },
+      "writtenOn": "2021-11-19T07:13:13Z",
+      "side": 1,
+      "message": "No, We can\u0027t find phosphor_usb_code_update by calling systemd method.\nWhen BMC starts, phosphor_usb_code_update will not start.\nphosphor_usb_code_update will not start until a USB flash disk is inserted.",
+      "parentUuid": "a93de88e_b87d886a",
+      "revId": "7e58e54fd8f0e1cf2ff8d148c36e257fe9c61aa9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
