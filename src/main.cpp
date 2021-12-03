@@ -155,7 +155,9 @@ static inline void
     }
 
     bool updateRequired = false;
-    bool jsonExist = std::filesystem::exists(srvCfgMgrFile);
+    // make sure the json file exists and has a size greater than 0
+    bool jsonExist = std::filesystem::exists(srvCfgMgrFile) &&
+                     (std::filesystem::file_size(srvCfgMgrFile) > 0);
     if (jsonExist)
     {
         std::ifstream file(srvCfgMgrFile);
