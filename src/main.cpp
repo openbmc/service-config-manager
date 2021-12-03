@@ -158,6 +158,19 @@ static inline void
     bool jsonExist = std::filesystem::exists(srvCfgMgrFile);
     if (jsonExist)
     {
+        // if the size is too small treat it as if the json file
+        // (maybe it needs to be larger, but at least I've caught
+        //  the case where the json file size is ZERO).
+        // does not exists to prevent this issue
+        // srvcfg-manager[1184]: terminate called after throwing
+        //     an instance of 'cereal::RapidJSONException'
+        if (std::filesystem::file_size(srvCfgMgrFile) < 1)
+        {
+            jsonExist = false;
+        }
+    }
+    if (jsonExist)
+    {
         std::ifstream file(srvCfgMgrFile);
         cereal::JSONInputArchive archive(file);
         MonitorListMap savedMonitorList;
