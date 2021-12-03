@@ -159,6 +159,12 @@ static inline void
     if (jsonExist)
     {
         std::ifstream file(srvCfgMgrFile);
+        // Testing for any invalid json file
+        // presently only checking file size isn't 0
+        if (std::filesystem::file_size(srvCfgMgrFile) == 0)
+        {
+            updateRequired = true;
+        }
         cereal::JSONInputArchive archive(file);
         MonitorListMap savedMonitorList;
         archive(savedMonitorList);
