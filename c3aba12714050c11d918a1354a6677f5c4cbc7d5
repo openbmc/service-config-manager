@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "726cc47b_f0a01fd0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2021-12-03T19:42:05Z",
+      "side": 1,
+      "message": "The test I\u0027d like to see is once you have the present, but empty /etc/srvcfg-mgr.json, just restart the service to be sure we\u0027re testing when it\u0027s 0 size:\nsystemctl restart srvcfg-manager.service",
+      "revId": "c3aba12714050c11d918a1354a6677f5c4cbc7d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4141969a_a73b832e",
+        "filename": "src/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2021-12-03T19:42:05Z",
+      "side": 1,
+      "message": "I think it\u0027s cleaner to just make this logic:\nbool jsonExist \u003d std::filesystem::exists(srvCfgMgrFile) \u0026\u0026 (std::filesystem::file_size(srvCfgMgrFile) \u003e 0);",
+      "revId": "c3aba12714050c11d918a1354a6677f5c4cbc7d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62f40e8c_0aeb03ae",
+        "filename": "src/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2021-12-03T19:42:05Z",
+      "side": 1,
+      "message": "I don\u0027t think we need the error traces in the comments. Just a simple comment stating the file must not be empty is fine.",
+      "revId": "c3aba12714050c11d918a1354a6677f5c4cbc7d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
