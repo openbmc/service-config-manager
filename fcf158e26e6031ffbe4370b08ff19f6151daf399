@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3df78ecc_9ffe5cb9",
+        "filename": "src/main.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-12-06T21:13:05Z",
+      "side": 1,
+      "message": "What does this \"\u003e0\" solve?  I suspect that any invalid or corrupted JSON file you really desire to have it come down to this path so that the whole JSON can be re-written?\n\nShould we add some kind of catch on line 164-166 so that any invalid json sets the \"updateRequired\" field?",
+      "revId": "fcf158e26e6031ffbe4370b08ff19f6151daf399",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
