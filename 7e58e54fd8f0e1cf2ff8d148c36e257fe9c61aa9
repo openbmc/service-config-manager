@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "566233da_d8cf3b42",
+        "filename": "src/main.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2021-12-06T20:57:42Z",
+      "side": 1,
+      "message": "Just a note that the usb code update service name has changed to usb-code-update@.service to keep it consistent with the rest of the service file names. Reference: https://gerrit.openbmc-project.xyz/c/openbmc/phosphor-bmc-code-mgmt/+/48236/",
+      "revId": "7e58e54fd8f0e1cf2ff8d148c36e257fe9c61aa9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a93de88e_b87d886a",
         "filename": "src/srvcfg_manager.cpp",
         "patchSetId": 5
