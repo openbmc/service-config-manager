@@ -34,6 +34,24 @@
       "revId": "fcf158e26e6031ffbe4370b08ff19f6151daf399",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0012310_11e40c68",
+        "filename": "src/main.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-12-06T21:39:55Z",
+      "side": 1,
+      "message": "A system crash in the middle of writing the file could be one cause of that.  The fs journal had \"create file\" or \"truncate file\" listed in the journal, but the data didn\u0027t make it out yet.  Depending on how big this file is, the moment you span an erase block (or sector in eMMC), you could end up with a partial file which will leave you in the same boat.",
+      "parentUuid": "73196784_6a86544a",
+      "revId": "fcf158e26e6031ffbe4370b08ff19f6151daf399",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
