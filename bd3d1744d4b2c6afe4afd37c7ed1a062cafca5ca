@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10a3e3c0_f2580165",
+        "filename": "src/srvcfg_manager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2021-12-09T07:35:41Z",
+      "side": 1,
+      "message": "Please rebase to the latest patch, and update it like this:\n`\"/xyz/openbmc_project/control/service/phosphor_2dusb_2dcode_2dupdate\"`\n\nhttps://gerrit.openbmc-project.xyz/c/openbmc/service-config-manager/+/49394",
+      "range": {
+        "startLine": 211,
+        "startChar": 4,
+        "endLine": 212,
+        "endChar": 52
+      },
+      "revId": "bd3d1744d4b2c6afe4afd37c7ed1a062cafca5ca",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "694a7a4e_a68a6651",
+        "filename": "src/srvcfg_manager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2021-12-09T07:35:41Z",
+      "side": 1,
+      "message": "as above",
+      "range": {
+        "startLine": 573,
+        "startChar": 31,
+        "endLine": 574,
+        "endChar": 64
+      },
+      "revId": "bd3d1744d4b2c6afe4afd37c7ed1a062cafca5ca",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "413eb1a0_ce95ebfe",
+        "filename": "src/srvcfg_manager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 625,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2021-12-09T07:35:41Z",
+      "side": 1,
+      "message": "as above",
+      "range": {
+        "startLine": 624,
+        "startChar": 31,
+        "endLine": 625,
+        "endChar": 64
+      },
+      "revId": "bd3d1744d4b2c6afe4afd37c7ed1a062cafca5ca",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab1c393c_87e5243e",
+        "filename": "src/srvcfg_manager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2021-12-09T07:35:41Z",
+      "side": 1,
+      "message": "as above",
+      "range": {
+        "startLine": 677,
+        "startChar": 31,
+        "endLine": 678,
+        "endChar": 64
+      },
+      "revId": "bd3d1744d4b2c6afe4afd37c7ed1a062cafca5ca",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
