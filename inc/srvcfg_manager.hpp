@@ -92,8 +92,7 @@ class ServiceConfig
     bool unitEnabledState = false;
     bool unitRunningState = false;
 
-    // dropbear is handled specially because it is a socket-activated service.
-    bool isDropBearService = false;
+    bool isSocketActivatedService = false;
     std::string subStateValue;
 
     bool isMaskedOut();

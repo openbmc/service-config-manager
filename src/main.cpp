@@ -35,8 +35,8 @@ static constexpr const char* srvCfgMgrFile = "/etc/srvcfg-mgr.json";
 // Base service name list. All instance of these services and
 // units(service/socket) will be managed by this daemon.
 static std::array<std::string, 6> serviceNames = {
-    "phosphor-ipmi-net", "bmcweb",       "phosphor-ipmi-kcs",
-    "start-ipkvm",       "obmc-console", "dropbear"};
+    "phosphor-ipmi-net", "bmcweb",   "phosphor-ipmi-kcs", "start-ipkvm",
+    "obmc-console",      "dropbear", "obmc-console-ssh"};
 
 enum class UnitType
 {
