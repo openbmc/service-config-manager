@@ -113,7 +113,7 @@ void ServiceConfig::updateServiceProperties(
 void ServiceConfig::queryAndUpdateProperties()
 {
     std::string objectPath =
-        isDropBearService ? socketObjectPath : serviceObjectPath;
+        isSocketActivatedService ? socketObjectPath : serviceObjectPath;
     if (objectPath.empty())
     {
         return;
@@ -220,9 +220,9 @@ ServiceConfig::ServiceConfig(
     instanceName(instanceName_), serviceObjectPath(serviceObjPath_),
     socketObjectPath(socketObjPath_)
 {
-    if (baseUnitName == "dropbear")
+    if (baseUnitName == "dropbear" || baseUnitName == "obmc-console-ssh")
     {
-        isDropBearService = true;
+        isSocketActivatedService = true;
     }
     instantiatedUnitName = baseUnitName + addInstanceName(instanceName, "@");
     updatedFlag = 0;
@@ -264,15 +264,16 @@ void ServiceConfig::stopAndApplyUnitConfig(boost::asio::yield_context yield)
         {
             systemdUnitAction(conn, yield, getSocketUnitName(), sysdStopUnit);
         }
-        if (!isDropBearService)
+        if (!isSocketActivatedService)
         {
             systemdUnitAction(conn, yield, getServiceUnitName(), sysdStopUnit);
         }
         else
         {
-            // Get the ListUnits property, find all the services of
-            // `dropbear@<ip><port>.service` and stop the service through
-            // the systemdUnitAction method
+            // For socket-activated service, each connection will spawn a
+            // service instance from template. Need to find all spawned service
+            // `<unitName>@<attribute>.service` and stop them through the
+            // systemdUnitAction method
             boost::system::error_code ec;
             auto listUnits =
                 conn->yield_method_call<std::vector<ListUnitsType>>(
@@ -289,7 +290,7 @@ void ServiceConfig::stopAndApplyUnitConfig(boost::asio::yield_context yield)
                 const auto& status =
                     std::get<static_cast<int>(ListUnitElements::subState)>(
                         unit);
-                if (service.find("dropbear@") != std::string::npos &&
+                if (service.find(baseUnitName + "@") != std::string::npos &&
                     service.find(".service") != std::string::npos &&
                     status == subStateRunning)
                 {
@@ -340,7 +341,7 @@ void ServiceConfig::stopAndApplyUnitConfig(boost::asio::yield_context yield)
         {
             unitFiles = {getServiceUnitName()};
         }
-        else if (!socketObjectPath.empty() && isDropBearService)
+        else if (!socketObjectPath.empty() && isSocketActivatedService)
         {
             unitFiles = {getSocketUnitName()};
         }
@@ -368,7 +369,7 @@ void ServiceConfig::restartUnitConfig(boost::asio::yield_context yield)
             systemdUnitAction(conn, yield, getSocketUnitName(),
                               sysdRestartUnit);
         }
-        if (!isDropBearService)
+        if (!isSocketActivatedService)
         {
             systemdUnitAction(conn, yield, getServiceUnitName(),
                               sysdRestartUnit);
