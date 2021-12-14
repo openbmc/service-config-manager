@@ -126,19 +126,17 @@ static inline void
                 auto& value = it->second;
                 if (type == UnitType::service)
                 {
-                    std::get<static_cast<int>(monitorElement::unitName)>(
-                        value) = unitName;
-                    std::get<static_cast<int>(monitorElement::instanceName)>(
-                        value) = instanceName;
                     std::get<static_cast<int>(monitorElement::serviceObjPath)>(
-                        value) = objectPath;
+                        value) = objectPath.str;
                 }
                 else if (type == UnitType::socket)
                 {
                     std::get<static_cast<int>(monitorElement::socketObjPath)>(
-                        value) = objectPath;
+                        value) = objectPath.str;
                 }
+                continue;
             }
+            // If not grouped with any existing entry, create a new one
             if (type == UnitType::service)
             {
                 unitsToMonitor.emplace(instantiatedUnitName,
@@ -147,9 +145,9 @@ static inline void
             }
             else if (type == UnitType::socket)
             {
-                unitsToMonitor.emplace(
-                    instantiatedUnitName,
-                    std::make_tuple("", "", "", objectPath.str));
+                unitsToMonitor.emplace(instantiatedUnitName,
+                                       std::make_tuple(unitName, instanceName,
+                                                       "", objectPath.str));
             }
         }
     }
