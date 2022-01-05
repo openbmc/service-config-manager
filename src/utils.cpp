@@ -21,7 +21,8 @@ void checkAndThrowInternalFailure(boost::system::error_code& ec,
     if (ec)
     {
         std::string msgToLog = ec.message() + (msg.empty() ? "" : " - " + msg);
-        phosphor::logging::log<phosphor::logging::level::ERR>(msgToLog.c_str());
+        lg2::error("Check and throw internal failure: message = {MSG}", "MSG",
+                   msgToLog);
         phosphor::logging::elog<
             sdbusplus::xyz::openbmc_project::Common::Error::InternalFailure>();
     }
@@ -44,8 +45,8 @@ static inline uint32_t getJobId(const std::string& path)
     auto pos = path.rfind("/");
     if (pos == std::string::npos)
     {
-        phosphor::logging::log<phosphor::logging::level::ERR>(
-            "Unable to get job id from job path");
+        lg2::error("Unable to get job id from job path, path = {PATH}", "PATH",
+                   path);
         phosphor::logging::elog<
             sdbusplus::xyz::openbmc_project::Common::Error::InternalFailure>();
     }
@@ -80,8 +81,8 @@ void systemdUnitAction(const std::shared_ptr<sdbusplus::asio::connection>& conn,
                 // Queued job is done, return now
                 return;
             }
-            phosphor::logging::log<phosphor::logging::level::ERR>(
-                "Systemd operation failed for job query");
+            lg2::error("Systemd operation failed for job query, ec = {EC}",
+                       "EC", ec.value());
             phosphor::logging::elog<sdbusplus::xyz::openbmc_project::Common::
                                         Error::InternalFailure>();
         }
