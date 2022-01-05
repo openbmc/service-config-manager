@@ -125,9 +125,9 @@ void ServiceConfig::queryAndUpdateProperties()
                    propertyMap) {
             if (ec)
             {
-                phosphor::logging::log<phosphor::logging::level::ERR>(
-                    "async_method_call error: Failed to service unit "
-                    "properties");
+                lg2::error(
+                    "async_method_call error: Failed to service unit properties: {EC}",
+                    "EC", ec.value());
                 return;
             }
             try
@@ -141,10 +141,9 @@ void ServiceConfig::queryAndUpdateProperties()
                                    std::string, VariantType>& propertyMap) {
                             if (ec)
                             {
-                                phosphor::logging::log<
-                                    phosphor::logging::level::ERR>(
-                                    "async_method_call error: Failed to get "
-                                    "all property");
+                                lg2::error(
+                                    "async_method_call error: Failed to get all property: {EC}",
+                                    "EC", ec.value());
                                 return;
                             }
                             try
@@ -157,11 +156,9 @@ void ServiceConfig::queryAndUpdateProperties()
                             }
                             catch (const std::exception& e)
                             {
-                                phosphor::logging::log<
-                                    phosphor::logging::level::ERR>(
-                                    "Exception in getting socket properties",
-                                    phosphor::logging::entry("WHAT=%s",
-                                                             e.what()));
+                                lg2::error(
+                                    "Exception in getting socket properties: {ERROR}",
+                                    "ERROR", e);
                                 return;
                             }
                         },
@@ -175,9 +172,8 @@ void ServiceConfig::queryAndUpdateProperties()
             }
             catch (const std::exception& e)
             {
-                phosphor::logging::log<phosphor::logging::level::ERR>(
-                    "Exception in getting socket properties",
-                    phosphor::logging::entry("WHAT=%s", e.what()));
+                lg2::error("Exception in getting socket properties: {ERROR}",
+                           "ERROR", e);
                 return;
             }
         },
@@ -198,9 +194,8 @@ void ServiceConfig::createSocketOverrideConf()
         {
             if (!std::filesystem::create_directories(ovrUnitFileDir))
             {
-                phosphor::logging::log<phosphor::logging::level::ERR>(
-                    "Unable to create the directory.",
-                    phosphor::logging::entry("DIR=%s", ovrUnitFileDir.c_str()));
+                lg2::error("Unable to create the {DIR} directory.", "DIR",
+                           ovrUnitFileDir);
                 phosphor::logging::elog<sdbusplus::xyz::openbmc_project::
                                             Common::Error::InternalFailure>();
             }
@@ -255,9 +250,7 @@ void ServiceConfig::stopAndApplyUnitConfig(boost::asio::yield_context yield)
         // No updates / masked - Just return.
         return;
     }
-    phosphor::logging::log<phosphor::logging::level::INFO>(
-        "Applying new settings.",
-        phosphor::logging::entry("OBJPATH=%s", objPath.c_str()));
+    lg2::info("Applying new settings: {OBJPATH}", "OBJPATH", objPath);
     if (subStateValue == subStateRunning || subStateValue == subStateListening)
     {
         if (!socketObjectPath.empty())
@@ -308,8 +301,8 @@ void ServiceConfig::stopAndApplyUnitConfig(boost::asio::yield_context yield)
         std::ofstream cfgFile(tmpFile, std::ios::out);
         if (!cfgFile.good())
         {
-            phosphor::logging::log<phosphor::logging::level::ERR>(
-                "Failed to open override.conf_tmp file");
+            lg2::error("Failed to open the {TMPFILE} file.", "TMPFILE",
+                       tmpFile);
             phosphor::logging::elog<sdbusplus::xyz::openbmc_project::Common::
                                         Error::InternalFailure>();
         }
@@ -324,8 +317,8 @@ void ServiceConfig::stopAndApplyUnitConfig(boost::asio::yield_context yield)
 
         if (std::rename(tmpFile.c_str(), ovrCfgFile.c_str()) != 0)
         {
-            phosphor::logging::log<phosphor::logging::level::ERR>(
-                "Failed to rename tmp file as override.conf");
+            lg2::error("Failed to rename {TMPFILE} file as {OVERCFGFILE} file.",
+                       "TMPFILE", tmpFile, "OVERCFGFILE", ovrCfgFile);
             std::remove(tmpFile.c_str());
             phosphor::logging::elog<sdbusplus::xyz::openbmc_project::Common::
                                         Error::InternalFailure>();
@@ -378,9 +371,7 @@ void ServiceConfig::restartUnitConfig(boost::asio::yield_context yield)
     // Reset the flag
     updatedFlag = 0;
 
-    phosphor::logging::log<phosphor::logging::level::INFO>(
-        "Applied new settings",
-        phosphor::logging::entry("OBJPATH=%s", objPath.c_str()));
+    lg2::info("Applied new settings: {OBJPATH}", "OBJPATH", objPath);
 
     queryAndUpdateProperties();
     return;
@@ -397,8 +388,7 @@ void ServiceConfig::startServiceRestartTimer()
         }
         else if (ec)
         {
-            phosphor::logging::log<phosphor::logging::level::ERR>(
-                "async wait error.");
+            lg2::error("async wait error: {EC}", "EC", ec.value());
             return;
         }
         updateInProgress = true;
@@ -503,8 +493,7 @@ void ServiceConfig::registerProperties()
                 }
                 if (unitMaskedState)
                 { // block updating if masked
-                    phosphor::logging::log<phosphor::logging::level::ERR>(
-                        "Invalid value specified");
+                    lg2::error("Invalid value specified");
                     return -EINVAL;
                 }
                 unitEnabledState = req;
@@ -531,8 +520,7 @@ void ServiceConfig::registerProperties()
                 }
                 if (unitMaskedState)
                 { // block updating if masked
-                    phosphor::logging::log<phosphor::logging::level::ERR>(
-                        "Invalid value specified");
+                    lg2::error("Invalid value specified");
                     return -EINVAL;
                 }
                 unitRunningState = req;

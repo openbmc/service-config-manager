@@ -16,6 +16,7 @@
 #pragma once
 #include <boost/asio.hpp>
 #include <phosphor-logging/elog-errors.hpp>
+#include <phosphor-logging/lg2.hpp>
 #include <sdbusplus/asio/object_server.hpp>
 #include <xyz/openbmc_project/Common/error.hpp>
 
