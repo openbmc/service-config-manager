@@ -158,26 +158,36 @@ static inline void
     bool jsonExist = std::filesystem::exists(srvCfgMgrFile);
     if (jsonExist)
     {
-        std::ifstream file(srvCfgMgrFile);
-        cereal::JSONInputArchive archive(file);
-        MonitorListMap savedMonitorList;
-        archive(savedMonitorList);
-
-        // compare the unit list read from systemd1 and the save list.
-        MonitorListMap diffMap;
-        std::set_difference(begin(unitsToMonitor), end(unitsToMonitor),
-                            begin(savedMonitorList), end(savedMonitorList),
-                            std::inserter(diffMap, begin(diffMap)));
-        for (auto& unitIt : diffMap)
+        try
         {
-            auto it = savedMonitorList.find(unitIt.first);
-            if (it == savedMonitorList.end())
+            std::ifstream file(srvCfgMgrFile);
+            cereal::JSONInputArchive archive(file);
+            MonitorListMap savedMonitorList;
+            archive(savedMonitorList);
+
+            // compare the unit list read from systemd1 and the save list.
+            MonitorListMap diffMap;
+            std::set_difference(begin(unitsToMonitor), end(unitsToMonitor),
+                                begin(savedMonitorList), end(savedMonitorList),
+                                std::inserter(diffMap, begin(diffMap)));
+            for (auto& unitIt : diffMap)
             {
-                savedMonitorList.insert(unitIt);
-                updateRequired = true;
+                auto it = savedMonitorList.find(unitIt.first);
+                if (it == savedMonitorList.end())
+                {
+                    savedMonitorList.insert(unitIt);
+                    updateRequired = true;
+                }
             }
+            unitsToMonitor = savedMonitorList;
         }
-        unitsToMonitor = savedMonitorList;
+        catch (const std::exception& e)
+        {
+            lg2::error(
+                "Failed to load json file, need to rewrite, ERROR = {ERROR}, file path = {FILEPATH}",
+                "ERROR", e, "FILEPATH", srvCfgMgrFile);
+            updateRequired = true;
+        }
     }
     if (!jsonExist || updateRequired)
     {
