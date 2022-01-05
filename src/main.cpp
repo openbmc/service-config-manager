@@ -31,6 +31,7 @@ std::map<std::string, std::shared_ptr<phosphor::service::ServiceConfig>>
 static bool unitQueryStarted = false;
 
 static constexpr const char* srvCfgMgrFile = "/etc/srvcfg-mgr.json";
+static constexpr const char* tmpFileBad = "/tmp/srvcfg-mgr.json.bad";
 
 // Base service name list. All instance of these services and
 // units(service/socket) will be managed by this daemon.
@@ -158,26 +159,51 @@ static inline void
     bool jsonExist = std::filesystem::exists(srvCfgMgrFile);
     if (jsonExist)
     {
-        std::ifstream file(srvCfgMgrFile);
-        cereal::JSONInputArchive archive(file);
-        MonitorListMap savedMonitorList;
-        archive(savedMonitorList);
-
-        // compare the unit list read from systemd1 and the save list.
-        MonitorListMap diffMap;
-        std::set_difference(begin(unitsToMonitor), end(unitsToMonitor),
-                            begin(savedMonitorList), end(savedMonitorList),
-                            std::inserter(diffMap, begin(diffMap)));
-        for (auto& unitIt : diffMap)
+        try
         {
-            auto it = savedMonitorList.find(unitIt.first);
-            if (it == savedMonitorList.end())
+            std::ifstream file(srvCfgMgrFile);
+            cereal::JSONInputArchive archive(file);
+            MonitorListMap savedMonitorList;
+            archive(savedMonitorList);
+
+            // compare the unit list read from systemd1 and the save list.
+            MonitorListMap diffMap;
+            std::set_difference(begin(unitsToMonitor), end(unitsToMonitor),
+                                begin(savedMonitorList), end(savedMonitorList),
+                                std::inserter(diffMap, begin(diffMap)));
+            for (auto& unitIt : diffMap)
             {
-                savedMonitorList.insert(unitIt);
-                updateRequired = true;
+                auto it = savedMonitorList.find(unitIt.first);
+                if (it == savedMonitorList.end())
+                {
+                    savedMonitorList.insert(unitIt);
+                    updateRequired = true;
+                }
             }
+            unitsToMonitor = savedMonitorList;
         }
-        unitsToMonitor = savedMonitorList;
+        catch (const std::exception& e)
+        {
+            lg2::error(
+                "Failed to load {FILEPATH} file, need to rewrite: {ERROR}.",
+                "FILEPATH", srvCfgMgrFile, "ERROR", e);
+
+            // The "bad" files need to be moved to /tmp/ so that we can try to
+            // find out the cause of the file corruption. If we encounter this
+            // failure multiple times, we will only overwrite it to ensure that
+            // we don't accidentally fill up /tmp/.
+            std::error_code ec;
+            std::filesystem::copy_file(
+                srvCfgMgrFile, tmpFileBad,
+                std::filesystem::copy_options::overwrite_existing, ec);
+            if (ec)
+            {
+                lg2::error("Failed to copy {SRCFILE} file to {DSTFILE}.",
+                           "SRCFILE", srvCfgMgrFile, "DSTFILE", tmpFileBad);
+            }
+
+            updateRequired = true;
+        }
     }
     if (!jsonExist || updateRequired)
     {
