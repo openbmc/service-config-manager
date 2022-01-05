@@ -186,14 +186,15 @@ void ServiceConfig::createSocketOverrideConf()
 {
     if (!socketObjectPath.empty())
     {
+        namespace fs = std::filesystem;
         std::string socketUnitName(instantiatedUnitName + ".socket");
         /// Check override socket directory exist, if not create it.
-        std::filesystem::path ovrUnitFileDir(systemdOverrideUnitBasePath);
+        fs::path ovrUnitFileDir(systemdOverrideUnitBasePath);
         ovrUnitFileDir += socketUnitName;
         ovrUnitFileDir += ".d";
-        if (!std::filesystem::exists(ovrUnitFileDir))
+        if (!fs::exists(ovrUnitFileDir))
         {
-            if (!std::filesystem::create_directories(ovrUnitFileDir))
+            if (!fs::create_directories(ovrUnitFileDir))
             {
                 lg2::error("Unable to create the directory. DIR = {DIR}", "DIR",
                            ovrUnitFileDir);
