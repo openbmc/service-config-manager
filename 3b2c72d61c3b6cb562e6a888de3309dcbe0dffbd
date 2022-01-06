@@ -1,0 +1,118 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02e7a793_afec6fa5",
+        "filename": "src/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2022-01-06T17:13:46Z",
+      "side": 1,
+      "message": "Is there a reason for this pattern?  \"key \u003d {KEY}\"?  Seems excessive in many cases throughout this commit.",
+      "range": {
+        "startLine": 224,
+        "startChar": 64,
+        "endLine": 224,
+        "endChar": 69
+      },
+      "revId": "3b2c72d61c3b6cb562e6a888de3309dcbe0dffbd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79eba2c7_bb8a0c91",
+        "filename": "src/srvcfg_manager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2022-01-06T17:13:46Z",
+      "side": 1,
+      "message": "Is this cast necessary?  If it is, please open a task to phosphor-logging and assign to me (and add a @TODO here referencing the task number).  We shouldn\u0027t really need to do casts for common types.",
+      "range": {
+        "startLine": 199,
+        "startChar": 27,
+        "endLine": 199,
+        "endChar": 54
+      },
+      "revId": "3b2c72d61c3b6cb562e6a888de3309dcbe0dffbd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96dc3004_7764b777",
+        "filename": "src/srvcfg_manager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2022-01-06T17:13:46Z",
+      "side": 1,
+      "message": "Do we need to log any of the file names?  Even if you don\u0027t put them into the primary message, it might be useful to have them in the journald metadata.",
+      "revId": "3b2c72d61c3b6cb562e6a888de3309dcbe0dffbd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a29798a6_00f1456d",
+        "filename": "src/srvcfg_manager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2022-01-06T17:13:46Z",
+      "side": 1,
+      "message": "Log EC?",
+      "revId": "3b2c72d61c3b6cb562e6a888de3309dcbe0dffbd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "106ce445_aef2a24b",
+        "filename": "src/utils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2022-01-06T17:13:46Z",
+      "side": 1,
+      "message": "Log path?",
+      "revId": "3b2c72d61c3b6cb562e6a888de3309dcbe0dffbd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f00dd4e4_65bcfe17",
+        "filename": "src/utils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2022-01-06T17:13:46Z",
+      "side": 1,
+      "message": "Log EC?",
+      "revId": "3b2c72d61c3b6cb562e6a888de3309dcbe0dffbd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
