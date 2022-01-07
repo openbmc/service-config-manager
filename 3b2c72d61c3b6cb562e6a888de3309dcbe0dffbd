@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "24a1d9ec_b2ddc423",
+        "filename": "src/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2022-01-07T01:40:49Z",
+      "side": 1,
+      "message": "\u003e Is there a reason for this pattern?  \"key \u003d {KEY}\"?  \n\nSorry, I\u0027m not sure what is wrong with this?\nWe will see the following error log:\n`async_method_call error: ListUnits failed, ec \u003d xxx`\nIn this way, we can clearly see the value of KEY from the log.",
+      "parentUuid": "02e7a793_afec6fa5",
+      "range": {
+        "startLine": 224,
+        "startChar": 64,
+        "endLine": 224,
+        "endChar": 69
+      },
+      "revId": "3b2c72d61c3b6cb562e6a888de3309dcbe0dffbd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "79eba2c7_bb8a0c91",
         "filename": "src/srvcfg_manager.cpp",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2022-01-06T17:13:46Z",
       "side": 1,
       "message": "Is this cast necessary?  If it is, please open a task to phosphor-logging and assign to me (and add a @TODO here referencing the task number).  We shouldn\u0027t really need to do casts for common types.",
+      "range": {
+        "startLine": 199,
+        "startChar": 27,
+        "endLine": 199,
+        "endChar": 54
+      },
+      "revId": "3b2c72d61c3b6cb562e6a888de3309dcbe0dffbd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c574c024_57330472",
+        "filename": "src/srvcfg_manager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2022-01-07T01:40:49Z",
+      "side": 1,
+      "message": "\u003e Is this cast necessary?  If it is, please open a task to phosphor-logging and assign to me (and add a @TODO here referencing the task number).  We shouldn\u0027t really need to do casts for common types.\n\nOops, sorry, this is unnecessary.\nUpdated",
+      "parentUuid": "79eba2c7_bb8a0c91",
       "range": {
         "startLine": 199,
         "startChar": 27,
@@ -64,6 +112,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7498c24_15357bc6",
+        "filename": "src/srvcfg_manager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2022-01-07T01:40:49Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "96dc3004_7764b777",
+      "revId": "3b2c72d61c3b6cb562e6a888de3309dcbe0dffbd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a29798a6_00f1456d",
@@ -77,6 +143,24 @@
       "writtenOn": "2022-01-06T17:13:46Z",
       "side": 1,
       "message": "Log EC?",
+      "revId": "3b2c72d61c3b6cb562e6a888de3309dcbe0dffbd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb5a7234_a4ee954c",
+        "filename": "src/srvcfg_manager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2022-01-07T01:40:49Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a29798a6_00f1456d",
       "revId": "3b2c72d61c3b6cb562e6a888de3309dcbe0dffbd",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -98,6 +182,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab2d1a32_33705cf0",
+        "filename": "src/utils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2022-01-07T01:40:49Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "106ce445_aef2a24b",
+      "revId": "3b2c72d61c3b6cb562e6a888de3309dcbe0dffbd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f00dd4e4_65bcfe17",
@@ -111,6 +213,24 @@
       "writtenOn": "2022-01-06T17:13:46Z",
       "side": 1,
       "message": "Log EC?",
+      "revId": "3b2c72d61c3b6cb562e6a888de3309dcbe0dffbd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54009101_8a584ffa",
+        "filename": "src/utils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2022-01-07T01:40:49Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f00dd4e4_65bcfe17",
       "revId": "3b2c72d61c3b6cb562e6a888de3309dcbe0dffbd",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
