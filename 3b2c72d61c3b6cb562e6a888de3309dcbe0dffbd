@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "47beecd4_71d15419",
+        "filename": "src/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2022-01-07T03:07:54Z",
+      "side": 1,
+      "message": "In a lot of cases its just extra information and it means you have to write \"KEY\" 4 times (twice in the message, once in the header, and then the value itself).\n\nIs it really significantly better than this?\n    \"async_method_call error: ListUnits failed: {EC}\"\n\nIt seems like in almost every case you have this there is either only one value or it is obvious what the values are.  I don\u0027t think it really saves all that much time in debugging to have the key listed yet another time.\n\nIts not my repo so I don\u0027t care strongly about it, but it just seems like clutter to me.",
+      "parentUuid": "24a1d9ec_b2ddc423",
+      "range": {
+        "startLine": 224,
+        "startChar": 64,
+        "endLine": 224,
+        "endChar": 69
+      },
+      "revId": "3b2c72d61c3b6cb562e6a888de3309dcbe0dffbd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "79eba2c7_bb8a0c91",
         "filename": "src/srvcfg_manager.cpp",
         "patchSetId": 1
