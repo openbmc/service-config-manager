@@ -72,6 +72,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e17887e3_64216440",
+        "filename": "src/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2022-01-08T01:15:41Z",
+      "side": 1,
+      "message": "\u003e In a lot of cases its just extra information and it means you have to write \"KEY\" 4 times (twice in the message, once in the header, and then the value itself).\n\u003e \n\u003e Is it really significantly better than this?\n\u003e     \"async_method_call error: ListUnits failed: {EC}\"\n\nWhen I use `journalctl -b | grep srvcfg` to view the log，it shows as follows：\n      \"async_method_call error: ListUnits failed: xxx\"\nSo my understanding is that I don\u0027t know what the key of `xxx` is through this log. If there are multiple parameters, it will be a little confusing\n\nWhen I use `journalctl -o json-pretty SYSLOG_IDENTIFIER\u003d\"srvcfg-manager\"` to view the log, LOG2_FMTMSG and MESSAGE are displayed as follows:\n\n       LOG2_FMTMSG\u003d async_method_call error: ListUnits failed: {EC}\n       MESSAGE\u003dasync_method_call error: ListUnits failed: xxx\n\nTBH, I usually use `journalctl -f/b` to monitor logs.\n\n\u003e \n\u003e It seems like in almost every case you have this there is either only one value or it is obvious what the values are.  I don\u0027t think it really saves all that much time in debugging to have the key listed yet another time.\n\u003e \n\u003e Its not my repo so I don\u0027t care strongly about it, but it just seems like clutter to me.\n\nAnyway, I am fine, I will update it 😊",
+      "parentUuid": "47beecd4_71d15419",
+      "range": {
+        "startLine": 224,
+        "startChar": 64,
+        "endLine": 224,
+        "endChar": 69
+      },
+      "revId": "3b2c72d61c3b6cb562e6a888de3309dcbe0dffbd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "79eba2c7_bb8a0c91",
