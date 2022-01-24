@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ecff01c_d358f95d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000269
+      },
+      "writtenOn": "2022-01-24T07:36:44Z",
+      "side": 1,
+      "message": "This already got Multiple +1\u0027s and latest patch has only minor pick changes, So going ahead with +2.",
+      "revId": "f2744893b77b9dd8903bb13113f4c3ef62c18f04",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
