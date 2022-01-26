@@ -1,0 +1,9 @@
+Verified+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Code-Review+1: Andrew Geissler <geissonator@yahoo.com>
+Code-Review+1: Patrick Williams <patrick@stwcx.xyz>
+Code-Review+2: AppaRao Puli <apparao.puli@linux.intel.com>
+Submitted-by: George Liu <liuxiwei@inspur.com>
+Submitted-at: Wed, 26 Jan 2022 00:46:34 +0000
+Reviewed-on: https://gerrit.openbmc-project.xyz/c/openbmc/service-config-manager/+/50131
+Project: openbmc/service-config-manager
+Branch: refs/heads/master
