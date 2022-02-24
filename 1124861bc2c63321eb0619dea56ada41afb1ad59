@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "a1ab1c26_cc314be1",
         "filename": "/COMMIT_MSG",
@@ -14,10 +15,10 @@
       "side": 1,
       "message": "Please explain how a system integrator (the person who configures the firmware build environment) can:\n1. Configure this feature out of their image. Is this the meson USBCodeUpdate option?\n2. When USBCodeUpdate is enabled, how can the system integrator set the default value for the phosphor_usb_code_update property.  Should there be a meson build option for the default value?",
       "revId": "1124861bc2c63321eb0619dea56ada41afb1ad59",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "621c923a_f8ece80a",
         "filename": "/COMMIT_MSG",
@@ -32,10 +33,10 @@
       "message": "\u003e When USBCodeUpdate is enabled, how can the system integrator set \u003e the default value for the phosphor_usb_code_update property. \n\u003e Should there be a meson build option for the default value?\n\nThis hasn\u0027t come true yet. I\u0027m working on it",
       "parentUuid": "a1ab1c26_cc314be1",
       "revId": "1124861bc2c63321eb0619dea56ada41afb1ad59",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "2d577e2f_1ad71740",
         "filename": "/COMMIT_MSG",
@@ -50,10 +51,10 @@
       "message": "Done",
       "parentUuid": "621c923a_f8ece80a",
       "revId": "1124861bc2c63321eb0619dea56ada41afb1ad59",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "0e7bdd26_0600c1c1",
         "filename": "/COMMIT_MSG",
@@ -67,10 +68,10 @@
       "side": 1,
       "message": "Please add test cases to show the code update property survives BMC reboot.  For example, set the property to true, then reboot the BMC, then validate the property is true.  Repeat for the \"false\" value.",
       "revId": "1124861bc2c63321eb0619dea56ada41afb1ad59",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "3ed2f9ab_24dce9a8",
         "filename": "/COMMIT_MSG",
@@ -85,10 +86,10 @@
       "message": "There is no persistence here. Restarting BMC will restore the default value. All other services, such as bmcweb/phosphor-ipmi-net and so on, will also restore their default values too.",
       "parentUuid": "0e7bdd26_0600c1c1",
       "revId": "1124861bc2c63321eb0619dea56ada41afb1ad59",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "514f2991_28e328e0",
         "filename": "/COMMIT_MSG",
@@ -103,10 +104,10 @@
       "message": "A requirement should be: This setting shall persist across BMC reboots.\nWhy?  It would be surprising to the BMC admin if rebooting the BMC re-enables the USB code update service.\nThe setting must survive BMC reboot to meet our needs.\n\nI believe the other services enablement setting (network IPMI, SSH, bmcweb, obmc-console service, etc.) persists across BMC reboots.  They are all systemd services, and the persistence of the setting is provided by systemd.  Can the testers confirm this?\n\nThis patch is fundamentally different because the setting is held in-memory in the service-config-manager app.\n\nHere are two independent ideas for how to persist the setting:\n1. Create a trivial do-nothing service which this can enable or disable.  In this way, systemd manages the setting.\n2. Write the setting to a file (for example, /etc/usb-code-update-enablement) whenever it is changed, and read it from that file when the service-config-manager app starts up.",
       "parentUuid": "3ed2f9ab_24dce9a8",
       "revId": "1124861bc2c63321eb0619dea56ada41afb1ad59",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "d8b3cfa9_d83544c1",
         "filename": "/COMMIT_MSG",
@@ -121,10 +122,10 @@
       "message": "I asked this question on the email list.  You can see the archived email, for example, here:\nhttps://lore.kernel.org/openbmc/d204389c-abf0-3547-ebfc-94af0b659bab@linux.ibm.com/T/#u",
       "parentUuid": "514f2991_28e328e0",
       "revId": "1124861bc2c63321eb0619dea56ada41afb1ad59",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "37867427_4bc02aa0",
         "filename": "/COMMIT_MSG",
@@ -139,10 +140,10 @@
       "message": "\u003e I believe the other services enablement setting (network IPMI, SSH, bmcweb, \n\u003e obmc-console service, etc.) persists across BMC reboots.  They are all systemd\n\u003e services, and the persistence of the setting is provided by systemd.  Can the \n\u003e testers confirm this?\n\nYes, you\u0027re right. I\u0027ve tested it.\n\n\u003e Here are two independent ideas for how to persist the setting:\n\u003e 1. Create a trivial do-nothing service which this can enable or disable.  In \n\u003e this way, systemd manages the setting.\n\u003e 2. Write the setting to a file (for example, /etc/usb-code-update-enablement) \n\u003e whenever it is changed, and read it from that file when the service-config-manager app starts up.\n\nI think #2 it\u0027s better. I\u0027ll do it. Thanks.",
       "parentUuid": "d8b3cfa9_d83544c1",
       "revId": "1124861bc2c63321eb0619dea56ada41afb1ad59",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "35517adb_50f3c61a",
         "filename": "/COMMIT_MSG",
@@ -157,10 +158,10 @@
       "message": "\u003e 2. Write the setting to a file (for example, /etc/usb-code-update-enablement) \n\u003e whenever it is changed, and read it from that file when the service-config- manager app starts up.\n\nDone. Now this setting is persistent across BMC reboots.",
       "parentUuid": "37867427_4bc02aa0",
       "revId": "1124861bc2c63321eb0619dea56ada41afb1ad59",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "856f99c4_6aa1c366",
         "filename": "src/main.cpp",
@@ -180,10 +181,10 @@
         "endChar": 41
       },
       "revId": "1124861bc2c63321eb0619dea56ada41afb1ad59",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "ed708eaf_a39257ae",
         "filename": "src/main.cpp",
@@ -204,10 +205,34 @@
         "endChar": 41
       },
       "revId": "1124861bc2c63321eb0619dea56ada41afb1ad59",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "27a774f7_5fce701a",
+        "filename": "src/main.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2022-02-24T16:32:47Z",
+      "side": 1,
+      "message": "Got it.",
+      "parentUuid": "ed708eaf_a39257ae",
+      "range": {
+        "startLine": 191,
+        "startChar": 8,
+        "endLine": 191,
+        "endChar": 41
+      },
+      "revId": "1124861bc2c63321eb0619dea56ada41afb1ad59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "e5c15d44_8529beee",
         "filename": "src/srvcfg_manager.cpp",
@@ -227,10 +252,10 @@
         "endChar": 17
       },
       "revId": "1124861bc2c63321eb0619dea56ada41afb1ad59",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "a093586e_a3a2b0c8",
         "filename": "src/srvcfg_manager.cpp",
@@ -251,8 +276,7 @@
         "endChar": 17
       },
       "revId": "1124861bc2c63321eb0619dea56ada41afb1ad59",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
