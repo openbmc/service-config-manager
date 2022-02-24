@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46a9e103_fddb9347",
+        "filename": "src/main.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2022-02-24T15:57:48Z",
+      "side": 1,
+      "message": "Can we go ahead and add an array to list all socket based services?",
+      "revId": "b017f1462b5ddb58617b7b1eb5f2949c5c9fabb1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b6702bd_5240d72e",
+        "filename": "src/srvcfg_manager.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2022-02-24T15:57:48Z",
+      "side": 1,
+      "message": "Can we go ahead and use an array and directly compare it, instead of making everyone to change this code for future.",
+      "range": {
+        "startLine": 218,
+        "startChar": 0,
+        "endLine": 221,
+        "endChar": 5
+      },
+      "revId": "b017f1462b5ddb58617b7b1eb5f2949c5c9fabb1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
