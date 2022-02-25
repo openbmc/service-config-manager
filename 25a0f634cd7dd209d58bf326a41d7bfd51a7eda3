@@ -1,0 +1,11 @@
+Code-Review+1: Adriana Kobylak <anoo@linux.ibm.com>
+Code-Review+2: Richard Marian Thomaiyar <richard.marian.thomaiyar@linux.intel.com>
+Code-Review+1: George Liu <liuxiwei@inspur.com>
+Code-Review+1: Bruce Mitchell <bruce.mitchell@linux.vnet.ibm.com>
+Verified+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Ok-To-Test+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Submitted-by: Chicago Duan <duanzhijia01@inspur.com>
+Submitted-at: Fri, 25 Feb 2022 00:48:50 +0000
+Reviewed-on: https://gerrit.openbmc-project.xyz/c/openbmc/service-config-manager/+/48780
+Project: openbmc/service-config-manager
+Branch: refs/heads/master
