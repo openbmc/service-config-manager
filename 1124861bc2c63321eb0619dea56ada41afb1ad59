@@ -161,6 +161,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "01f24b86_08dcd9b9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000400
+      },
+      "writtenOn": "2022-02-25T00:50:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35517adb_50f3c61a",
+      "revId": "1124861bc2c63321eb0619dea56ada41afb1ad59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "856f99c4_6aa1c366",
@@ -232,6 +250,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b8a3306_07636316",
+        "filename": "src/main.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000400
+      },
+      "writtenOn": "2022-02-25T00:50:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27a774f7_5fce701a",
+      "range": {
+        "startLine": 191,
+        "startChar": 8,
+        "endLine": 191,
+        "endChar": 41
+      },
+      "revId": "1124861bc2c63321eb0619dea56ada41afb1ad59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e5c15d44_8529beee",
@@ -269,6 +311,30 @@
       "side": 1,
       "message": "srvcfg_manager don\u0027t need to do anything to systemd when we enable/disable phosphor_usb_code_update, which is different from other services. srvcfg_manager only need to show the properties on the object. And another process will look for these properties: https://gerrit.openbmc-project.xyz/c/openbmc/service-config-manager/+/48780/5//COMMIT_MSG#25",
       "parentUuid": "e5c15d44_8529beee",
+      "range": {
+        "startLine": 467,
+        "startChar": 16,
+        "endLine": 469,
+        "endChar": 17
+      },
+      "revId": "1124861bc2c63321eb0619dea56ada41afb1ad59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2dff24f_2255cc2c",
+        "filename": "src/srvcfg_manager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1000400
+      },
+      "writtenOn": "2022-02-25T00:50:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a093586e_a3a2b0c8",
       "range": {
         "startLine": 467,
         "startChar": 16,

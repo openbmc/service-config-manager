@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "89b8076b_f4f2939d",
         "filename": "/COMMIT_MSG",
@@ -20,10 +21,10 @@
         "endChar": 40
       },
       "revId": "ec8a0fdcd0f454ffec207ce221c7becf181e76a0",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "a948fcaa_74ea958d",
         "filename": "/COMMIT_MSG",
@@ -44,10 +45,34 @@
         "endChar": 40
       },
       "revId": "ec8a0fdcd0f454ffec207ce221c7becf181e76a0",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3875affb_afc59862",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000400
+      },
+      "writtenOn": "2022-02-25T00:50:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a948fcaa_74ea958d",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 40
+      },
+      "revId": "ec8a0fdcd0f454ffec207ce221c7becf181e76a0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "e8cf8a97_74a9f169",
         "filename": "meson_options.txt",
@@ -67,10 +92,10 @@
         "endChar": 22
       },
       "revId": "ec8a0fdcd0f454ffec207ce221c7becf181e76a0",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "5389eb71_28178321",
         "filename": "meson_options.txt",
@@ -91,10 +116,10 @@
         "endChar": 22
       },
       "revId": "ec8a0fdcd0f454ffec207ce221c7becf181e76a0",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "1a64f269_461f9c9f",
         "filename": "meson_options.txt",
@@ -114,10 +139,10 @@
         "endChar": 22
       },
       "revId": "ec8a0fdcd0f454ffec207ce221c7becf181e76a0",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "c48b8534_9f3a3856",
         "filename": "meson_options.txt",
@@ -138,8 +163,7 @@
         "endChar": 22
       },
       "revId": "ec8a0fdcd0f454ffec207ce221c7becf181e76a0",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
