@@ -107,6 +107,13 @@ static inline void
     // managed, irrespective of instance name.
     for (const auto& unit : listUnits)
     {
+        // Ignore non-existent units
+        if (std::get<static_cast<int>(ListUnitElements::loadState)>(unit) ==
+            loadStateNotFound)
+        {
+            continue;
+        }
+
         const auto& fullUnitName =
             std::get<static_cast<int>(ListUnitElements::name)>(unit);
         auto [unitName, type, instanceName] =
