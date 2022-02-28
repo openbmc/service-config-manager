@@ -1,0 +1,7 @@
+Verified+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Code-Review+2: Richard Marian Thomaiyar <richard.marian.thomaiyar@linux.intel.com>
+Submitted-by: Jiaqing Zhao <jiaqing.zhao@intel.com>
+Submitted-at: Mon, 28 Feb 2022 16:20:49 +0000
+Reviewed-on: https://gerrit.openbmc-project.xyz/c/openbmc/service-config-manager/+/51594
+Project: openbmc/service-config-manager
+Branch: refs/heads/master
