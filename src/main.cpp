@@ -23,6 +23,7 @@
 
 #include <filesystem>
 #include <fstream>
+#include <unordered_map>
 
 std::unique_ptr<boost::asio::steady_timer> timer = nullptr;
 std::unique_ptr<boost::asio::steady_timer> initTimer = nullptr;
@@ -35,9 +36,11 @@ static constexpr const char* tmpFileBad = "/tmp/srvcfg-mgr.json.bad";
 
 // Base service name list. All instance of these services and
 // units(service/socket) will be managed by this daemon.
-static std::array<std::string, 6> serviceNames = {
-    "phosphor-ipmi-net", "bmcweb",       "phosphor-ipmi-kcs",
-    "start-ipkvm",       "obmc-console", "dropbear"};
+static std::unordered_map<std::string /* unitName */,
+                          bool /* isSocketActivated */>
+    managedServices = {{"phosphor-ipmi-net", false}, {"bmcweb", false},
+                       {"phosphor-ipmi-kcs", false}, {"start-ipkvm", false},
+                       {"obmc-console", false},      {"dropbear", true}};
 
 enum class UnitType
 {
@@ -118,9 +121,14 @@ static inline void
             std::get<static_cast<int>(ListUnitElements::name)>(unit);
         auto [unitName, type, instanceName] =
             getUnitNameTypeAndInstance(fullUnitName);
-        if (std::find(serviceNames.begin(), serviceNames.end(), unitName) !=
-            serviceNames.end())
+        if (managedServices.count(unitName))
         {
+            // For socket-activated units, ignore all its instances
+            if (managedServices.at(unitName) == true && !instanceName.empty())
+            {
+                continue;
+            }
+
             std::string instantiatedUnitName =
                 unitName + addInstanceName(instanceName, "_40");
             boost::replace_all(instantiatedUnitName, "-", "_2d");
