@@ -27,9 +27,9 @@ boost_args = ['-DBOOST_ALL_NO_LIB',
 
 deps = [dependency('boost'),
         dependency('boost', modules : ['coroutine']),
-        dependency('phosphor-dbus-interfaces', fallback: ['phosphor-dbus-interfaces', 'phosphor_dbus_interfaces_dep']),
-        dependency('phosphor-logging', fallback: ['phosphor-logging', 'phosphor_logging_dep']),
-        dependency('sdbusplus', fallback: ['sdbusplus', 'sdbusplus_dep']),
+        dependency('phosphor-dbus-interfaces'),
+        dependency('phosphor-logging'),
+        dependency('sdbusplus'),
         dependency('systemd'),
 ]
 
