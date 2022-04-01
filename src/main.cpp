@@ -131,8 +131,7 @@ static inline void
             }
 
             std::string instantiatedUnitName =
-                unitName + addInstanceName(instanceName, "_40");
-            boost::replace_all(instantiatedUnitName, "-", "_2d");
+                unitName + addInstanceName(instanceName, "@");
             const sdbusplus::message::object_path& objectPath =
                 std::get<static_cast<int>(ListUnitElements::objectPath)>(unit);
             // Group the service & socket units togther.. Same services
@@ -228,7 +227,7 @@ static inline void
 
 #ifdef USB_CODE_UPDATE
     unitsToMonitor.emplace(
-        "phosphor_2dusb_2dcode_2dupdate",
+        "phosphor-usb-code-update",
         std::make_tuple(
             phosphor::service::usbCodeUpdateUnitName, "",
             "/org/freedesktop/systemd1/unit/usb_2dcode_2dupdate_2eservice",
@@ -238,14 +237,9 @@ static inline void
     // create objects for needed services
     for (auto& it : unitsToMonitor)
     {
-        std::string objPath(std::string(phosphor::service::srcCfgMgrBasePath) +
-                            "/" + it.first);
-        std::string instanciatedUnitName =
-            std::get<static_cast<int>(monitorElement::unitName)>(it.second) +
-            addInstanceName(
-                std::get<static_cast<int>(monitorElement::instanceName)>(
-                    it.second),
-                "@");
+        sdbusplus::message::object_path basePath(
+            phosphor::service::srcCfgMgrBasePath);
+        std::string objPath(basePath / it.first);
         auto srvCfgObj = std::make_unique<phosphor::service::ServiceConfig>(
             server, conn, objPath,
             std::get<static_cast<int>(monitorElement::unitName)>(it.second),
