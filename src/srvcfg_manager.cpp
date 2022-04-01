@@ -53,8 +53,6 @@ static constexpr const char* usbCodeUpdateStateFile =
     "/var/lib/srvcfg_manager/usb-code-update-state";
 static constexpr const char* emptyUsbCodeUpdateRulesFile =
     "/etc/udev/rules.d/70-bmc-usb.rules";
-static constexpr const char* usbCodeUpdateObjectPath =
-    "/xyz/openbmc_project/control/service/phosphor_2dusb_2dcode_2dupdate";
 
 using UsbCodeUpdateStateMap = std::unordered_map<std::string, bool>;
 
@@ -221,7 +219,7 @@ void ServiceConfig::updateServiceProperties(
     }
 
 #ifdef USB_CODE_UPDATE
-    if (objPath == usbCodeUpdateObjectPath)
+    if (baseUnitName == usbCodeUpdateUnitName)
     {
         getUSBCodeUpdateStateFromFile();
     }
@@ -570,7 +568,7 @@ void ServiceConfig::registerProperties()
             if (!internalSet)
             {
 #ifdef USB_CODE_UPDATE
-                if (objPath == usbCodeUpdateObjectPath)
+                if (baseUnitName == usbCodeUpdateUnitName)
                 {
                     unitMaskedState = req;
                     unitEnabledState = !unitMaskedState;
@@ -620,7 +618,7 @@ void ServiceConfig::registerProperties()
             if (!internalSet)
             {
 #ifdef USB_CODE_UPDATE
-                if (objPath == usbCodeUpdateObjectPath)
+                if (baseUnitName == usbCodeUpdateUnitName)
                 {
                     if (unitMaskedState)
                     { // block updating if masked
@@ -671,7 +669,7 @@ void ServiceConfig::registerProperties()
             if (!internalSet)
             {
 #ifdef USB_CODE_UPDATE
-                if (objPath == usbCodeUpdateObjectPath)
+                if (baseUnitName == usbCodeUpdateUnitName)
                 {
                     if (unitMaskedState)
                     { // block updating if masked
