@@ -36,6 +36,10 @@ static constexpr const char* srvCfgPropMasked = "Masked";
 static constexpr const char* srvCfgPropEnabled = "Enabled";
 static constexpr const char* srvCfgPropRunning = "Running";
 
+#ifdef USB_CODE_UPDATE
+static constexpr const char* usbCodeUpdateUnitName = "phosphor_usb_code_update";
+#endif
+
 enum class UpdatedProp
 {
     port = 1,

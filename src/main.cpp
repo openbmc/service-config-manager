@@ -230,7 +230,7 @@ static inline void
     unitsToMonitor.emplace(
         "phosphor_2dusb_2dcode_2dupdate",
         std::make_tuple(
-            "phosphor_usb_code_update", "",
+            phosphor::service::usbCodeUpdateUnitName, "",
             "/org/freedesktop/systemd1/unit/usb_2dcode_2dupdate_2eservice",
             ""));
 #endif
