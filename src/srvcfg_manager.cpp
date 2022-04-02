@@ -65,8 +65,7 @@ void ServiceConfig::setUSBCodeUpdateState(const bool& state)
     {
         if (std::filesystem::exists(emptyUsbCodeUpdateRulesFile))
         {
-            phosphor::logging::log<phosphor::logging::level::INFO>(
-                "Enable usb code update");
+            lg2::info("Enable usb code update");
             std::filesystem::remove(emptyUsbCodeUpdateRulesFile);
         }
         return;
@@ -82,12 +81,10 @@ void ServiceConfig::setUSBCodeUpdateState(const bool& state)
                                     ec);
     if (ec)
     {
-        phosphor::logging::log<phosphor::logging::level::ERR>(
-            "Disable usb code update failed");
+        lg2::error("Disable usb code update failed");
         return;
     }
-    phosphor::logging::log<phosphor::logging::level::INFO>(
-        "Disable usb code update");
+    lg2::info("Disable usb code update");
 }
 
 void ServiceConfig::saveUSBCodeUpdateStateToFile(const bool& maskedState,
@@ -111,8 +108,7 @@ void ServiceConfig::getUSBCodeUpdateStateFromFile()
 {
     if (!std::filesystem::exists(usbCodeUpdateStateFile))
     {
-        phosphor::logging::log<phosphor::logging::level::INFO>(
-            "usb-code-update-state file does not exist");
+        lg2::info("usb-code-update-state file does not exist");
 
         unitMaskedState = false;
         unitEnabledState = true;
@@ -624,8 +620,7 @@ void ServiceConfig::registerProperties()
                 {
                     if (unitMaskedState)
                     { // block updating if masked
-                        phosphor::logging::log<phosphor::logging::level::ERR>(
-                            "Invalid value specified");
+                        lg2::error("Invalid value specified");
                         return -EINVAL;
                     }
                     unitEnabledState = req;
@@ -675,8 +670,7 @@ void ServiceConfig::registerProperties()
                 {
                     if (unitMaskedState)
                     { // block updating if masked
-                        phosphor::logging::log<phosphor::logging::level::ERR>(
-                            "Invalid value specified");
+                        lg2::error("Invalid value specified");
                         return -EINVAL;
                     }
                     unitEnabledState = req;
