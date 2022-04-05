@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65149ee4_bc38052f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000269
+      },
+      "writtenOn": "2022-04-05T05:52:35Z",
+      "side": 1,
+      "message": "Thanks Zhao for clean-up remaining log messages. ",
+      "revId": "f27f431faa0c40c0253e50cddd92ffcb99081604",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
