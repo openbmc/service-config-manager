@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1df0926b_dd8c4e4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000269
+      },
+      "writtenOn": "2022-06-03T04:35:47Z",
+      "side": 1,
+      "message": "code lgtm, Can you get an another vote from one of your colleague/others? so that i can proceed with +2.\n\nSorry for delay. ",
+      "revId": "430d7ea571104ac6839a41acb2ed6eebcd5f5f09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
