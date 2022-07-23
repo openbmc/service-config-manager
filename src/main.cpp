@@ -333,12 +333,12 @@ int main()
     auto server = sdbusplus::asio::object_server(conn, true);
     server.add_manager(phosphor::service::srcCfgMgrBasePath);
     // Initialize the objects after systemd indicated startup finished.
-    auto userUpdatedSignal = std::make_unique<sdbusplus::bus::match::match>(
-        static_cast<sdbusplus::bus::bus&>(*conn),
+    auto userUpdatedSignal = std::make_unique<sdbusplus::bus::match_t>(
+        static_cast<sdbusplus::bus_t&>(*conn),
         "type='signal',"
         "member='StartupFinished',path='/org/freedesktop/systemd1',"
         "interface='org.freedesktop.systemd1.Manager'",
-        [&server, &conn](sdbusplus::message::message& /*msg*/) {
+        [&server, &conn](sdbusplus::message_t& /*msg*/) {
             if (!unitQueryStarted)
             {
                 unitQueryStarted = true;
