@@ -16,6 +16,7 @@
 #pragma once
 #include "utils.hpp"
 
+#include <boost/container/flat_map.hpp>
 #include <sdbusplus/timer.hpp>
 
 namespace phosphor
