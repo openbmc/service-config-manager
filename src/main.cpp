@@ -38,10 +38,14 @@ static constexpr const char* tmpFileBad = "/tmp/srvcfg-mgr.json.bad";
 // units(service/socket) will be managed by this daemon.
 static std::unordered_map<std::string /* unitName */,
                           bool /* isSocketActivated */>
-    managedServices = {{"phosphor-ipmi-net", false}, {"bmcweb", false},
-                       {"phosphor-ipmi-kcs", false}, {"start-ipkvm", false},
-                       {"obmc-console", false},      {"dropbear", true},
-                       {"obmc-console-ssh", true}};
+    managedServices = {{"phosphor-ipmi-net", false},
+                       {"bmcweb", false},
+                       {"phosphor-ipmi-kcs", false},
+                       {"start-ipkvm", false},
+                       {"obmc-console", false},
+                       {"dropbear", true},
+                       {"obmc-console-ssh", true},
+                       {"xyz.openbmc_project.VirtualMedia", false}};
 
 enum class UnitType
 {
