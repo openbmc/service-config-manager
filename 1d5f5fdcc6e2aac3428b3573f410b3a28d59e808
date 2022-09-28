@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d876193_d067e631",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2022-09-28T07:14:09Z",
+      "side": 1,
+      "message": "Please do not link to your internal-only repos",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 86
+      },
+      "revId": "1d5f5fdcc6e2aac3428b3573f410b3a28d59e808",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35a54a03_81742836",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1001252
+      },
+      "writtenOn": "2022-09-28T07:14:09Z",
+      "side": 1,
+      "message": "Why having this port for virtual media? As far as I know, Intel-BMC/virtual-media used websocket for redirecting local file.",
+      "range": {
+        "startLine": 30,
+        "startChar": 9,
+        "endLine": 30,
+        "endChar": 21
+      },
+      "revId": "1d5f5fdcc6e2aac3428b3573f410b3a28d59e808",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
