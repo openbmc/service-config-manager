@@ -325,7 +325,7 @@ void checkAndInit(sdbusplus::asio::object_server& server,
 
 int main()
 {
-    boost::asio::io_service io;
+    boost::asio::io_context io;
     auto conn = std::make_shared<sdbusplus::asio::connection>(io);
     timer = std::make_unique<boost::asio::steady_timer>(io);
     initTimer = std::make_unique<boost::asio::steady_timer>(io);
