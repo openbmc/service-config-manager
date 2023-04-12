@@ -8,7 +8,7 @@ project(
     ],
     license: 'Apache-2.0',
     version: '1.0',
-    meson_version: '>=0.57.0',
+    meson_version: '>=0.58.0',
 )
 
 # Wno-psabi reduces the number of "Note:" messages when cross-compiling some STL
@@ -50,7 +50,7 @@ executable('phosphor-srvcfg-manager',
 
 systemd = dependency('systemd')
 systemd_system_unit_dir = systemd.get_variable(
-    pkgconfig: 'systemdsystemunitdir',
+    'systemdsystemunitdir',
     pkgconfig_define: ['prefix', get_option('prefix')])
 
 configure_file(
