@@ -89,8 +89,8 @@ std::tuple<std::string, UnitType, std::string>
         auto instancePos = fullUnitName.rfind("@");
         if (instancePos != std::string::npos)
         {
-            instanceName =
-                fullUnitName.substr(instancePos + 1, typePos - instancePos - 1);
+            instanceName = fullUnitName.substr(instancePos + 1,
+                                               typePos - instancePos - 1);
             unitName = fullUnitName.substr(0, instancePos);
         }
         else
@@ -120,8 +120,8 @@ static inline void
 
         const auto& fullUnitName =
             std::get<static_cast<int>(ListUnitElements::name)>(unit);
-        auto [unitName, type, instanceName] =
-            getUnitNameTypeAndInstance(fullUnitName);
+        auto [unitName, type,
+              instanceName] = getUnitNameTypeAndInstance(fullUnitName);
         if (managedServices.count(unitName))
         {
             // For socket-activated units, ignore all its instances
@@ -261,13 +261,13 @@ void init(sdbusplus::asio::object_server& server,
     conn->async_method_call(
         [&server, &conn](boost::system::error_code ec,
                          const std::vector<ListUnitsType>& listUnits) {
-            if (ec)
-            {
-                lg2::error("async_method_call error: ListUnits failed: {EC}",
-                           "EC", ec.value());
-                return;
-            }
-            handleListUnitsResponse(server, conn, ec, listUnits);
+        if (ec)
+        {
+            lg2::error("async_method_call error: ListUnits failed: {EC}", "EC",
+                       ec.value());
+            return;
+        }
+        handleListUnitsResponse(server, conn, ec, listUnits);
         },
         sysdService, sysdObjPath, sysdMgrIntf, "ListUnits");
 }
@@ -279,45 +279,45 @@ void checkAndInit(sdbusplus::asio::object_server& server,
     conn->async_method_call(
         [&server, &conn](boost::system::error_code ec,
                          const std::variant<uint64_t>& value) {
-            if (ec)
+        if (ec)
+        {
+            lg2::error("async_method_call error: ListUnits failed: {EC}", "EC",
+                       ec.value());
+            return;
+        }
+        if (std::get<uint64_t>(value))
+        {
+            if (!unitQueryStarted)
             {
-                lg2::error("async_method_call error: ListUnits failed: {EC}",
-                           "EC", ec.value());
-                return;
+                unitQueryStarted = true;
+                init(server, conn);
             }
-            if (std::get<uint64_t>(value))
-            {
-                if (!unitQueryStarted)
+        }
+        else
+        {
+            // FIX-ME: Latest up-stream sync caused issue in receiving
+            // StartupFinished signal. Unable to get StartupFinished signal
+            // from systemd1 hence using poll method too, to trigger it
+            // properly.
+            constexpr size_t pollTimeout = 10; // seconds
+            initTimer->expires_after(std::chrono::seconds(pollTimeout));
+            initTimer->async_wait(
+                [&server, &conn](const boost::system::error_code& ec) {
+                if (ec == boost::asio::error::operation_aborted)
                 {
-                    unitQueryStarted = true;
-                    init(server, conn);
+                    // Timer reset.
+                    return;
                 }
-            }
-            else
-            {
-                // FIX-ME: Latest up-stream sync caused issue in receiving
-                // StartupFinished signal. Unable to get StartupFinished signal
-                // from systemd1 hence using poll method too, to trigger it
-                // properly.
-                constexpr size_t pollTimeout = 10; // seconds
-                initTimer->expires_after(std::chrono::seconds(pollTimeout));
-                initTimer->async_wait([&server, &conn](
-                                          const boost::system::error_code& ec) {
-                    if (ec == boost::asio::error::operation_aborted)
-                    {
-                        // Timer reset.
-                        return;
-                    }
-                    if (ec)
-                    {
-                        lg2::error(
-                            "service config mgr - init - async wait error: {EC}",
-                            "EC", ec.value());
-                        return;
-                    }
-                    checkAndInit(server, conn);
-                });
-            }
+                if (ec)
+                {
+                    lg2::error(
+                        "service config mgr - init - async wait error: {EC}",
+                        "EC", ec.value());
+                    return;
+                }
+                checkAndInit(server, conn);
+            });
+        }
         },
         sysdService, sysdObjPath, dBusPropIntf, dBusGetMethod, sysdMgrIntf,
         "FinishTimestamp");
@@ -339,11 +339,11 @@ int main()
         "member='StartupFinished',path='/org/freedesktop/systemd1',"
         "interface='org.freedesktop.systemd1.Manager'",
         [&server, &conn](sdbusplus::message_t& /*msg*/) {
-            if (!unitQueryStarted)
-            {
-                unitQueryStarted = true;
-                init(server, conn);
-            }
+        if (!unitQueryStarted)
+        {
+            unitQueryStarted = true;
+            init(server, conn);
+        }
         });
     // this will make sure to initialize the objects, when daemon is
     // restarted.
