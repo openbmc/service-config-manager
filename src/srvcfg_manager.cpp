@@ -224,8 +224,8 @@ void ServiceConfig::updateServiceProperties(
 
 void ServiceConfig::queryAndUpdateProperties()
 {
-    std::string objectPath =
-        isSocketActivatedService ? socketObjectPath : serviceObjectPath;
+    std::string objectPath = isSocketActivatedService ? socketObjectPath
+                                                      : serviceObjectPath;
     if (objectPath.empty())
     {
         return;
@@ -235,59 +235,59 @@ void ServiceConfig::queryAndUpdateProperties()
         [this](boost::system::error_code ec,
                const boost::container::flat_map<std::string, VariantType>&
                    propertyMap) {
-            if (ec)
+        if (ec)
+        {
+            lg2::error(
+                "async_method_call error: Failed to service unit properties: {EC}",
+                "EC", ec.value());
+            return;
+        }
+        try
+        {
+            updateServiceProperties(propertyMap);
+            if (!socketObjectPath.empty())
             {
-                lg2::error(
-                    "async_method_call error: Failed to service unit properties: {EC}",
-                    "EC", ec.value());
-                return;
+                conn->async_method_call(
+                    [this](boost::system::error_code ec,
+                           const boost::container::flat_map<
+                               std::string, VariantType>& propertyMap) {
+                    if (ec)
+                    {
+                        lg2::error(
+                            "async_method_call error: Failed to get all property: {EC}",
+                            "EC", ec.value());
+                        return;
+                    }
+                    try
+                    {
+                        updateSocketProperties(propertyMap);
+                        if (!srvCfgIface)
+                        {
+                            registerProperties();
+                        }
+                    }
+                    catch (const std::exception& e)
+                    {
+                        lg2::error(
+                            "Exception in getting socket properties: {ERROR}",
+                            "ERROR", e);
+                        return;
+                    }
+                    },
+                    sysdService, socketObjectPath, dBusPropIntf,
+                    dBusGetAllMethod, sysdSocketIntf);
             }
-            try
+            else if (!srvCfgIface)
             {
-                updateServiceProperties(propertyMap);
-                if (!socketObjectPath.empty())
-                {
-                    conn->async_method_call(
-                        [this](boost::system::error_code ec,
-                               const boost::container::flat_map<
-                                   std::string, VariantType>& propertyMap) {
-                            if (ec)
-                            {
-                                lg2::error(
-                                    "async_method_call error: Failed to get all property: {EC}",
-                                    "EC", ec.value());
-                                return;
-                            }
-                            try
-                            {
-                                updateSocketProperties(propertyMap);
-                                if (!srvCfgIface)
-                                {
-                                    registerProperties();
-                                }
-                            }
-                            catch (const std::exception& e)
-                            {
-                                lg2::error(
-                                    "Exception in getting socket properties: {ERROR}",
-                                    "ERROR", e);
-                                return;
-                            }
-                        },
-                        sysdService, socketObjectPath, dBusPropIntf,
-                        dBusGetAllMethod, sysdSocketIntf);
-                }
-                else if (!srvCfgIface)
-                {
-                    registerProperties();
-                }
+                registerProperties();
             }
-            catch (const std::exception& e)
-            {
-                lg2::error("Exception in getting socket properties: {ERROR}",
-                           "ERROR", e);
-                return;
-            }
+        }
+        catch (const std::exception& e)
+        {
+            lg2::error("Exception in getting socket properties: {ERROR}",
+                       "ERROR", e);
+            return;
+        }
         },
         sysdService, objectPath, dBusPropIntf, dBusGetAllMethod, sysdUnitIntf);
     return;
@@ -504,28 +504,28 @@ void ServiceConfig::startServiceRestartTimer()
         updateInProgress = true;
         boost::asio::spawn(conn->get_io_context(),
                            [this](boost::asio::yield_context yield) {
-                               // Stop and apply configuration for all objects
-                               for (auto& srvMgrObj : srvMgrObjects)
-                               {
-                                   auto& srvObj = srvMgrObj.second;
-                                   if (srvObj->updatedFlag)
-                                   {
-                                       srvObj->stopAndApplyUnitConfig(yield);
-                                   }
-                               }
-                               // Do system reload
-                               systemdDaemonReload(conn, yield);
-                               // restart unit config.
-                               for (auto& srvMgrObj : srvMgrObjects)
-                               {
-                                   auto& srvObj = srvMgrObj.second;
-                                   if (srvObj->updatedFlag)
-                                   {
-                                       srvObj->restartUnitConfig(yield);
-                                   }
-                               }
-                               updateInProgress = false;
-                           });
+            // Stop and apply configuration for all objects
+            for (auto& srvMgrObj : srvMgrObjects)
+            {
+                auto& srvObj = srvMgrObj.second;
+                if (srvObj->updatedFlag)
+                {
+                    srvObj->stopAndApplyUnitConfig(yield);
+                }
+            }
+            // Do system reload
+            systemdDaemonReload(conn, yield);
+            // restart unit config.
+            for (auto& srvMgrObj : srvMgrObjects)
+            {
+                auto& srvObj = srvMgrObj.second;
+                if (srvObj->updatedFlag)
+                {
+                    srvObj->restartUnitConfig(yield);
+                }
+            }
+            updateInProgress = false;
+        });
     });
 }
 
@@ -539,50 +539,8 @@ void ServiceConfig::registerProperties()
         sockAttrIface->register_property(
             sockAttrPropPort, portNum,
             [this](const uint16_t& req, uint16_t& res) {
-                if (!internalSet)
-                {
-                    if (req == res)
-                    {
-                        return 1;
-                    }
-                    if (updateInProgress)
-                    {
-                        return 0;
-                    }
-                    portNum = req;
-                    updatedFlag |=
-                        (1 << static_cast<uint8_t>(UpdatedProp::port));
-                    startServiceRestartTimer();
-                }
-                res = req;
-                return 1;
-            });
-    }
-
-    srvCfgIface->register_property(
-        srvCfgPropMasked, unitMaskedState, [this](const bool& req, bool& res) {
             if (!internalSet)
             {
-#ifdef USB_CODE_UPDATE
-                if (baseUnitName == usbCodeUpdateUnitName)
-                {
-                    unitMaskedState = req;
-                    unitEnabledState = !unitMaskedState;
-                    unitRunningState = !unitMaskedState;
-                    internalSet = true;
-                    srvCfgIface->set_property(srvCfgPropEnabled,
-                                              unitEnabledState);
-                    srvCfgIface->set_property(srvCfgPropRunning,
-                                              unitRunningState);
-                    srvCfgIface->set_property(srvCfgPropMasked,
-                                              unitMaskedState);
-                    internalSet = false;
-                    setUSBCodeUpdateState(unitEnabledState);
-                    saveUSBCodeUpdateStateToFile(unitMaskedState,
-                                                 unitEnabledState);
-                    return 1;
-                }
-#endif
                 if (req == res)
                 {
                     return 1;
@@ -591,122 +549,151 @@ void ServiceConfig::registerProperties()
                 {
                     return 0;
                 }
-                unitMaskedState = req;
-                unitEnabledState = !unitMaskedState;
-                unitRunningState = !unitMaskedState;
-                updatedFlag |=
-                    (1 << static_cast<uint8_t>(UpdatedProp::maskedState)) |
-                    (1 << static_cast<uint8_t>(UpdatedProp::enabledState)) |
-                    (1 << static_cast<uint8_t>(UpdatedProp::runningState));
-                internalSet = true;
-                srvCfgIface->set_property(srvCfgPropEnabled, unitEnabledState);
-                srvCfgIface->set_property(srvCfgPropRunning, unitRunningState);
-                internalSet = false;
+                portNum = req;
+                updatedFlag |= (1 << static_cast<uint8_t>(UpdatedProp::port));
                 startServiceRestartTimer();
             }
             res = req;
             return 1;
-        });
+            });
+    }
 
-    srvCfgIface->register_property(
-        srvCfgPropEnabled, unitEnabledState,
-        [this](const bool& req, bool& res) {
-            if (!internalSet)
-            {
+    srvCfgIface->register_property(srvCfgPropMasked, unitMaskedState,
+                                   [this](const bool& req, bool& res) {
+        if (!internalSet)
+        {
 #ifdef USB_CODE_UPDATE
-                if (baseUnitName == usbCodeUpdateUnitName)
-                {
-                    if (unitMaskedState)
-                    { // block updating if masked
-                        lg2::error("Invalid value specified");
-                        return -EINVAL;
-                    }
-                    unitEnabledState = req;
-                    unitRunningState = req;
-                    internalSet = true;
-                    srvCfgIface->set_property(srvCfgPropEnabled,
-                                              unitEnabledState);
-                    srvCfgIface->set_property(srvCfgPropRunning,
-                                              unitRunningState);
-                    internalSet = false;
-                    setUSBCodeUpdateState(unitEnabledState);
-                    saveUSBCodeUpdateStateToFile(unitMaskedState,
-                                                 unitEnabledState);
-                    res = req;
-                    return 1;
-                }
+            if (baseUnitName == usbCodeUpdateUnitName)
+            {
+                unitMaskedState = req;
+                unitEnabledState = !unitMaskedState;
+                unitRunningState = !unitMaskedState;
+                internalSet = true;
+                srvCfgIface->set_property(srvCfgPropEnabled, unitEnabledState);
+                srvCfgIface->set_property(srvCfgPropRunning, unitRunningState);
+                srvCfgIface->set_property(srvCfgPropMasked, unitMaskedState);
+                internalSet = false;
+                setUSBCodeUpdateState(unitEnabledState);
+                saveUSBCodeUpdateStateToFile(unitMaskedState, unitEnabledState);
+                return 1;
+            }
 #endif
-                if (req == res)
-                {
-                    return 1;
-                }
-                if (updateInProgress)
-                {
-                    return 0;
-                }
+            if (req == res)
+            {
+                return 1;
+            }
+            if (updateInProgress)
+            {
+                return 0;
+            }
+            unitMaskedState = req;
+            unitEnabledState = !unitMaskedState;
+            unitRunningState = !unitMaskedState;
+            updatedFlag |=
+                (1 << static_cast<uint8_t>(UpdatedProp::maskedState)) |
+                (1 << static_cast<uint8_t>(UpdatedProp::enabledState)) |
+                (1 << static_cast<uint8_t>(UpdatedProp::runningState));
+            internalSet = true;
+            srvCfgIface->set_property(srvCfgPropEnabled, unitEnabledState);
+            srvCfgIface->set_property(srvCfgPropRunning, unitRunningState);
+            internalSet = false;
+            startServiceRestartTimer();
+        }
+        res = req;
+        return 1;
+    });
+
+    srvCfgIface->register_property(srvCfgPropEnabled, unitEnabledState,
+                                   [this](const bool& req, bool& res) {
+        if (!internalSet)
+        {
+#ifdef USB_CODE_UPDATE
+            if (baseUnitName == usbCodeUpdateUnitName)
+            {
                 if (unitMaskedState)
                 { // block updating if masked
                     lg2::error("Invalid value specified");
                     return -EINVAL;
                 }
                 unitEnabledState = req;
-                updatedFlag |=
-                    (1 << static_cast<uint8_t>(UpdatedProp::enabledState));
-                startServiceRestartTimer();
+                unitRunningState = req;
+                internalSet = true;
+                srvCfgIface->set_property(srvCfgPropEnabled, unitEnabledState);
+                srvCfgIface->set_property(srvCfgPropRunning, unitRunningState);
+                internalSet = false;
+                setUSBCodeUpdateState(unitEnabledState);
+                saveUSBCodeUpdateStateToFile(unitMaskedState, unitEnabledState);
+                res = req;
+                return 1;
             }
-            res = req;
-            return 1;
-        });
-
-    srvCfgIface->register_property(
-        srvCfgPropRunning, unitRunningState,
-        [this](const bool& req, bool& res) {
-            if (!internalSet)
-            {
-#ifdef USB_CODE_UPDATE
-                if (baseUnitName == usbCodeUpdateUnitName)
-                {
-                    if (unitMaskedState)
-                    { // block updating if masked
-                        lg2::error("Invalid value specified");
-                        return -EINVAL;
-                    }
-                    unitEnabledState = req;
-                    unitRunningState = req;
-                    internalSet = true;
-                    srvCfgIface->set_property(srvCfgPropEnabled,
-                                              unitEnabledState);
-                    srvCfgIface->set_property(srvCfgPropRunning,
-                                              unitRunningState);
-                    internalSet = false;
-                    setUSBCodeUpdateState(unitEnabledState);
-                    saveUSBCodeUpdateStateToFile(unitMaskedState,
-                                                 unitEnabledState);
-                    res = req;
-                    return 1;
-                }
 #endif
-                if (req == res)
-                {
-                    return 1;
-                }
-                if (updateInProgress)
-                {
-                    return 0;
-                }
+            if (req == res)
+            {
+                return 1;
+            }
+            if (updateInProgress)
+            {
+                return 0;
+            }
+            if (unitMaskedState)
+            { // block updating if masked
+                lg2::error("Invalid value specified");
+                return -EINVAL;
+            }
+            unitEnabledState = req;
+            updatedFlag |= (1
+                            << static_cast<uint8_t>(UpdatedProp::enabledState));
+            startServiceRestartTimer();
+        }
+        res = req;
+        return 1;
+    });
+
+    srvCfgIface->register_property(srvCfgPropRunning, unitRunningState,
+                                   [this](const bool& req, bool& res) {
+        if (!internalSet)
+        {
+#ifdef USB_CODE_UPDATE
+            if (baseUnitName == usbCodeUpdateUnitName)
+            {
                 if (unitMaskedState)
                 { // block updating if masked
                     lg2::error("Invalid value specified");
                     return -EINVAL;
                 }
+                unitEnabledState = req;
                 unitRunningState = req;
-                updatedFlag |=
-                    (1 << static_cast<uint8_t>(UpdatedProp::runningState));
-                startServiceRestartTimer();
+                internalSet = true;
+                srvCfgIface->set_property(srvCfgPropEnabled, unitEnabledState);
+                srvCfgIface->set_property(srvCfgPropRunning, unitRunningState);
+                internalSet = false;
+                setUSBCodeUpdateState(unitEnabledState);
+                saveUSBCodeUpdateStateToFile(unitMaskedState, unitEnabledState);
+                res = req;
+                return 1;
             }
-            res = req;
-            return 1;
-        });
+#endif
+            if (req == res)
+            {
+                return 1;
+            }
+            if (updateInProgress)
+            {
+                return 0;
+            }
+            if (unitMaskedState)
+            { // block updating if masked
+                lg2::error("Invalid value specified");
+                return -EINVAL;
+            }
+            unitRunningState = req;
+            updatedFlag |= (1
+                            << static_cast<uint8_t>(UpdatedProp::runningState));
+            startServiceRestartTimer();
+        }
+        res = req;
+        return 1;
+    });
 
     srvCfgIface->initialize();
     if (!socketObjectPath.empty())
