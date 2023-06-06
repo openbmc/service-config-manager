@@ -36,6 +36,7 @@ owners:
 - richard.marian.thomaiyar@linux.intel.com
 
 reviewers:
+- geissonator@yahoo.com
 
 matchers:
 
@@ -46,3 +47,6 @@ openbmc:
 - name: Richard Marian Thomaiyar
   email: richard.marian.thomaiyar@linux.intel.com
   discord: rthomaiy
+- name: Andrew Geissler
+  email: geissonator@yahoo.com
+  discord: geissonator
