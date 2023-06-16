@@ -1,0 +1,8 @@
+Code-Review+1: Andrew Geissler <geissonator@yahoo.com>
+Code-Review+2: Richard Marian Thomaiyar <richard.marian.thomaiyar@linux.intel.com>
+Verified+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Submitted-by: Patrick Williams <patrick@stwcx.xyz>
+Submitted-at: Fri, 16 Jun 2023 16:27:54 +0000
+Reviewed-on: https://gerrit.openbmc.org/c/openbmc/service-config-manager/+/63275
+Project: openbmc/service-config-manager
+Branch: refs/heads/master
