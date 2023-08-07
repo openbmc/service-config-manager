@@ -33,7 +33,6 @@
 
 owners:
 - apparao.puli@linux.intel.com
-- richard.marian.thomaiyar@linux.intel.com
 
 reviewers:
 - geissonator@yahoo.com
@@ -44,9 +43,6 @@ openbmc:
 - name: AppaRao Puli
   email: apparao.puli@linux.intel.com
   discord: apparao.puli
-- name: Richard Marian Thomaiyar
-  email: richard.marian.thomaiyar@linux.intel.com
-  discord: rthomaiy
 - name: Andrew Geissler
   email: geissonator@yahoo.com
   discord: geissonator
