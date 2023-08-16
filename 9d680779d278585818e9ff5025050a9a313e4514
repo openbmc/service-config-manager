@@ -1,0 +1,7 @@
+Verified+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Code-Review+2: AppaRao Puli <apparao.puli@intel.com>
+Submitted-by: AppaRao Puli <apparao.puli@intel.com>
+Submitted-at: Wed, 16 Aug 2023 03:46:30 +0000
+Reviewed-on: https://gerrit.openbmc.org/c/openbmc/service-config-manager/+/65800
+Project: openbmc/service-config-manager
+Branch: refs/heads/master
