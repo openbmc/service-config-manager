@@ -273,7 +273,7 @@ void ServiceConfig::queryAndUpdateProperties()
                             "ERROR", e);
                         return;
                     }
-                    },
+                },
                     sysdService, socketObjectPath, dBusPropIntf,
                     dBusGetAllMethod, sysdSocketIntf);
             }
@@ -288,7 +288,7 @@ void ServiceConfig::queryAndUpdateProperties()
                        "ERROR", e);
             return;
         }
-        },
+    },
         sysdService, objectPath, dBusPropIntf, dBusGetAllMethod, sysdUnitIntf);
     return;
 }
@@ -555,7 +555,7 @@ void ServiceConfig::registerProperties()
             }
             res = req;
             return 1;
-            });
+        });
     }
 
     srvCfgIface->register_property(srvCfgPropMasked, unitMaskedState,

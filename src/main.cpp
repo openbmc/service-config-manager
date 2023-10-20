@@ -268,7 +268,7 @@ void init(sdbusplus::asio::object_server& server,
             return;
         }
         handleListUnitsResponse(server, conn, ec, listUnits);
-        },
+    },
         sysdService, sysdObjPath, sysdMgrIntf, "ListUnits");
 }
 
@@ -318,7 +318,7 @@ void checkAndInit(sdbusplus::asio::object_server& server,
                 checkAndInit(server, conn);
             });
         }
-        },
+    },
         sysdService, sysdObjPath, dBusPropIntf, dBusGetMethod, sysdMgrIntf,
         "FinishTimestamp");
 }
@@ -344,7 +344,7 @@ int main()
             unitQueryStarted = true;
             init(server, conn);
         }
-        });
+    });
     // this will make sure to initialize the objects, when daemon is
     // restarted.
     checkAndInit(server, conn);
