@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82d03cc4_2e798659",
+        "filename": "src/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000269
+      },
+      "writtenOn": "2023-10-23T02:24:58Z",
+      "side": 1,
+      "message": "Is 272 Lines formatted correctly? I believe, these should Left shift by 4 spaces for better readability, Isn\u0027t it? May be some clang-format property incorrect/missing?",
+      "revId": "9a187bb9da1fd40187e20d84b95bc5a7be7429ca",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
