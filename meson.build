@@ -33,7 +33,7 @@ deps = [dependency('boost'),
         dependency('systemd'),
 ]
 
-if(get_option('usb-code-update').enabled())
+if(get_option('usb-code-update').allowed())
     add_project_arguments('-DUSB_CODE_UPDATE', language : 'cpp')
 endif
 
