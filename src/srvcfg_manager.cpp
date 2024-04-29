@@ -322,8 +322,7 @@ ServiceConfig::ServiceConfig(
     const std::string& objPath_, const std::string& baseUnitName_,
     const std::string& instanceName_, const std::string& serviceObjPath_,
     const std::string& socketObjPath_) :
-    conn(conn_),
-    server(srv_), objPath(objPath_), baseUnitName(baseUnitName_),
+    conn(conn_), server(srv_), objPath(objPath_), baseUnitName(baseUnitName_),
     instanceName(instanceName_), serviceObjectPath(serviceObjPath_),
     socketObjectPath(socketObjPath_)
 {
@@ -420,8 +419,7 @@ void ServiceConfig::stopAndApplyUnitConfig(boost::asio::yield_context yield)
         // Write the socket header
         cfgFile << "[Socket]\n";
         // Listen
-        cfgFile << "Listen" << protocol << "="
-                << "\n";
+        cfgFile << "Listen" << protocol << "=" << "\n";
         cfgFile << "Listen" << protocol << "=" << portNum << "\n";
         cfgFile.close();
 
