@@ -134,7 +134,7 @@ static inline void
                 unitName + addInstanceName(instanceName, "@");
             const sdbusplus::message::object_path& objectPath =
                 std::get<static_cast<int>(ListUnitElements::objectPath)>(unit);
-            // Group the service & socket units togther.. Same services
+            // Group the service & socket units together.. Same services
             // are managed together.
             auto it = unitsToMonitor.find(instantiatedUnitName);
             if (it != unitsToMonitor.end())
