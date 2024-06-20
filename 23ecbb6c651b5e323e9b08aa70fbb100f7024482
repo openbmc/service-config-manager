@@ -1,0 +1,9 @@
+Verified+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Code-Review+2: AppaRao Puli <apparao.puli@linux.intel.com>
+Code-Review+1: Andrew Geissler <geissonator@yahoo.com>
+Submitted-by: AppaRao Puli <apparao.puli@linux.intel.com>
+Submitted-at: Thu, 20 Jun 2024 10:35:50 +0000
+Reviewed-on: https://gerrit.openbmc.org/c/openbmc/service-config-manager/+/72101
+Comments-Total: 3
+Project: openbmc/service-config-manager
+Branch: refs/heads/master
