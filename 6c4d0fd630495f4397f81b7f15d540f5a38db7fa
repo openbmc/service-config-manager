@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a68790a_88999daa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000269
+      },
+      "writtenOn": "2024-06-20T10:41:14Z",
+      "side": 1,
+      "message": "Assuming build failure is due to CI build environment mismatch, So moving ahead with +2 for unblocking. Whenever its ready (after CI build change) for migrate, This can be merged.",
+      "revId": "6c4d0fd630495f4397f81b7f15d540f5a38db7fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
