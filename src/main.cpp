@@ -39,7 +39,7 @@ static constexpr const char* tmpFileBad = "/tmp/srvcfg-mgr.json.bad";
 static std::unordered_map<std::string /* unitName */,
                           bool /* isSocketActivated */>
     managedServices = {{"phosphor-ipmi-net", false}, {"bmcweb", false},
-                       {"phosphor-ipmi-kcs", false}, {"start-ipkvm", false},
+                       {"phosphor-ipmi-kcs", false}, {"obmc-ikvm", false},
                        {"obmc-console", false},      {"dropbear", true},
                        {"obmc-console-ssh", true}};
 
