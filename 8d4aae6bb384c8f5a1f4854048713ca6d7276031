@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffbff3eb_953f6b06",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000733
+      },
+      "writtenOn": "2024-06-28T01:31:21Z",
+      "side": 1,
+      "message": "Tagging the subject line \"systemd:\" makes sense in the obmc-ikvm repo itself, but it seems a bit off in this repo IMO; I think \"obmc-ikvm:\" as in the corresponding patch in intel-ipmi-oem would be better.",
+      "revId": "8d4aae6bb384c8f5a1f4854048713ca6d7276031",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
