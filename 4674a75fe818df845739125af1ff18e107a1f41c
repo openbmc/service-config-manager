@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "950fd9f1_c77f867f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2024-07-01T18:30:23Z",
+      "side": 1,
+      "message": "As noted elsewhere, please try and coordinate the merge and the autobumps of all of these together.",
+      "revId": "4674a75fe818df845739125af1ff18e107a1f41c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
