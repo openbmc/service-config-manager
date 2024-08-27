@@ -34,6 +34,24 @@
       "parentUuid": "abc453d1_0be803e4",
       "revId": "de87972682912d5f50dc31d313aa7505e7325070",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8949632_75826bf9",
+        "filename": "src/srvcfg_manager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2024-08-27T19:25:50Z",
+      "side": 1,
+      "message": "If you set Gerrit to ignore all whitespace the diff looks pretty minimal.  Doesn\u0027t look like there are any functionality changes.",
+      "parentUuid": "cef96a33_2c31dd09",
+      "revId": "de87972682912d5f50dc31d313aa7505e7325070",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
