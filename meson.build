@@ -30,7 +30,7 @@ deps = [dependency('boost'),
         dependency('phosphor-dbus-interfaces'),
         dependency('phosphor-logging'),
         dependency('sdbusplus'),
-        dependency('systemd'),
+        dependency('libsystemd'),
 ]
 
 if(get_option('usb-code-update').allowed())
