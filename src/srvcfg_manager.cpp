@@ -524,7 +524,8 @@ void ServiceConfig::startServiceRestartTimer()
                                    }
                                }
                                updateInProgress = false;
-                           });
+                           },
+                           {});
     });
 }
 
