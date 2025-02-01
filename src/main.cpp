@@ -65,8 +65,8 @@ enum class monitorElement
     socketObjPath
 };
 
-std::tuple<std::string, UnitType, std::string>
-    getUnitNameTypeAndInstance(const std::string& fullUnitName)
+std::tuple<std::string, UnitType, std::string> getUnitNameTypeAndInstance(
+    const std::string& fullUnitName)
 {
     UnitType type = UnitType::invalid;
     std::string instanceName;
