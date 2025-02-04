@@ -1,0 +1,10 @@
+Code-Review+2: Andrew Geissler <geissonator@yahoo.com>
+Code-Review+2: Vernon Mauery <vernon.mauery@linux.intel.com>
+Verified+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Code-Review+1: Zev Weiss <zev@bewilderbeest.net>
+Submitted-by: Mohammed Javith Akthar M <mohammedjavitham@ami.com>
+Submitted-at: Tue, 04 Feb 2025 09:04:26 +0000
+Reviewed-on: https://gerrit.openbmc.org/c/openbmc/service-config-manager/+/72475
+Comments-Total: 4
+Project: openbmc/service-config-manager
+Branch: refs/heads/master
