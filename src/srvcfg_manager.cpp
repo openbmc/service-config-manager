@@ -501,31 +501,32 @@ void ServiceConfig::startServiceRestartTimer()
             return;
         }
         updateInProgress = true;
-        boost::asio::spawn(conn->get_io_context(),
-                           [this](boost::asio::yield_context yield) {
-                               // Stop and apply configuration for all objects
-                               for (auto& srvMgrObj : srvMgrObjects)
-                               {
-                                   auto& srvObj = srvMgrObj.second;
-                                   if (srvObj->updatedFlag)
-                                   {
-                                       srvObj->stopAndApplyUnitConfig(yield);
-                                   }
-                               }
-                               // Do system reload
-                               systemdDaemonReload(conn, yield);
-                               // restart unit config.
-                               for (auto& srvMgrObj : srvMgrObjects)
-                               {
-                                   auto& srvObj = srvMgrObj.second;
-                                   if (srvObj->updatedFlag)
-                                   {
-                                       srvObj->restartUnitConfig(yield);
-                                   }
-                               }
-                               updateInProgress = false;
-                           },
-                           {});
+        (void)boost::asio::spawn(
+            conn->get_io_context(),
+            [this](boost::asio::yield_context yield) {
+                // Stop and apply configuration for all objects
+                for (auto& srvMgrObj : srvMgrObjects)
+                {
+                    auto& srvObj = srvMgrObj.second;
+                    if (srvObj->updatedFlag)
+                    {
+                        srvObj->stopAndApplyUnitConfig(yield);
+                    }
+                }
+                // Do system reload
+                systemdDaemonReload(conn, yield);
+                // restart unit config.
+                for (auto& srvMgrObj : srvMgrObjects)
+                {
+                    auto& srvObj = srvMgrObj.second;
+                    if (srvObj->updatedFlag)
+                    {
+                        srvObj->restartUnitConfig(yield);
+                    }
+                }
+                updateInProgress = false;
+            },
+            {});
     });
 }
 
