@@ -1,0 +1,7 @@
+Verified+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Code-Review+2: Andrew Geissler <geissonator@yahoo.com>
+Submitted-by: Jason Bills <jason.m.bills@linux.intel.com>
+Submitted-at: Fri, 28 Feb 2025 19:06:13 +0000
+Reviewed-on: https://gerrit.openbmc.org/c/openbmc/service-config-manager/+/78516
+Project: openbmc/service-config-manager
+Branch: refs/heads/master
