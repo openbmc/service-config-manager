@@ -24,8 +24,7 @@ boost_args = [
 ]
 
 deps = [
-    dependency('boost'),
-    dependency('boost', modules: ['coroutine']),
+    dependency('boost', modules: ['coroutine', 'context']),
     dependency('phosphor-dbus-interfaces'),
     dependency('phosphor-logging'),
     dependency('sdbusplus'),

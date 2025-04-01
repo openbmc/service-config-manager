@@ -15,6 +15,7 @@
 */
 #include "srvcfg_manager.hpp"
 
+#include <boost/asio/detached.hpp>
 #include <boost/asio/spawn.hpp>
 
 #ifdef USB_CODE_UPDATE
@@ -501,7 +502,7 @@ void ServiceConfig::startServiceRestartTimer()
             return;
         }
         updateInProgress = true;
-        (void)boost::asio::spawn(
+        boost::asio::spawn(
             conn->get_io_context(),
             [this](boost::asio::yield_context yield) {
                 // Stop and apply configuration for all objects
@@ -526,7 +527,7 @@ void ServiceConfig::startServiceRestartTimer()
                 }
                 updateInProgress = false;
             },
-            {});
+            boost::asio::detached);
     });
 }
 
