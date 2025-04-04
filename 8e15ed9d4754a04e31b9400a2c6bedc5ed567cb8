@@ -54,6 +54,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcea6f3e_53da441c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002413
+      },
+      "writtenOn": "2025-04-04T06:31:06Z",
+      "side": 1,
+      "message": "I have added this information to the commit message to inform the user why we need to control ssifbridge.",
+      "parentUuid": "efb225ba_da9201ea",
+      "revId": "8e15ed9d4754a04e31b9400a2c6bedc5ed567cb8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9d203caa_ad04e746",
@@ -85,6 +103,24 @@
       "side": 1,
       "message": "No SSIF device:\n1. Use qemu to simulate evb-ast2600 environment (SSIF disabled).\n2. Check if ssifbridge is not registered in service manager.\n\troot@evb-ast2600:/etc# busctl tree xyz.openbmc_project.Control.Service.Manager\n\t`- /xyz\n\t  `- /xyz/openbmc_project\n\t\t`- /xyz/openbmc_project/control\n\t\t  `- /xyz/openbmc_project/control/service\n\t\t\t|- /xyz/openbmc_project/control/service/_6fbmc_2dconsole_2dssh\n\t\t\t|- /xyz/openbmc_project/control/service/_6fbmc_2dikvm\n\t\t\t|- /xyz/openbmc_project/control/service/_70hosphor_2dipmi_2dnet_40eth0\n\t\t\t|- /xyz/openbmc_project/control/service/_70hosphor_2dusb_2dcode_2dupdate\n\t\t\t|- /xyz/openbmc_project/control/service/bmcweb\n\t\t\t|- /xyz/openbmc_project/control/service/dropbear \n\nWith SSIF device:\n1. Use qemu to simulate evb-ast2600 environment.\n2. Make sure SSIF device is created in /dev\n\troot@evb-ast2600:~# ls /dev/ipmi-ssif-host\n\t/dev/ipmi-ssif-host\n\n3. Make sure ssifbridge has been registered in service manager.\n\troot@evb-ast2600:/etc# busctl tree xyz.openbmc_project.Control.Service.Manager\n\t`- /xyz\n\t  `- /xyz/openbmc_project\n\t\t`- /xyz/openbmc_project/control\n\t\t  `- /xyz/openbmc_project/control/service\n\t\t\t|- /xyz/openbmc_project/control/service/_6fbmc_2dconsole_2dssh\n\t\t\t|- /xyz/openbmc_project/control/service/_6fbmc_2dikvm\n\t\t\t|- /xyz/openbmc_project/control/service/_70hosphor_2dipmi_2dnet_40eth0\n\t\t\t|- /xyz/openbmc_project/control/service/_70hosphor_2dusb_2dcode_2dupdate\n\t\t\t|- /xyz/openbmc_project/control/service/bmcweb\n\t\t\t|- /xyz/openbmc_project/control/service/dropbear\n\t\t\t`- /xyz/openbmc_project/control/service/ssifbridge\n\t\t\n4. Check content of /xyz/openbmc_project/control/service/ssifbridge.\n\troot@evb-ast2600:/etc# busctl introspect xyz.openbmc_project.Control.Service.Manager /xyz/openbmc_project/control/service/ssifbridge\n\tNAME                                           TYPE      SIGNATURE RESULT/VALUE FLAGS\n\torg.freedesktop.DBus.Introspectable            interface -         -            -\n\t.Introspect                                    method    -         s            -\n\torg.freedesktop.DBus.Peer                      interface -         -            -\n\t.GetMachineId                                  method    -         s            -\n\t.Ping                                          method    -         -            -\n\torg.freedesktop.DBus.Properties                interface -         -            -\n\t.Get                                           method    ss        v            -\n\t.GetAll                                        method    s         a{sv}        -\n\t.Set                                           method    ssv       -            -\n\t.PropertiesChanged                             signal    sa{sv}as  -            -\n\txyz.openbmc_project.Control.Service.Attributes interface -         -            -\n\t.Enabled                                       property  b         true         emits-change writable\n\t.Masked                                        property  b         false        emits-change writable\n\t.Running                                       property  b         true         emits-change writable\n\t\n5. Disable SSIF and check the status of service.\n\troot@evb-ast2600:/dev# busctl set-property xyz.openbmc_project.Control.Service.Manager \\\n\t\u003e     /xyz/openbmc_project/control/service/ssifbridge \\\n\t\u003e     xyz.openbmc_project.Control.Service.Attributes Enabled b false\n\troot@evb-ast2600:/dev#\n\troot@evb-ast2600:/dev# busctl set-property xyz.openbmc_project.Control.Service.Manager \\\n\t\u003e     /xyz/openbmc_project/control/service/ssifbridge \\\n\t\u003e     xyz.openbmc_project.Control.Service.Attributes Running b false\n\troot@evb-ast2600:/dev#\n\t\n\troot@evb-ast2600:/dev# systemctl status ssifbridge\n\t* ssifbridge.service - Phosphor IPMI SSIF DBus Bridge\n\t\t Loaded: loaded (/usr/lib/systemd/system/ssifbridge.service; disabled; preset: enabled)\n\t\t Active: inactive (dead)\n\n\tMar 20 01:25:14 evb-ast2600 systemd[1]: Started Phosphor IPMI SSIF DBus Bridge.\n\tMar 20 05:53:05 evb-ast2600 systemd[1]: Stopping Phosphor IPMI SSIF DBus Bridge...\n\tMar 20 05:53:05 evb-ast2600 systemd[1]: ssifbridge.service: Deactivated successfully.\n\tMar 20 05:53:05 evb-ast2600 systemd[1]: Stopped Phosphor IPMI SSIF DBus Bridge.\n\n6. Enable SSIF and check the status of service.\n\troot@evb-ast2600:/dev# busctl set-property xyz.openbmc_project.Control.Service.Manager \\\n\t\u003e     /xyz/openbmc_project/control/service/ssifbridge \\\n\t\u003e     xyz.openbmc_project.Control.Service.Attributes Enabled b true\n\troot@evb-ast2600:/dev#\n\troot@evb-ast2600:/dev# busctl set-property xyz.openbmc_project.Control.Service.Manager \\\n\t\u003e     /xyz/openbmc_project/control/service/ssifbridge \\\n\t\u003e     xyz.openbmc_project.Control.Service.Attributes Running b true\n\troot@evb-ast2600:/dev#\n\n\troot@evb-ast2600:/dev# systemctl status ssifbridge\n\t* ssifbridge.service - Phosphor IPMI SSIF DBus Bridge\n\t\t Loaded: loaded (/usr/lib/systemd/system/ssifbridge.service; enabled; preset: enabled)\n\t\t Active: active (running) since Thu 2025-03-20 05:59:31 UTC; 20s ago\n\t Invocation: 3245883dbdb849d9a2db828a5f1c6e42\n\t   Main PID: 1080 (ssifbridged)\n\t\t\tCPU: 270ms\n\t\t CGroup: /system.slice/ssifbridge.service\n\t\t\t\t `-1080 /usr/bin/ssifbridged",
       "parentUuid": "9d203caa_ad04e746",
+      "revId": "8e15ed9d4754a04e31b9400a2c6bedc5ed567cb8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83744832_a16c9c84",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1002413
+      },
+      "writtenOn": "2025-04-04T06:31:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2b2eb89_7524ff48",
       "revId": "8e15ed9d4754a04e31b9400a2c6bedc5ed567cb8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
