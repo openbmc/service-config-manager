@@ -17,15 +17,11 @@
 
 #include <boost/asio/detached.hpp>
 #include <boost/asio/spawn.hpp>
-
-#ifdef USB_CODE_UPDATE
 #include <cereal/archives/json.hpp>
 #include <cereal/types/tuple.hpp>
 #include <cereal/types/unordered_map.hpp>
 
 #include <cstdio>
-#endif
-
 #include <fstream>
 #include <regex>
 
@@ -282,6 +278,7 @@ void ServiceConfig::queryAndUpdateProperties()
                 {
                     registerProperties();
                 }
+                writeStateFile();
             }
             catch (const std::exception& e)
             {
@@ -317,6 +314,18 @@ void ServiceConfig::createSocketOverrideConf()
     }
 }
 
+void ServiceConfig::writeStateFile()
+{
+    std::unordered_map<std::string, bool> stateMap;
+    stateMap[srvCfgPropMasked] = unitMaskedState;
+    stateMap[srvCfgPropEnabled] = unitEnabledState;
+    stateMap[srvCfgPropRunning] = unitRunningState;
+
+    std::ofstream file(stateFile);
+    cereal::JSONOutputArchive archive(file);
+    archive(CEREAL_NVP(stateMap));
+}
+
 ServiceConfig::ServiceConfig(
     sdbusplus::asio::object_server& srv_,
     std::shared_ptr<sdbusplus::asio::connection>& conn_,
@@ -330,6 +339,7 @@ ServiceConfig::ServiceConfig(
     isSocketActivatedService = serviceObjectPath.empty();
     instantiatedUnitName = baseUnitName + addInstanceName(instanceName, "@");
     updatedFlag = 0;
+    stateFile = srvDataBaseDir + instantiatedUnitName;
     queryAndUpdateProperties();
     return;
 }
@@ -502,6 +512,8 @@ void ServiceConfig::startServiceRestartTimer()
             return;
         }
         updateInProgress = true;
+        // Ensure our persistent files are updated with changes
+        writeStateFile();
         boost::asio::spawn(
             conn->get_io_context(),
             [this](boost::asio::yield_context yield) {
