@@ -107,6 +107,8 @@ class ServiceConfig
     bool isSocketActivatedService = false;
     std::string subStateValue;
 
+    std::string stateFile;
+
     bool isMaskedOut();
     void registerProperties();
     void queryAndUpdateProperties();
@@ -119,6 +121,7 @@ class ServiceConfig
             propertyMap);
     std::string getSocketUnitName();
     std::string getServiceUnitName();
+    void writeStateFile();
 };
 
 } // namespace service
