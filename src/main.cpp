@@ -31,7 +31,9 @@ std::map<std::string, std::shared_ptr<phosphor::service::ServiceConfig>>
     srvMgrObjects;
 static bool unitQueryStarted = false;
 
-static constexpr const char* srvCfgMgrFile = "/etc/srvcfg-mgr.json";
+static constexpr const char* srvCfgMgrFileOld = "/etc/srvcfg-mgr.json";
+static constexpr const char* srvCfgMgrFile =
+    "/var/lib/service-config-manager/srvcfg-mgr.json";
 static constexpr const char* tmpFileBad = "/tmp/srvcfg-mgr.json.bad";
 
 // Base service name list. All instance of these services and
@@ -169,6 +171,17 @@ static inline void handleListUnitsResponse(
     }
 
     bool updateRequired = false;
+
+    // First check if our config manager file is in the old spot.
+    // If it is, then move it to the new spot
+    if ((std::filesystem::exists(srvCfgMgrFileOld)) &&
+        (!std::filesystem::exists(srvCfgMgrFile)))
+    {
+        lg2::info("Moving {OLDFILEPATH} to new location, {FILEPATH}",
+                  "OLDFILEPATH", srvCfgMgrFileOld, "FILEPATH", srvCfgMgrFile);
+        std::filesystem::rename(srvCfgMgrFileOld, srvCfgMgrFile);
+    }
+
     bool jsonExist = std::filesystem::exists(srvCfgMgrFile);
     if (jsonExist)
     {
