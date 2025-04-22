@@ -32,8 +32,7 @@ std::map<std::string, std::shared_ptr<phosphor::service::ServiceConfig>>
 static bool unitQueryStarted = false;
 
 static constexpr const char* srvCfgMgrFileOld = "/etc/srvcfg-mgr.json";
-static constexpr const char* srvCfgMgrFile =
-    "/var/lib/service-config-manager/srvcfg-mgr.json";
+static constexpr const char* srvCfgMgrFile = "srvcfg-mgr.json";
 static constexpr const char* tmpFileBad = "/tmp/srvcfg-mgr.json.bad";
 
 // Base service name list. All instance of these services and
@@ -172,22 +171,30 @@ static inline void handleListUnitsResponse(
 
     bool updateRequired = false;
 
-    // First check if our config manager file is in the old spot.
+    // Determine if we need to create our persistent config dir
+    if (!std::filesystem::exists(srvDataBaseDir))
+    {
+        std::filesystem::create_directories(srvDataBaseDir);
+    }
+
+    std::string srvCfgMgrFilePath = std::string(srvDataBaseDir) + srvCfgMgrFile;
+
+    // Check if our config manager file is in the old spot.
     // If it is, then move it to the new spot
     if ((std::filesystem::exists(srvCfgMgrFileOld)) &&
-        (!std::filesystem::exists(srvCfgMgrFile)))
+        (!std::filesystem::exists(srvCfgMgrFilePath)))
     {
         lg2::info("Moving {OLDFILEPATH} to new location, {FILEPATH}",
                   "OLDFILEPATH", srvCfgMgrFileOld, "FILEPATH", srvCfgMgrFile);
-        std::filesystem::rename(srvCfgMgrFileOld, srvCfgMgrFile);
+        std::filesystem::rename(srvCfgMgrFileOld, srvCfgMgrFilePath);
     }
 
-    bool jsonExist = std::filesystem::exists(srvCfgMgrFile);
+    bool jsonExist = std::filesystem::exists(srvCfgMgrFilePath);
     if (jsonExist)
     {
         try
         {
-            std::ifstream file(srvCfgMgrFile);
+            std::ifstream file(srvCfgMgrFilePath);
             cereal::JSONInputArchive archive(file);
             MonitorListMap savedMonitorList;
             archive(savedMonitorList);
