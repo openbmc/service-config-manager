@@ -29,10 +29,15 @@ deps = [
     dependency('phosphor-logging'),
     dependency('sdbusplus'),
     dependency('libsystemd'),
+    dependency('nlohmann_json', include_type: 'system'),
 ]
 
 if (get_option('usb-code-update').allowed())
     add_project_arguments('-DUSB_CODE_UPDATE', language: 'cpp')
+endif
+
+if (get_option('persist-settings-to-file').allowed())
+    add_project_arguments('-DPERSIST_SETTINGS', language: 'cpp')
 endif
 
 executable(
