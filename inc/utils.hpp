@@ -45,6 +45,8 @@ static constexpr const char* stateDisabled = "disabled";
 static constexpr const char* subStateRunning = "running";
 static constexpr const char* subStateListening = "listening";
 static constexpr const char* loadStateNotFound = "not-found";
+static constexpr const char* srvDataBaseDir =
+    "/var/lib/service-config-manager/";
 
 using ListUnitsType =
     std::tuple<std::string, std::string, std::string, std::string, std::string,
