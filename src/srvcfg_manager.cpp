@@ -283,7 +283,7 @@ void ServiceConfig::queryAndUpdateProperties()
                 {
                     registerProperties();
                 }
-                writeStateFile();
+                loadStateFile();
             }
             catch (const std::exception& e)
             {
@@ -330,6 +330,75 @@ void ServiceConfig::writeStateFile()
     std::ofstream file(stateFile);
     file << stateMap;
     file.close();
+#endif
+}
+
+void ServiceConfig::loadStateFile()
+{
+#ifdef PERSIST_SETTINGS
+    if (std::filesystem::exists(stateFile))
+    {
+        std::ifstream file(stateFile);
+        if (!file.good())
+        {
+            lg2::error("Error reading {FILEPATH}; delete it and continue",
+                       "FILEPATH", stateFile);
+            std::filesystem::remove(stateFile);
+            // rewrite file with what was ready from systemd
+            writeStateFile();
+            return;
+        }
+
+        nlohmann::json stateMap =
+            nlohmann::json::parse(file, nullptr, false, true);
+        if (stateMap.is_discarded())
+        {
+            lg2::error("Error loading {FILEPATH}; delete it and continue",
+                       "FILEPATH", stateFile);
+            std::filesystem::remove(stateFile);
+            // rewrite file with what was ready from systemd
+            writeStateFile();
+            return;
+        }
+
+        // If there are any differences, the persistent config file wins so
+        // update the dbus properties and trigger a reload to apply the changes
+        if (stateMap[srvCfgPropMasked] != unitMaskedState)
+        {
+            lg2::info(
+                "Masked property for {FILEPATH} not equal. Setting to {SETTING}",
+                "FILEPATH", stateFile, "SETTING", stateMap[srvCfgPropMasked]);
+            unitMaskedState = stateMap[srvCfgPropMasked];
+            updatedFlag |=
+                (1 << static_cast<uint8_t>(UpdatedProp::maskedState));
+            startServiceRestartTimer();
+        }
+        if (stateMap[srvCfgPropEnabled] != unitEnabledState)
+        {
+            lg2::info(
+                "Enabled property for {FILEPATH} not equal. Setting to {SETTING}",
+                "FILEPATH", stateFile, "SETTING", stateMap[srvCfgPropEnabled]);
+            unitEnabledState = stateMap[srvCfgPropEnabled];
+            updatedFlag |=
+                (1 << static_cast<uint8_t>(UpdatedProp::enabledState));
+            startServiceRestartTimer();
+        }
+        if (stateMap[srvCfgPropRunning] != unitRunningState)
+        {
+            lg2::info(
+                "Running property for {FILEPATH} not equal. Setting to {SETTING}",
+                "FILEPATH", stateFile, "SETTING", stateMap[srvCfgPropRunning]);
+            unitRunningState = stateMap[srvCfgPropRunning];
+            updatedFlag |=
+                (1 << static_cast<uint8_t>(UpdatedProp::runningState));
+            startServiceRestartTimer();
+        }
+    }
+    else
+    {
+        // Just write out what we got from systemd if no existing config file
+        writeStateFile();
+    }
 #endif
 }
 
