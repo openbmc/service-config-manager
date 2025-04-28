@@ -122,6 +122,7 @@ class ServiceConfig
     std::string getSocketUnitName();
     std::string getServiceUnitName();
     void writeStateFile();
+    void loadStateFile();
 };
 
 } // namespace service
