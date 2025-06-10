@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "16cce67c_54a37ff8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2025-06-10T20:38:03Z",
+      "side": 1,
+      "message": "Thinking how we could get into this situation. So we start with the old code and move to the new code. /etc is moved to /var. Then they downgrade back to old code. Now we have the file in /etc and /var. They then update to new code again and there is a situation where we would just blindly move the /etc and copy over the /var. \n\nI think it would be best to always assume /etc is the \"good\" file as that\u0027s the upgrade path so blindly moving it to /var makes sense to me. We just don\u0027t want to break things in a downgrade path. But I can document that fact in the commit message and provide a warning log if there is a file in /var before copying the file from /etc.",
+      "parentUuid": "eeb6004b_037ff621",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 36
+      },
+      "revId": "e57dc0e171a0c9aeab7cf352e3b1f3f54c185cff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e498920f_b49a097c",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -37,6 +61,24 @@
       "writtenOn": "2025-06-10T15:05:22Z",
       "side": 1,
       "message": "Overall in support of this.",
+      "revId": "e57dc0e171a0c9aeab7cf352e3b1f3f54c185cff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b3eac6a_ef5fdd0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2025-06-10T20:38:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e498920f_b49a097c",
       "revId": "e57dc0e171a0c9aeab7cf352e3b1f3f54c185cff",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -64,6 +106,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a6d2511_0cddccec",
+        "filename": "inc/utils.hpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2025-06-10T20:38:03Z",
+      "side": 1,
+      "message": "No, this is meant to be a persistent file, so it goes where the rest of the BMC persistent data goes in /var/lib/\u003crepo name\u003e/",
+      "parentUuid": "73d05749_d20e44b8",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 2
+      },
+      "revId": "e57dc0e171a0c9aeab7cf352e3b1f3f54c185cff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3335280a_ba15b0e4",
@@ -77,6 +143,24 @@
       "writtenOn": "2025-06-10T20:27:39Z",
       "side": 1,
       "message": "if it\u0027s just for track systemd services, maybe it shouldn\u0027t be at /etc at all? And keeping /etc part is obsolete? It just puzzles users who using service which contains config at /etc and it isn\u0027t config but tracker.",
+      "revId": "e57dc0e171a0c9aeab7cf352e3b1f3f54c185cff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "acc1e1e3_64d73b5c",
+        "filename": "src/main.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2025-06-10T20:38:03Z",
+      "side": 1,
+      "message": "I\u0027m not sure I\u0027m fully understanding you here. I agree it shouldn\u0027t be in /etc as I tried to explain in my commit message. This commit moves the file to /var and stops using /etc. Please reopen this comment if I didn\u0027t explain it well enough.",
+      "parentUuid": "3335280a_ba15b0e4",
       "revId": "e57dc0e171a0c9aeab7cf352e3b1f3f54c185cff",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
