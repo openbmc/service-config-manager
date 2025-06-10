@@ -39,6 +39,46 @@
       "message": "Overall in support of this.",
       "revId": "e57dc0e171a0c9aeab7cf352e3b1f3f54c185cff",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73d05749_d20e44b8",
+        "filename": "inc/utils.hpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000182
+      },
+      "writtenOn": "2025-06-10T20:27:39Z",
+      "side": 1,
+      "message": "isn\u0027t it /var/run/service-config-manager or /var/tmp/service-config-manager directory?",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 2
+      },
+      "revId": "e57dc0e171a0c9aeab7cf352e3b1f3f54c185cff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3335280a_ba15b0e4",
+        "filename": "src/main.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000182
+      },
+      "writtenOn": "2025-06-10T20:27:39Z",
+      "side": 1,
+      "message": "if it\u0027s just for track systemd services, maybe it shouldn\u0027t be at /etc at all? And keeping /etc part is obsolete? It just puzzles users who using service which contains config at /etc and it isn\u0027t config but tracker.",
+      "revId": "e57dc0e171a0c9aeab7cf352e3b1f3f54c185cff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
