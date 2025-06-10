@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b7062a85_827b4ff3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2025-06-10T20:45:41Z",
+      "side": 1,
+      "message": "Ahh interesting perspective. For me, it\u0027s the opposite. We have the formal REST API for enabling/disabling services (which goes through the official d-bus API\u0027s into service-config-manager). To me that is the source of truth. If we have a product engineer (or developer in the lab) mucking around on a system using systemctl and other command line mechanisms to debug something, I want the system to go back to the source of truth after a BMC reboot.\n\nMy proposal here is a change in behavior though so I understand if the preference here is that I enable this new \"persistence\" feature via a meson build option.",
+      "parentUuid": "422d078b_21b96644",
+      "range": {
+        "startLine": 14,
+        "startChar": 41,
+        "endLine": 15,
+        "endChar": 9
+      },
+      "revId": "62c2a94ba3f080349d59a504fd079816feaed3be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "aa92aac6_5bada34d",
         "filename": "src/srvcfg_manager.cpp",
         "patchSetId": 4
@@ -37,6 +61,30 @@
       "writtenOn": "2025-06-10T15:04:54Z",
       "side": 1,
       "message": "(thinking out loud) I wonder if we should drop the cereal dependency here for nlohmann.  somewhat unrelated to your commit.",
+      "range": {
+        "startLine": 326,
+        "startChar": 12,
+        "endLine": 326,
+        "endChar": 22
+      },
+      "revId": "62c2a94ba3f080349d59a504fd079816feaed3be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04de010f_843652b7",
+        "filename": "src/srvcfg_manager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2025-06-10T20:45:41Z",
+      "side": 1,
+      "message": "Yeah, let me look into what it takes to just use nlohmann.",
+      "parentUuid": "aa92aac6_5bada34d",
       "range": {
         "startLine": 326,
         "startChar": 12,
