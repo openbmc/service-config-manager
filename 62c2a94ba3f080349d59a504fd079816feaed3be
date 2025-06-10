@@ -22,6 +22,29 @@
       },
       "revId": "62c2a94ba3f080349d59a504fd079816feaed3be",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa92aac6_5bada34d",
+        "filename": "src/srvcfg_manager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2025-06-10T15:04:54Z",
+      "side": 1,
+      "message": "(thinking out loud) I wonder if we should drop the cereal dependency here for nlohmann.  somewhat unrelated to your commit.",
+      "range": {
+        "startLine": 326,
+        "startChar": 12,
+        "endLine": 326,
+        "endChar": 22
+      },
+      "revId": "62c2a94ba3f080349d59a504fd079816feaed3be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
