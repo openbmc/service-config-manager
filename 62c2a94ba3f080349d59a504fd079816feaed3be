@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "422d078b_21b96644",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2025-06-10T15:03:39Z",
+      "side": 1,
+      "message": "These commands functionally just use symlinks on the systemd service files;  Could we track the state in a similar way so we\u0027re not inventing a different file format?\n\nI could see a case where someone disables a service, then reboots, expecting the service to be enabled, but srvcfg-mgr has persisted the opposite, so the service reenables.  That seems like worse unexpected behavior.",
+      "range": {
+        "startLine": 14,
+        "startChar": 41,
+        "endLine": 15,
+        "endChar": 9
+      },
+      "revId": "62c2a94ba3f080349d59a504fd079816feaed3be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
