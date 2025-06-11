@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dc9942ad_3a605725",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2025-06-11T00:30:29Z",
+      "side": 1,
+      "message": "The way I always thought of this service was that this was just adding \"easy buttons\" to dbus but systemd was always the source of truth for whether a service was enabled/disabled.  The REST API should directly reflect the same thing as systemd status, although indirectly through this service so it can track some amount of intent (is this service disabled, or is this service crashed).",
+      "parentUuid": "b7062a85_827b4ff3",
+      "range": {
+        "startLine": 14,
+        "startChar": 41,
+        "endLine": 15,
+        "endChar": 9
+      },
+      "revId": "62c2a94ba3f080349d59a504fd079816feaed3be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "aa92aac6_5bada34d",
         "filename": "src/srvcfg_manager.cpp",
         "patchSetId": 4
