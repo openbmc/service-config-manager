@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bbced67f_fbb4338e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2025-06-11T18:13:38Z",
+      "side": 1,
+      "message": "I see. So if I\u0027m reading the code correctly, it doesn\u0027t currently handle people doing live systemctl changes to services via the command line. There would be a mismatch between what\u0027s on dbus from service-config-manager and what systemd has. If you reboot the BMC or restart the service it would pick up the new changes. \n\nMaybe a happy compromise is that I add support to monitor for systemd changes to the service and ensure d-bus is up to date? Then we can be confident what is written to the persistent setting is what systemd has?\n\nMy main goal with these commits is to support a redundant BMC design where we can replicate the service settings to a passive BMC and have it ensure that the correct services are enabled/disabled based on what the primary BMC had set.",
+      "parentUuid": "2eb6e2b5_1981ec2f",
+      "range": {
+        "startLine": 14,
+        "startChar": 41,
+        "endLine": 15,
+        "endChar": 9
+      },
+      "revId": "62c2a94ba3f080349d59a504fd079816feaed3be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "aa92aac6_5bada34d",
         "filename": "src/srvcfg_manager.cpp",
         "patchSetId": 4
