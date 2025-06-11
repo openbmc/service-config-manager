@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2eb6e2b5_1981ec2f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2025-06-11T00:32:23Z",
+      "side": 1,
+      "message": "if it worked that way, and someone disabled a service, it could be reenabled through the REST API in the same way, right?",
+      "parentUuid": "dc9942ad_3a605725",
+      "range": {
+        "startLine": 14,
+        "startChar": 41,
+        "endLine": 15,
+        "endChar": 9
+      },
+      "revId": "62c2a94ba3f080349d59a504fd079816feaed3be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "aa92aac6_5bada34d",
         "filename": "src/srvcfg_manager.cpp",
         "patchSetId": 4
