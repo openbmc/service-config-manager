@@ -5,12 +5,12 @@ described by the [service management D-Bus interfaces][].
 
 The configuration settings are intended to persist across BMC reboots.
 
-An example use case for this service is BMCWeb's implementation of the Redfish
-NetworkProtocol schema.
+An example use case for this service is [BMCWeb's
+implementation][bmcweb-implementation] of the Redfish NetworkProtocol schema.
 
 [service management d-bus interfaces]:
   https://github.com/openbmc/phosphor-dbus-interfaces/tree/master/yaml/xyz/openbmc_project/Control/Service
-[bmcweb's implementation of the redfish networkprotocol schema]:
+[bmcweb-implementation]:
   https://github.com/openbmc/bmcweb/blob/master/redfish-core/lib/network_protocol.hpp
 
 ## Design
