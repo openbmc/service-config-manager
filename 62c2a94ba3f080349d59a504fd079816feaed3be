@@ -122,6 +122,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6e72bd55_9e1c4198",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2025-07-29T19:23:25Z",
+      "side": 1,
+      "message": "Went back and forth on this for a bit and in the end I think it\u0027s best to just make this new \"persist\" feature something that\u0027s configurable. Enabled by default here in meson for CI purposes but disabled by default in the bitbake recipe so we just keep the existing design as the default.",
+      "parentUuid": "bbced67f_fbb4338e",
+      "range": {
+        "startLine": 14,
+        "startChar": 41,
+        "endLine": 15,
+        "endChar": 9
+      },
+      "revId": "62c2a94ba3f080349d59a504fd079816feaed3be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "aa92aac6_5bada34d",
         "filename": "src/srvcfg_manager.cpp",
         "patchSetId": 4
@@ -157,6 +181,30 @@
       "side": 1,
       "message": "Yeah, let me look into what it takes to just use nlohmann.",
       "parentUuid": "aa92aac6_5bada34d",
+      "range": {
+        "startLine": 326,
+        "startChar": 12,
+        "endLine": 326,
+        "endChar": 22
+      },
+      "revId": "62c2a94ba3f080349d59a504fd079816feaed3be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10929e96_a614afec",
+        "filename": "src/srvcfg_manager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2025-07-29T19:23:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04de010f_843652b7",
       "range": {
         "startLine": 326,
         "startChar": 12,
