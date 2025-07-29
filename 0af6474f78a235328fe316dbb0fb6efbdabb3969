@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b5f21f6_b999c2af",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2025-07-29T19:32:41Z",
+      "side": 1,
+      "message": "If no persistent file is found for a monitored service then the default will be whatever systemd says it is.",
+      "parentUuid": "ad576fb4_fa8b0172",
+      "revId": "0af6474f78a235328fe316dbb0fb6efbdabb3969",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "08f4998e_02e0ee23",
