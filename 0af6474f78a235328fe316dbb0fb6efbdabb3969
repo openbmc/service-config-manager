@@ -33,6 +33,75 @@
       "message": "wait you are loading the state after registering the interface for response?",
       "revId": "0af6474f78a235328fe316dbb0fb6efbdabb3969",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f33d1c23_0c55112e",
+        "filename": "src/srvcfg_manager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2025-07-29T19:23:25Z",
+      "side": 1,
+      "message": "Sort of? Within this function we query systemd for the actual state of the services and sockets. We put that on d-bus, and then immediately after we query what the values should be based on the persistent settings. We then correct systemd if they mismatch. If a correction is needed then this service will reject any dbus requests until that has completed.",
+      "parentUuid": "08f4998e_02e0ee23",
+      "revId": "0af6474f78a235328fe316dbb0fb6efbdabb3969",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c963465_68f14b4b",
+        "filename": "src/srvcfg_manager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2025-07-29T19:23:25Z",
+      "side": 1,
+      "message": "Wrap this around the compile flag",
+      "revId": "0af6474f78a235328fe316dbb0fb6efbdabb3969",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d836db96_4f0c8908",
+        "filename": "src/srvcfg_manager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2025-07-29T19:23:25Z",
+      "side": 1,
+      "message": "Check for errors on file load and parsing.",
+      "revId": "0af6474f78a235328fe316dbb0fb6efbdabb3969",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1a562cb_a6ab9e63",
+        "filename": "src/srvcfg_manager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2025-07-29T19:23:25Z",
+      "side": 1,
+      "message": "Per previous review comment, utilize nlohmann instead of cereal",
+      "revId": "0af6474f78a235328fe316dbb0fb6efbdabb3969",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
