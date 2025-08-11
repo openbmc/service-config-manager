@@ -205,6 +205,24 @@
       "parentUuid": "acc1e1e3_64d73b5c",
       "revId": "e57dc0e171a0c9aeab7cf352e3b1f3f54c185cff",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1232551b_2e13a23a",
+        "filename": "src/main.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2025-08-11T15:33:58Z",
+      "side": 1,
+      "message": "Yeah I understand that as a good practice in openbmc that we don\u0027t break existing users, so by moving the existing file we make this change transparent to users going forward.",
+      "parentUuid": "786c7390_129997aa",
+      "revId": "e57dc0e171a0c9aeab7cf352e3b1f3f54c185cff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
