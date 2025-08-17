@@ -16,6 +16,24 @@
       "message": "I guess we\u0027re ok requiring unneeded dependencies in the case the persist-settings-to-file option is not enabled (instead of adding a \"deps +\u003d nlohmann_json\"), since also the #ifdef around the includes in file src/srvcfg_manager.cpp were also removed.",
       "revId": "0e6976b5c5dac9f69012afffe028c0ead242319c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b5f90cc_2b92802f",
+        "filename": "meson.build",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2025-08-17T06:25:34Z",
+      "side": 1,
+      "message": "Hmm, that\u0027s a good point. nlohmann is pretty small but we shouldn\u0027t include it if we don\u0027t have the feature enabled. I think with the cereal includes I was just simplifying since we always use it for the main file, but still best to keep that wrapped as well with the compile option.",
+      "parentUuid": "e5b0842d_39d68e46",
+      "revId": "0e6976b5c5dac9f69012afffe028c0ead242319c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
