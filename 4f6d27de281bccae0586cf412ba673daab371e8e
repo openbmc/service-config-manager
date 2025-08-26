@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7d211a2_07459741",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2025-08-26T16:59:03Z",
+      "side": 1,
+      "message": "I don\u0027t really want to block this, but I don\u0027t see any provisions for change in upgrade in these config files.  Should we include at least some form of version.  I\u0027m ok if it\u0027s in a short follow on patch.\n\nI\u0027ll reiterate that I\u0027d really like to see this file be written as systemd units, so systemd is aware of the changes, we don\u0027t get mismatches, and things like systemctl disable still function.  I think I\u0027m in the minority here, so that\u0027s fine.",
+      "revId": "4f6d27de281bccae0586cf412ba673daab371e8e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
