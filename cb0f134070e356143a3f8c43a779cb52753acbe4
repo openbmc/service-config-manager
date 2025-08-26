@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57d04f2c_fe10673e",
+        "filename": "src/srvcfg_manager.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1000153
+      },
+      "writtenOn": "2025-08-26T22:29:32Z",
+      "side": 1,
+      "message": "I messed this up before with the bmcweb one.  You really want this version as part of the filename, so if say, you wanted to change this to parse yaml instead of json, you could prior to actually parsing.\n\nAlso, while you\u0027re parsing you can know what version happens.",
+      "range": {
+        "startLine": 331,
+        "startChar": 0,
+        "endLine": 331,
+        "endChar": 65
+      },
+      "revId": "cb0f134070e356143a3f8c43a779cb52753acbe4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
