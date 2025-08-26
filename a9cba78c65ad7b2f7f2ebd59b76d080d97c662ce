@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76ea1efc_4cad4aa5",
+        "filename": "src/srvcfg_manager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2025-08-26T21:12:00Z",
+      "side": 1,
+      "message": "Version was added in previous commit so check it and fail if not recognized.",
+      "revId": "a9cba78c65ad7b2f7f2ebd59b76d080d97c662ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
