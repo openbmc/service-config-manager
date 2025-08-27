@@ -22,6 +22,30 @@
       },
       "revId": "cb0f134070e356143a3f8c43a779cb52753acbe4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7b262c5_5025c5e5",
+        "filename": "src/srvcfg_manager.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2025-08-27T12:48:16Z",
+      "side": 1,
+      "message": "Hmm, is that something in a best practices guide? I haven\u0027t seen it before. I get the point but it feels like a bit much here. This is a very simple json file and I don\u0027t see why we\u0027d ever go away from json. Also, adding the version to the file adds some complexity when it comes to cleaning up older versions of the file. My preference is to just leave it as it is here but I\u0027ll give some other people time to weigh in.",
+      "parentUuid": "57d04f2c_fe10673e",
+      "range": {
+        "startLine": 331,
+        "startChar": 0,
+        "endLine": 331,
+        "endChar": 65
+      },
+      "revId": "cb0f134070e356143a3f8c43a779cb52753acbe4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
