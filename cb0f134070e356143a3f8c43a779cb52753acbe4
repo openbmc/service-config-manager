@@ -1,0 +1,9 @@
+Verified+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Code-Review+1: Adriana Kobylak <anoo@us.ibm.com>
+Code-Review+2: Andrew Geissler <geissonator@yahoo.com>
+Submitted-by: Andrew Geissler <geissonator@yahoo.com>
+Submitted-at: Wed, 03 Sep 2025 13:40:06 +0000
+Reviewed-on: https://gerrit.openbmc.org/c/openbmc/service-config-manager/+/79882
+Comments-Total: 17
+Project: openbmc/service-config-manager
+Branch: refs/heads/master
