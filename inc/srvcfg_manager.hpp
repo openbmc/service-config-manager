@@ -111,7 +111,7 @@ class ServiceConfig
 
     bool isMaskedOut();
     void registerProperties();
-    void queryAndUpdateProperties();
+    void queryAndUpdateProperties(bool isStartup);
     void createSocketOverrideConf();
     void updateServiceProperties(
         const boost::container::flat_map<std::string, VariantType>&

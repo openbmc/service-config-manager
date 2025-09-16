@@ -229,7 +229,7 @@ void ServiceConfig::updateServiceProperties(
 #endif
 }
 
-void ServiceConfig::queryAndUpdateProperties()
+void ServiceConfig::queryAndUpdateProperties(bool isStartup = false)
 {
     std::string objectPath =
         isSocketActivatedService ? socketObjectPath : serviceObjectPath;
@@ -239,9 +239,10 @@ void ServiceConfig::queryAndUpdateProperties()
     }
 
     conn->async_method_call(
-        [this](boost::system::error_code ec,
-               const boost::container::flat_map<std::string, VariantType>&
-                   propertyMap) {
+        [this,
+         isStartup](boost::system::error_code ec,
+                    const boost::container::flat_map<std::string, VariantType>&
+                        propertyMap) {
             if (ec)
             {
                 lg2::error(
@@ -288,7 +289,19 @@ void ServiceConfig::queryAndUpdateProperties()
                 {
                     registerProperties();
                 }
-                loadStateFile();
+                if (isStartup)
+                {
+                    // On startup, load our persistent settings and compare to
+                    // what was read from systemd. If they are different, use
+                    // the persistent settings
+                    loadStateFile();
+                }
+                else
+                {
+                    // This is just an update once we're already running so
+                    // write the values out to our persistent settings
+                    writeStateFile();
+                }
             }
             catch (const std::exception& e)
             {
@@ -327,6 +340,8 @@ void ServiceConfig::createSocketOverrideConf()
 void ServiceConfig::writeStateFile()
 {
 #ifdef PERSIST_SETTINGS
+    lg2::debug("Writing Persistent State File Information to {STATE_FILE}",
+               "STATE_FILE", stateFile);
     nlohmann::json stateMap;
     stateMap[persistDataFileVersionStr] = persistDataFileVersion;
     stateMap[srvCfgPropMasked] = unitMaskedState;
@@ -342,6 +357,8 @@ void ServiceConfig::writeStateFile()
 void ServiceConfig::loadStateFile()
 {
 #ifdef PERSIST_SETTINGS
+    lg2::debug("Loading Persistent State File Information from {STATE_FILE}",
+               "STATE_FILE", stateFile);
     if (std::filesystem::exists(stateFile))
     {
         std::ifstream file(stateFile);
@@ -433,7 +450,7 @@ ServiceConfig::ServiceConfig(
     instantiatedUnitName = baseUnitName + addInstanceName(instanceName, "@");
     updatedFlag = 0;
     stateFile = srvDataBaseDir + instantiatedUnitName;
-    queryAndUpdateProperties();
+    queryAndUpdateProperties(true);
     return;
 }
 
@@ -584,7 +601,8 @@ void ServiceConfig::restartUnitConfig(boost::asio::yield_context yield)
     // Reset the flag
     updatedFlag = 0;
 
-    lg2::info("Applied new settings: {OBJPATH}", "OBJPATH", objPath);
+    lg2::info("Applied new settings: {OBJPATH} {UNIT_RUNNING_STATE}", "OBJPATH",
+              objPath, "UNIT_RUNNING_STATE", unitRunningState);
 
     queryAndUpdateProperties();
     return;
@@ -605,8 +623,6 @@ void ServiceConfig::startServiceRestartTimer()
             return;
         }
         updateInProgress = true;
-        // Ensure our persistent files are updated with changes
-        writeStateFile();
         boost::asio::spawn(
             conn->get_io_context(),
             [this](boost::asio::yield_context yield) {
