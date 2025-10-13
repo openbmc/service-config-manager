@@ -187,7 +187,10 @@ static inline void handleListUnitsResponse(
         lg2::info("Moving {OLDFILEPATH} to new location, {FILEPATH}",
                   "OLDFILEPATH", srvCfgMgrFileOld, "FILEPATH",
                   srvCfgMgrFilePath);
-        std::filesystem::rename(srvCfgMgrFileOld, srvCfgMgrFilePath);
+        // Note that the rename() function can run into issues when /etc
+        // is an overlay on /var so use copy/remove instead
+        std::filesystem::copy(srvCfgMgrFileOld, srvCfgMgrFilePath);
+        std::filesystem::remove(srvCfgMgrFileOld);
     }
 
     bool jsonExist = std::filesystem::exists(srvCfgMgrFilePath);
