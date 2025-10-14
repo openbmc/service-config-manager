@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c195e722_02841228",
+        "filename": "src/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2025-10-14T14:53:36Z",
+      "side": 1,
+      "message": "any value in using the non-throwing version of these, that take an error_code?",
+      "revId": "b35f7fcb7aded18b78f1429c3c6f95594d146d5c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
