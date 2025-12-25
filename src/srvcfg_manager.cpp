@@ -43,8 +43,6 @@ namespace service
 static constexpr const char* overrideConfFileName = "override.conf";
 static constexpr const size_t restartTimeout = 15; // seconds
 
-static constexpr const char* systemd1UnitBasePath =
-    "/org/freedesktop/systemd1/unit/";
 static constexpr const char* systemdOverrideUnitBasePath =
     "/etc/systemd/system/";
 
