@@ -21,6 +21,7 @@
 #include <cereal/types/unordered_map.hpp>
 #include <sdbusplus/bus/match.hpp>
 
+#include <csignal>
 #include <filesystem>
 #include <fstream>
 #include <unordered_map>
@@ -356,6 +357,60 @@ int main()
     conn->request_name(phosphor::service::serviceConfigSrvName);
     auto server = sdbusplus::asio::object_server(conn, true);
     server.add_manager(phosphor::service::srcCfgMgrBasePath);
+
+    // SIGHUP signal handler to reload service configuration from persistent
+    // storage. In redundant BMC systems, this enables automatic configuration
+    // updates when data is synchronized from a peer BMC.
+    boost::asio::signal_set signals(io, SIGHUP);
+    std::function<void(const boost::system::error_code&, int)> sighupHandler;
+    sighupHandler = [&signals, &sighupHandler](
+                        const boost::system::error_code& ec, int signalNumber) {
+        // Re-arm the handler so we never miss a subsequent SIGHUP.
+        // Additional signals received during handler execution are
+        // queued by the event loop and processed sequentially
+        signals.async_wait(sighupHandler);
+
+        if (ec)
+        {
+            lg2::error("Failed to receive SIGHUP signal, Error: {EC}", "EC",
+                       ec.value());
+            return;
+        }
+        lg2::info("Received SIGHUP signal {SIGNAL}", "SIGNAL", signalNumber);
+
+#ifdef PERSIST_SETTINGS
+        lg2::info("Reloading service configuration from persisted storage");
+
+        for (auto& [objPath, srvObj] : srvMgrObjects)
+        {
+            if (!srvObj)
+            {
+                // Invalid or unable to access the object
+                continue;
+            }
+            try
+            {
+                srvObj->reloadServiceConfigUnit();
+                lg2::debug(
+                    "Successfully reloaded service configuration for {OBJPATH}",
+                    "OBJPATH", objPath);
+            }
+            catch (const std::exception& e)
+            {
+                lg2::error(
+                    "Failed to reload configuration for {OBJPATH}: {ERROR}",
+                    "OBJPATH", objPath, "ERROR", e);
+            }
+        }
+
+        lg2::info("service configuration reloaded successfully.");
+#else
+        lg2::info(
+            "Ignoring reload for SIGHUP signal, persistent settings disabled.");
+#endif
+    };
+    signals.async_wait(sighupHandler);
+
     // Initialize the objects after systemd indicated startup finished.
     auto userUpdatedSignal = std::make_unique<sdbusplus::bus::match_t>(
         static_cast<sdbusplus::bus_t&>(*conn),

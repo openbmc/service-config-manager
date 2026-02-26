@@ -227,7 +227,7 @@ void ServiceConfig::updateServiceProperties(
 #endif
 }
 
-void ServiceConfig::queryAndUpdateProperties(bool isStartup = false)
+void ServiceConfig::queryAndUpdateProperties(bool isRestore = false)
 {
     std::string objectPath =
         isSocketActivatedService ? socketObjectPath : serviceObjectPath;
@@ -238,7 +238,7 @@ void ServiceConfig::queryAndUpdateProperties(bool isStartup = false)
 
     conn->async_method_call(
         [this,
-         isStartup](boost::system::error_code ec,
+         isRestore](boost::system::error_code ec,
                     const boost::container::flat_map<std::string, VariantType>&
                         propertyMap) {
             if (ec)
@@ -287,9 +287,10 @@ void ServiceConfig::queryAndUpdateProperties(bool isStartup = false)
                 {
                     registerProperties();
                 }
-                if (isStartup)
+                if (isRestore)
                 {
-                    // On startup, load our persistent settings and compare to
+                    // On startup or when notified of a persistent data change,
+                    // load our persistent settings and compare to
                     // what was read from systemd. If they are different, use
                     // the persistent settings
                     loadStateFile();
@@ -432,6 +433,11 @@ void ServiceConfig::loadStateFile()
         writeStateFile();
     }
 #endif
+}
+
+void ServiceConfig::reloadServiceConfigUnit()
+{
+    queryAndUpdateProperties(true);
 }
 
 ServiceConfig::ServiceConfig(
