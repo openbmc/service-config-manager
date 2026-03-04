@@ -1,0 +1,129 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18f4370c_d60d68fb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2026-03-04T20:59:29Z",
+      "side": 1,
+      "message": "I\u0027d like a bit more of a \"why\" in the commit message. My understanding is we are doing this to support a redundant BMC environment in a situation where the active BMC is synching over data changes and we want the passive BMC to reload this data.",
+      "revId": "6e78ffc58c11d49fa6554de115273ad90a41dcf8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93891e79_4e03266c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2026-03-04T20:59:29Z",
+      "side": 1,
+      "message": "I\u0027d like to see a few more tests.\n- Change a value in a persistent file, do the reload, and confirm the changed value from the file shows up on dbus and the service was correctly enabled/disabled\n- Send multiple reloads quickly and ensure they are queued as expected",
+      "revId": "6e78ffc58c11d49fa6554de115273ad90a41dcf8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6c2979a_86c608aa",
+        "filename": "src/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2026-03-04T20:59:29Z",
+      "side": 1,
+      "message": "This is all un-needed code if someone has not enabled the meson option, persist-settings-to-file, but it\u0027s also basically a noop if someone doesn\u0027t have the feature enabled. We\u0027ll see if anyone else weighs in on whether the signal handling should be wrapped behind that meson option.",
+      "revId": "6e78ffc58c11d49fa6554de115273ad90a41dcf8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef87e9f2_3961b734",
+        "filename": "src/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2026-03-04T20:59:29Z",
+      "side": 1,
+      "message": "nit: \"reload\" feels a bit vague. Maybe something more like \"SIGHUP signal handler for persistent data changes\"",
+      "revId": "6e78ffc58c11d49fa6554de115273ad90a41dcf8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccf0de7a_5ae7c3e9",
+        "filename": "src/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2026-03-04T20:59:29Z",
+      "side": 1,
+      "message": "I think it\u0027s worth a comment to mention the fact that we\u0027re relying on the dbus event loop to queue and serialize additional signals here. Seeing a re-arm at the start of a signal handler is a bit unusual for me but I understand why from the commit message.",
+      "revId": "6e78ffc58c11d49fa6554de115273ad90a41dcf8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf3a3771_74f8aa84",
+        "filename": "src/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2026-03-04T20:59:29Z",
+      "side": 1,
+      "message": "I\u0027m not sure if there\u0027s a situation where we could get this signal and \nthe srvMgrObjects may not all be available/valid but I think it\u0027s worth a \ncheck to ensure we\u0027ve got a valid object before accessing it.",
+      "revId": "6e78ffc58c11d49fa6554de115273ad90a41dcf8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50d26601_76cd92cc",
+        "filename": "src/srvcfg_manager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2026-03-04T20:59:29Z",
+      "side": 1,
+      "message": "\"On startup or when notified of a persistent data change\"",
+      "range": {
+        "startLine": 292,
+        "startChar": 23,
+        "endLine": 292,
+        "endChar": 33
+      },
+      "revId": "6e78ffc58c11d49fa6554de115273ad90a41dcf8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
