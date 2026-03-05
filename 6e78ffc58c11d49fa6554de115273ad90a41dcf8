@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1de9d75f_00af81bb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002351
+      },
+      "writtenOn": "2026-03-05T17:19:48Z",
+      "side": 1,
+      "message": "Updated the commit message.",
+      "parentUuid": "18f4370c_d60d68fb",
+      "revId": "6e78ffc58c11d49fa6554de115273ad90a41dcf8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "93891e79_4e03266c",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-03-04T20:59:29Z",
       "side": 1,
       "message": "I\u0027d like to see a few more tests.\n- Change a value in a persistent file, do the reload, and confirm the changed value from the file shows up on dbus and the service was correctly enabled/disabled\n- Send multiple reloads quickly and ensure they are queued as expected",
+      "revId": "6e78ffc58c11d49fa6554de115273ad90a41dcf8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbfb58f8_087522f5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002351
+      },
+      "writtenOn": "2026-03-05T17:19:48Z",
+      "side": 1,
+      "message": "I had tested these scenarios. Updating the commit message with the logs.",
+      "parentUuid": "93891e79_4e03266c",
       "revId": "6e78ffc58c11d49fa6554de115273ad90a41dcf8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "304b72c4_36637429",
+        "filename": "src/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1002351
+      },
+      "writtenOn": "2026-03-05T17:19:48Z",
+      "side": 1,
+      "message": "Yes, I agree.\nThe `async_wait` where the signal is processed is wrapped in the meson option `persist-settings-to-file`. \nBut if the handling of signal is also wrapped, then when a reload is fired for `service-config-manager`, due to the changes made in service file to send a `SIGHUP` signal, it will execute it\u0027s default behavior - to terminate the service. The maximum tries to restart on termination is 3, after that the the service will be deactivated.",
+      "parentUuid": "c6c2979a_86c608aa",
+      "revId": "6e78ffc58c11d49fa6554de115273ad90a41dcf8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ef87e9f2_3961b734",
         "filename": "src/main.cpp",
         "patchSetId": 1
@@ -65,6 +119,24 @@
       "writtenOn": "2026-03-04T20:59:29Z",
       "side": 1,
       "message": "nit: \"reload\" feels a bit vague. Maybe something more like \"SIGHUP signal handler for persistent data changes\"",
+      "revId": "6e78ffc58c11d49fa6554de115273ad90a41dcf8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20c970ab_32aebfef",
+        "filename": "src/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1002351
+      },
+      "writtenOn": "2026-03-05T17:19:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef87e9f2_3961b734",
       "revId": "6e78ffc58c11d49fa6554de115273ad90a41dcf8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -82,6 +154,24 @@
       "writtenOn": "2026-03-04T20:59:29Z",
       "side": 1,
       "message": "I think it\u0027s worth a comment to mention the fact that we\u0027re relying on the dbus event loop to queue and serialize additional signals here. Seeing a re-arm at the start of a signal handler is a bit unusual for me but I understand why from the commit message.",
+      "revId": "6e78ffc58c11d49fa6554de115273ad90a41dcf8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00c5b9b9_ce4defdb",
+        "filename": "src/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1002351
+      },
+      "writtenOn": "2026-03-05T17:19:48Z",
+      "side": 1,
+      "message": "Yes, I have added a comment addressing this.",
+      "parentUuid": "ccf0de7a_5ae7c3e9",
       "revId": "6e78ffc58c11d49fa6554de115273ad90a41dcf8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -105,6 +195,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e53f8302_ee34c46d",
+        "filename": "src/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1002351
+      },
+      "writtenOn": "2026-03-05T17:19:48Z",
+      "side": 1,
+      "message": "I have included a check to continue the loop if the `srvObj` is valid.",
+      "parentUuid": "bf3a3771_74f8aa84",
+      "revId": "6e78ffc58c11d49fa6554de115273ad90a41dcf8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "50d26601_76cd92cc",
         "filename": "src/srvcfg_manager.cpp",
         "patchSetId": 1
@@ -116,6 +224,30 @@
       "writtenOn": "2026-03-04T20:59:29Z",
       "side": 1,
       "message": "\"On startup or when notified of a persistent data change\"",
+      "range": {
+        "startLine": 292,
+        "startChar": 23,
+        "endLine": 292,
+        "endChar": 33
+      },
+      "revId": "6e78ffc58c11d49fa6554de115273ad90a41dcf8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abedd8aa_f1d4bc57",
+        "filename": "src/srvcfg_manager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1002351
+      },
+      "writtenOn": "2026-03-05T17:19:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50d26601_76cd92cc",
       "range": {
         "startLine": 292,
         "startChar": 23,
