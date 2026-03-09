@@ -16,6 +16,24 @@
       "message": "with this mentioned issue[https://gerrit.openbmc.org/c/openbmc/service-config-manager/+/87981/comment/c6c2979a_86c608aa/], the handler should not be wrapped in this macro, correct?\n\nIf we want to avoid triggering the deserialization logic in case of disabled persist-settings, may be we can do like below:\n\n\n```\nsignals.async_wait(sighupHandler);\n#ifdef PERSIST_SETTINGS\nreloadAllServiceConfigs(); // Call this from sighupHandler() and wrap the core logic here\n#endif\n```",
       "revId": "3ca6924dcfbaade5851a381ddb8f080a0bb4db85",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a04a079a_24c1ce00",
+        "filename": "src/main.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1002351
+      },
+      "writtenOn": "2026-03-09T10:26:05Z",
+      "side": 1,
+      "message": "Yes, agreeing since the `fd` will be written but never handled else. \nUpdated.",
+      "parentUuid": "95695ee8_a6b2ffbb",
+      "revId": "3ca6924dcfbaade5851a381ddb8f080a0bb4db85",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
