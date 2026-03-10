@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f2c231a_4fbf69d4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2026-03-10T19:33:53Z",
+      "side": 1,
+      "message": "nit: Still not clear to me in this message the overall design/purpose. I\u0027d like it mentioned that an Active BMC is syncing over the persistent data files to the passive BMC, and we are then utilizing this new function to tell the service config manager on the passive BMC to reload the changed data and apply it to the passive BMC. In this way we ensure the passive BMC is enabling/disabling the same services as the Active BMC.",
+      "revId": "b23cd2eff27753fb0e4dd1d8a9259a501a0f4691",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2afc2af_d490d85e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2026-03-10T19:33:53Z",
+      "side": 1,
+      "message": "Why did the bmcweb server start back up here? Oh, probably socket activation? Could you also set Masked to true do it doesn\u0027t start back up automatically?",
+      "revId": "b23cd2eff27753fb0e4dd1d8a9259a501a0f4691",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2836e30d_04e80316",
+        "filename": "src/srvcfg_manager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2026-03-10T19:33:53Z",
+      "side": 1,
+      "message": "I\u0027m not sure why the \"Unit\" was added here? As we\u0027re dealing with systemd a lot in this code, a unit means something (a basic systemd service/target/socket). This function is really enabling/disabling/masking systemd units. So I think the more generic \"reloadServiceConfig()\" made more sense. If you want more, something like \"reloadServicecConfigData()\"? But I\u0027d prefer we not put Unit on it.",
+      "range": {
+        "startLine": 438,
+        "startChar": 20,
+        "endLine": 438,
+        "endChar": 43
+      },
+      "revId": "b23cd2eff27753fb0e4dd1d8a9259a501a0f4691",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

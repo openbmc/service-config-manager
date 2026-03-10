@@ -124,6 +124,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9853d219_97020e36",
+        "filename": "src/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2026-03-10T19:33:53Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "48a9d38a_0df9c014",
+      "revId": "6e78ffc58c11d49fa6554de115273ad90a41dcf8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef87e9f2_3961b734",
@@ -225,6 +243,24 @@
       "side": 1,
       "message": "I have included a check to continue the loop if the `srvObj` is valid.",
       "parentUuid": "bf3a3771_74f8aa84",
+      "revId": "6e78ffc58c11d49fa6554de115273ad90a41dcf8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0f316f4_d40833fd",
+        "filename": "src/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2026-03-10T19:33:53Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e53f8302_ee34c46d",
       "revId": "6e78ffc58c11d49fa6554de115273ad90a41dcf8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
