@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "637573fc_0c7eec72",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002351
+      },
+      "writtenOn": "2026-03-11T08:19:18Z",
+      "side": 1,
+      "message": "Okay, I have updated the commit message to include more details as mentioned.",
+      "parentUuid": "0f2c231a_4fbf69d4",
+      "revId": "b23cd2eff27753fb0e4dd1d8a9259a501a0f4691",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d2afc2af_d490d85e",
         "filename": "/COMMIT_MSG",
         "patchSetId": 3
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e308ffd6_de099fe9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1002351
+      },
+      "writtenOn": "2026-03-11T08:19:18Z",
+      "side": 1,
+      "message": "Added a new test case scenario with Masked set to true, Enabling bmc service.\nIn case of the tested scenario, is this the expected behavior ?",
+      "parentUuid": "d2afc2af_d490d85e",
+      "revId": "b23cd2eff27753fb0e4dd1d8a9259a501a0f4691",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2836e30d_04e80316",
         "filename": "src/srvcfg_manager.cpp",
         "patchSetId": 3
@@ -48,6 +84,30 @@
       "writtenOn": "2026-03-10T19:33:53Z",
       "side": 1,
       "message": "I\u0027m not sure why the \"Unit\" was added here? As we\u0027re dealing with systemd a lot in this code, a unit means something (a basic systemd service/target/socket). This function is really enabling/disabling/masking systemd units. So I think the more generic \"reloadServiceConfig()\" made more sense. If you want more, something like \"reloadServicecConfigData()\"? But I\u0027d prefer we not put Unit on it.",
+      "range": {
+        "startLine": 438,
+        "startChar": 20,
+        "endLine": 438,
+        "endChar": 43
+      },
+      "revId": "b23cd2eff27753fb0e4dd1d8a9259a501a0f4691",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e41bb2b6_f0857ce9",
+        "filename": "src/srvcfg_manager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1002351
+      },
+      "writtenOn": "2026-03-11T08:19:18Z",
+      "side": 1,
+      "message": "Yes, I got that it can be misleading naming. Updated the function name.",
+      "parentUuid": "2836e30d_04e80316",
       "range": {
         "startLine": 438,
         "startChar": 20,
