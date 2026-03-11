@@ -36,6 +36,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0eae6fb6_4c17b275",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2026-03-11T20:02:30Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "637573fc_0c7eec72",
+      "revId": "b23cd2eff27753fb0e4dd1d8a9259a501a0f4691",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d2afc2af_d490d85e",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Added a new test case scenario with Masked set to true, Enabling bmc service.\nIn case of the tested scenario, is this the expected behavior ?",
       "parentUuid": "d2afc2af_d490d85e",
+      "revId": "b23cd2eff27753fb0e4dd1d8a9259a501a0f4691",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34ffba70_94e8d548",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2026-03-11T20:02:30Z",
+      "side": 1,
+      "message": "Hmm, I wanted the masked added to this test (i.e. Enabled:false and Masked:true) so that we don\u0027t see bmcweb start back up in the test data. I just find it confusing that we\u0027re saying we want to disable bmcweb but then the journal shows it starting back up. I think it\u0027s due to its socket activation so masking it will prevent it from starting back up and then the journal from the test would make sense. If it\u0027s not the socket activation then your test shows we have a bug because bmcweb should not be starting back up.",
+      "parentUuid": "e308ffd6_de099fe9",
       "revId": "b23cd2eff27753fb0e4dd1d8a9259a501a0f4691",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -108,6 +144,30 @@
       "side": 1,
       "message": "Yes, I got that it can be misleading naming. Updated the function name.",
       "parentUuid": "2836e30d_04e80316",
+      "range": {
+        "startLine": 438,
+        "startChar": 20,
+        "endLine": 438,
+        "endChar": 43
+      },
+      "revId": "b23cd2eff27753fb0e4dd1d8a9259a501a0f4691",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8356091f_990e5963",
+        "filename": "src/srvcfg_manager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2026-03-11T20:02:30Z",
+      "side": 1,
+      "message": "Doesn\u0027t look like name was changed?",
+      "parentUuid": "e41bb2b6_f0857ce9",
       "range": {
         "startLine": 438,
         "startChar": 20,
