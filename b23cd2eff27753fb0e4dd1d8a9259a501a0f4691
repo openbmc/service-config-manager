@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "36004ad7_5b1cabf0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1002351
+      },
+      "writtenOn": "2026-03-12T09:55:26Z",
+      "side": 1,
+      "message": "From the complete traces, I believe it is due to socket activation as you mentioned. In the journal traces of disabling service when masked is set to true, the DBus property is updated, but service is not restarted. Updated the test scenario.",
+      "parentUuid": "34ffba70_94e8d548",
+      "revId": "b23cd2eff27753fb0e4dd1d8a9259a501a0f4691",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2836e30d_04e80316",
         "filename": "src/srvcfg_manager.cpp",
         "patchSetId": 3
@@ -168,6 +186,30 @@
       "side": 1,
       "message": "Doesn\u0027t look like name was changed?",
       "parentUuid": "e41bb2b6_f0857ce9",
+      "range": {
+        "startLine": 438,
+        "startChar": 20,
+        "endLine": 438,
+        "endChar": 43
+      },
+      "revId": "b23cd2eff27753fb0e4dd1d8a9259a501a0f4691",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a80068a_224d9de5",
+        "filename": "src/srvcfg_manager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1002351
+      },
+      "writtenOn": "2026-03-12T09:55:26Z",
+      "side": 1,
+      "message": "Changed in the latest patch.",
+      "parentUuid": "8356091f_990e5963",
       "range": {
         "startLine": 438,
         "startChar": 20,
