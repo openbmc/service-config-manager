@@ -50,8 +50,8 @@ static constexpr const char* srvDataBaseDir =
 
 using ListUnitsType =
     std::tuple<std::string, std::string, std::string, std::string, std::string,
-               std::string, sdbusplus::message::object_path, uint32_t,
-               std::string, sdbusplus::message::object_path>;
+               std::string, sdbusplus::object_path, uint32_t, std::string,
+               sdbusplus::object_path>;
 
 enum class ListUnitElements
 {
