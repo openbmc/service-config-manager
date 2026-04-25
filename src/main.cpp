@@ -134,7 +134,7 @@ static inline void handleListUnitsResponse(
 
             std::string instantiatedUnitName =
                 unitName + addInstanceName(instanceName, "@");
-            const sdbusplus::message::object_path& objectPath =
+            const sdbusplus::object_path& objectPath =
                 std::get<static_cast<int>(ListUnitElements::objectPath)>(unit);
             // Group the service & socket units together.. Same services
             // are managed together.
@@ -262,8 +262,7 @@ static inline void handleListUnitsResponse(
     // create objects for needed services
     for (auto& it : unitsToMonitor)
     {
-        sdbusplus::message::object_path basePath(
-            phosphor::service::srcCfgMgrBasePath);
+        sdbusplus::object_path basePath(phosphor::service::srcCfgMgrBasePath);
         std::string objPath(basePath / it.first);
         auto srvCfgObj = std::make_unique<phosphor::service::ServiceConfig>(
             server, conn, objPath,
