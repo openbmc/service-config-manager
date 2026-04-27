@@ -57,7 +57,7 @@ void systemdUnitAction(const std::shared_ptr<sdbusplus::asio::connection>& conn,
                        const std::string& actionMethod)
 {
     boost::system::error_code ec;
-    auto jobPath = conn->yield_method_call<sdbusplus::message::object_path>(
+    auto jobPath = conn->yield_method_call<sdbusplus::object_path>(
         yield, ec, sysdService, sysdObjPath, sysdMgrIntf, actionMethod,
         unitName, sysdReplaceMode);
     checkAndThrowInternalFailure(ec,
